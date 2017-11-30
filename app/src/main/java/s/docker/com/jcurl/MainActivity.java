@@ -2,10 +2,10 @@ package s.docker.com.jcurl;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("jcurl");
@@ -18,7 +18,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(CurlUtil.getInstance().get("http://www.baidu.com"));
+
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CurlUtil.getInstance().get("http://www.baidu.com");
+            }
+        });
+        tv.setText("hello");
     }
 
     /**

@@ -29,7 +29,7 @@ string CurlUtil::get(string url) {
 
     LOGD("go");
     request->setResponseCallback([=](CAHttpClient* client, CAHttpResponse* response){
-        LOGD("%s",request->getRequestData());
+        LOGD("%s",response->getResponseData()->toString().c_str());
     });
 
     CAHttpClient::getInstance(4)->send(request);

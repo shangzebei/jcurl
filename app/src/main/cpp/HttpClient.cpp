@@ -64,7 +64,7 @@ void CAHttpClient::networkThread()
                 _sleepCondition.wait(_requestQueueMutex);
             }
             request = _requestQueue.at(0);
-//            _requestQueue.erase(0);
+            _requestQueue.erase(_requestQueue.begin());
         }
         
         if (request == _requestSentinel) {
@@ -85,6 +85,7 @@ void CAHttpClient::networkThread()
         _responseQueueMutex.unlock();
         
         _schedulerMutex.lock();
+        this->dispatchResponseCallbacks();
 //        if (nullptr != _scheduler)
 //        {
 //            _scheduler->performFunctionInUIThread([=]
@@ -116,6 +117,13 @@ void CAHttpClient::networkThreadAlone(CAHttpRequest* request, CAHttpResponse* re
     processResponse(response, responseMessage);
     
     _schedulerMutex.lock();
+
+
+    auto& callback=request->getCallback();
+
+    if (nullptr != callback) {
+        callback(this,response);
+    }
 //    if (nullptr != _scheduler)
 //    {
 //        _scheduler->performFunctionInUIThread([this, response, request]{
@@ -511,7 +519,7 @@ void CAHttpClient::dispatchResponseCallbacks()
     if (!_responseQueue.empty())
     {
         response = _responseQueue.at(0);
-//        _responseQueue.erase(0);
+        _responseQueue.erase(_responseQueue.begin());
     }
     _responseQueueMutex.unlock();
     
