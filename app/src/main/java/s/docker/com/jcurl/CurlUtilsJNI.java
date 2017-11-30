@@ -8,6 +8,7 @@
 
 package s.docker.com.jcurl;
 
-public class JcurlJNI {
-  public final static native String get();
+public class CurlUtilsJNI {
+  public final static native long CurlUtil_getInstance();
+  public final static native String CurlUtil_get(long jarg1, CurlUtil jarg1_, String jarg2);
 }

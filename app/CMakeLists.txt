@@ -2,16 +2,16 @@ cmake_minimum_required(VERSION 3.6)
 project(jcurl)
 
 add_subdirectory(src/main/cpp/Json/lib_json)
-#add_subdirectory(src/main/cpp/curl)
+
 set(SWIG_SOURCE_FILE src/main/cpp/curljni.i)
-SET(SWIG_CPP_OUT_FILE_NAME src/main/cpp/curljni.c)
+SET(SWIG_CPP_OUT_FILE_NAME src/main/cpp/curljni.cxx)
 SET(SWIG_JAVA_OUT_DIR src/main/java/s/docker/com/jcurl)
 SET(SWIG_JAVA_PACKAGE s.docker.com.jcurl)
 
-execute_process(COMMAND swig -outdir ${SWIG_JAVA_OUT_DIR} -o ${SWIG_CPP_OUT_FILE_NAME} -java -package ${SWIG_JAVA_PACKAGE} ${SWIG_SOURCE_FILE})#-o ${SWIG_CPP_OUT_FILE_NAME} -package ${SWIG_JAVA_PACKAGE}
+execute_process(COMMAND swig -c++ -outdir ${SWIG_JAVA_OUT_DIR} -o ${SWIG_CPP_OUT_FILE_NAME} -java -package ${SWIG_JAVA_PACKAGE} ${SWIG_SOURCE_FILE})#-o ${SWIG_CPP_OUT_FILE_NAME} -package ${SWIG_JAVA_PACKAGE}
 set(SOURCE_FILES
-        src/main/cpp/CommonHttpManager.cpp
-        src/main/cpp/CommonHttpManager.h
+        src/main/cpp/CurlUtil.cpp
+        src/main/cpp/CurlUtil.h
         src/main/cpp/HttpClient.cpp
         src/main/cpp/HttpClient.h
         src/main/cpp/HttpCookie.cpp
@@ -22,9 +22,9 @@ set(SOURCE_FILES
         src/main/cpp/CAData.h
         src/main/cpp/ccUtils.cpp
         src/main/cpp/ccUtils.h
-        src/main/cpp/native-lib.c
         ${SWIG_CPP_OUT_FILE_NAME}
         )
+
 
 add_library(curl STATIC IMPORTED)
 set(curl_path ${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/curl/prebuilt/android/${ANDROID_ABI}/libcurl.a)
@@ -36,7 +36,6 @@ set_target_properties(curl
   ${curl_path})
 
 
-
 INCLUDE_DIRECTORIES(${JNI_INCLUDE_DIRS} src/main/cpp/curl/include/android/curl src/main/cpp/Json/lib_json)
 find_library(log_lib log)
 find_library(z_lib z)
@@ -44,5 +43,4 @@ add_library(jcurl
          SHARED
         ${SOURCE_FILES}
 )
-file(WRITE shang.txt ${curl})
 target_link_libraries(jcurl lib_json ${log_lib} ${curl_path} ${curl_ssl} ${curl_crypto} ${z_lib})

@@ -14,6 +14,30 @@
 #endif
 
 
+
+#ifdef __cplusplus
+/* SwigValueWrapper is described in swig.swg */
+template<typename T> class SwigValueWrapper {
+  struct SwigMovePointer {
+    T *ptr;
+    SwigMovePointer(T *p) : ptr(p) { }
+    ~SwigMovePointer() { delete ptr; }
+    SwigMovePointer& operator=(SwigMovePointer& rhs) { T* oldptr = ptr; ptr = 0; delete oldptr; ptr = rhs.ptr; rhs.ptr = 0; return *this; }
+  } pointer;
+  SwigValueWrapper& operator=(const SwigValueWrapper<T>& rhs);
+  SwigValueWrapper(const SwigValueWrapper<T>& rhs);
+public:
+  SwigValueWrapper() : pointer(0) { }
+  SwigValueWrapper& operator=(const T& t) { SwigMovePointer tmp(new T(t)); pointer = tmp; return *this; }
+  operator T&() const { return *pointer.ptr; }
+  T *operator&() { return pointer.ptr; }
+};
+
+template <typename T> T SwigValueInit() {
+  return T();
+}
+#endif
+
 /* -----------------------------------------------------------------------------
  *  This section contains generic SWIG labels for method/variable
  *  declarations/attributes, and other compiler dependent labels.
@@ -194,10 +218,10 @@ static void SWIGUNUSED SWIG_JavaThrowException(JNIEnv *jenv, SWIG_JavaExceptionC
   while (except_ptr->code != code && except_ptr->code)
     except_ptr++;
 
-  (*jenv)->ExceptionClear(jenv);
-  excep = (*jenv)->FindClass(jenv, except_ptr->java_exception);
+  jenv->ExceptionClear();
+  excep = jenv->FindClass(except_ptr->java_exception);
   if (excep)
-    (*jenv)->ThrowNew(jenv, excep, msg);
+    jenv->ThrowNew(excep, msg);
 }
 
 
@@ -205,19 +229,120 @@ static void SWIGUNUSED SWIG_JavaThrowException(JNIEnv *jenv, SWIG_JavaExceptionC
 
 #define SWIG_contract_assert(nullreturn, expr, msg) if (!(expr)) {SWIG_JavaThrowException(jenv, SWIG_JavaIllegalArgumentException, msg); return nullreturn; } else
 
+/*  Errors in SWIG */
+#define  SWIG_UnknownError    	   -1
+#define  SWIG_IOError        	   -2
+#define  SWIG_RuntimeError   	   -3
+#define  SWIG_IndexError     	   -4
+#define  SWIG_TypeError      	   -5
+#define  SWIG_DivisionByZero 	   -6
+#define  SWIG_OverflowError  	   -7
+#define  SWIG_SyntaxError    	   -8
+#define  SWIG_ValueError     	   -9
+#define  SWIG_SystemError    	   -10
+#define  SWIG_AttributeError 	   -11
+#define  SWIG_MemoryError    	   -12
+#define  SWIG_NullReferenceError   -13
+
+
+
+
+#include <string>
+
+
+#include <typeinfo>
+#include <stdexcept>
+
+
+#include <vector>
+#include <stdexcept>
+
+
+#include <map>
+#include <algorithm>
+#include <stdexcept>
+
+
+SWIGINTERN void SWIG_JavaException(JNIEnv *jenv, int code, const char *msg) {
+  SWIG_JavaExceptionCodes exception_code = SWIG_JavaUnknownError;
+  switch(code) {
+  case SWIG_MemoryError:
+    exception_code = SWIG_JavaOutOfMemoryError;
+    break;
+  case SWIG_IOError:
+    exception_code = SWIG_JavaIOException;
+    break;
+  case SWIG_SystemError:
+  case SWIG_RuntimeError:
+    exception_code = SWIG_JavaRuntimeException;
+    break;
+  case SWIG_OverflowError:
+  case SWIG_IndexError:
+    exception_code = SWIG_JavaIndexOutOfBoundsException;
+    break;
+  case SWIG_DivisionByZero:
+    exception_code = SWIG_JavaArithmeticException;
+    break;
+  case SWIG_SyntaxError:
+  case SWIG_ValueError:
+  case SWIG_TypeError:
+    exception_code = SWIG_JavaIllegalArgumentException;
+    break;
+  case SWIG_UnknownError:
+  default:
+    exception_code = SWIG_JavaUnknownError;
+    break;
+  }
+  SWIG_JavaThrowException(jenv, exception_code, msg);
+}
+
+
+#include <typeinfo>
+#include <stdexcept>
+
+
+#include <utility>
+
+
+#include "CurlUtil.h"
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_JcurlJNI_get(JNIEnv *jenv, jclass jcls) {
-  jstring jresult = 0 ;
-  char *result = 0 ;
+SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getInstance(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  CurlUtil *result = 0 ;
   
   (void)jenv;
   (void)jcls;
-  result = (char *)get();
-  if (result) jresult = (*jenv)->NewStringUTF(jenv, (const char *)result);
+  result = (CurlUtil *)CurlUtil::getInstance();
+  *(CurlUtil **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+  jstring jresult = 0 ;
+  CurlUtil *arg1 = (CurlUtil *) 0 ;
+  std::string arg2 ;
+  std::string result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(CurlUtil **)&jarg1; 
+  if(!jarg2) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
+    return 0;
+  } 
+  const char *arg2_pstr = (const char *)jenv->GetStringUTFChars(jarg2, 0); 
+  if (!arg2_pstr) return 0;
+  (&arg2)->assign(arg2_pstr);
+  jenv->ReleaseStringUTFChars(jarg2, arg2_pstr); 
+  result = (arg1)->get(arg2);
+  jresult = jenv->NewStringUTF((&result)->c_str()); 
   return jresult;
 }
 
