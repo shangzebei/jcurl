@@ -1,2 +1,2 @@
-%module jcurl
+%module Jcurl
 extern char * get();

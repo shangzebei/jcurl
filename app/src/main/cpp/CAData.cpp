@@ -1,6 +1,7 @@
 
 
 #include <cstring>
+#include <cstdlib>
 #include "CAData.h"
 
 // implementation of DPoint

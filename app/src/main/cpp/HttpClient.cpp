@@ -1,12 +1,12 @@
 
 #include "HttpClient.h"
 #include "CAData.h"
+#include "ccUtils.h"
 #include <queue>
 #include <curl.h>
 #include <map>
 #include <string.h>
-
-
+#include <cstdlib>
 
 
 static std::map<ssize_t, CAHttpClient*> s_mHttpClient; // pointer to singleton
@@ -64,7 +64,7 @@ void CAHttpClient::networkThread()
                 _sleepCondition.wait(_requestQueueMutex);
             }
             request = _requestQueue.at(0);
-            _requestQueue.erase(nullptr);
+//            _requestQueue.erase(0);
         }
         
         if (request == _requestSentinel) {
@@ -325,10 +325,10 @@ static int processPostFileTask(CAHttpClient* client,  CAHttpRequest *request, wr
     {
         std::string strReq = request->getRequestData();
         strReq.resize(request->getRequestDataSize());
-        std::vector<std::string> vv = CrossApp::Parse2StrVector(strReq, "&");
+        std::vector<std::string> vv = Parse2StrVector(strReq, "&");
         for (int i = 0; i < vv.size(); i++)
         {
-            std::vector<std::string> v = CrossApp::Parse2StrVector(vv[i], "=", true);
+            std::vector<std::string> v = Parse2StrVector(vv[i], "=", true);
             if (v.size() == 2)
             {
                 curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, v[0].c_str(), CURLFORM_COPYCONTENTS, v[1].c_str(), CURLFORM_END);
@@ -412,7 +412,7 @@ void CAHttpClient::enableCookies(const char* cookieFile)
     }
     else
     {
-        _cookieFilename = (FileUtils::getInstance()->getWritablePath() + "cookieFile.txt");
+        _cookieFilename = ("cookieFile.txt");
     }
 }
 
@@ -511,7 +511,7 @@ void CAHttpClient::dispatchResponseCallbacks()
     if (!_responseQueue.empty())
     {
         response = _responseQueue.at(0);
-        _responseQueue.erase(nullptr);
+//        _responseQueue.erase(0);
     }
     _responseQueueMutex.unlock();
     

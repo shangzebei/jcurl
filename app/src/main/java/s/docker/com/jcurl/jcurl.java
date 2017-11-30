@@ -8,9 +8,9 @@
 
 package s.docker.com.jcurl;
 
-public class jcurl {
+public class Jcurl {
   public static String get() {
-    return jcurlJNI.get();
+    return JcurlJNI.get();
   }
 
 }

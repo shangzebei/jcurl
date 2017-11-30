@@ -210,7 +210,7 @@ static void SWIGUNUSED SWIG_JavaThrowException(JNIEnv *jenv, SWIG_JavaExceptionC
 extern "C" {
 #endif
 
-SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_jcurlJNI_get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_JcurlJNI_get(JNIEnv *jenv, jclass jcls) {
   jstring jresult = 0 ;
   char *result = 0 ;
   

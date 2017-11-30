@@ -8,6 +8,6 @@
 
 package s.docker.com.jcurl;
 
-public class jcurlJNI {
+public class JcurlJNI {
   public final static native String get();
 }
