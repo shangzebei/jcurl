@@ -12,18 +12,18 @@
 
 
 /**
- * @brief defines the object which users will receive at onHttpCompleted(sender, CAHttpResponse) callback.
+ * @brief defines the object which users will receive at onHttpCompleted(sender, HttpResponse) callback.
  * Please refer to samples/TestCpp/Classes/ExtensionTest/NetworkTest/CAHttpClientTest.cpp as a sample.
  * @since v2.0.2.
  * @lua NA
  */
-class CAHttpResponse {
+class HttpResponse {
 public:
     /**
-     * Constructor, it's used by CAHttpClient internal, users don't need to create CAHttpResponse manually.
-     * @param request the corresponding CAHttpRequest which leads to this response.
+     * Constructor, it's used by CAHttpClient internal, users don't need to create HttpResponse manually.
+     * @param request the corresponding HttpRequest which leads to this response.
      */
-    CAHttpResponse(CAHttpRequest *request)
+    HttpResponse(HttpRequest *request)
             : _pHttpRequest(request), _succeed(false), _responseHeader(nullptr), _responseData(nullptr) {
         if (_pHttpRequest) {
         }
@@ -31,9 +31,9 @@ public:
 
     /**
      * Destructor, it will be called in CAHttpClient internal.
-     * Users don't need to destruct CAHttpResponse object manually.
+     * Users don't need to destruct HttpResponse object manually.
      */
-    virtual ~CAHttpResponse() {
+    virtual ~HttpResponse() {
     }
 
     /**
@@ -46,11 +46,11 @@ public:
     // getters, will be called by users
 
     /**
-     * Get the corresponding CAHttpRequest object which leads to this response.
+     * Get the corresponding HttpRequest object which leads to this response.
      * There's no paired setter for it, because it's already setted in class constructor
-     * @return CAHttpRequest* the corresponding CAHttpRequest object which leads to this response.
+     * @return HttpRequest* the corresponding HttpRequest object which leads to this response.
      */
-    inline CAHttpRequest *getHttpRequest() const {
+    inline HttpRequest *getHttpRequest() const {
         return _pHttpRequest;
     }
 
@@ -148,10 +148,10 @@ public:
     }
 
 protected:
-    bool initWithRequest(CAHttpRequest *request);
+    bool initWithRequest(HttpRequest *request);
 
     // properties
-    CAHttpRequest *_pHttpRequest;  /// the corresponding CAHttpRequest pointer who leads to this response
+    HttpRequest *_pHttpRequest;  /// the corresponding HttpRequest pointer who leads to this response
     bool _succeed;       /// to indicate if the http request is successful simply
     CAData *_responseData;  /// the returned raw data. You can also dump it as a string
     CAData *_responseHeader;  /// the returned raw header data. You can also dump it as a string

@@ -20,16 +20,19 @@ CurlUtil *CurlUtil::getInstance() {
     return curlUtil;
 }
 
-string CurlUtil::get(string url) {
-    CAHttpRequest* request = new CAHttpRequest();
-
+string CurlUtil::get(string url,Response& response) {
+    HttpRequest* request = new HttpRequest();
     request->setUrl(url);
 
-    request->setRequestType(CAHttpRequest::Type::Get);
+    request->setRequestType(HttpRequest::Type::Get);
 
     LOGD("go");
-    request->setResponseCallback([=](CAHttpClient* client, CAHttpResponse* response){
-        LOGD("%s",response->getResponseData()->toString().c_str());
+    request->setResponseCallback([&](CAHttpClient* client, HttpResponse* httpResponse){
+//        LOGD("%s",httpResponse->getResponseData()->toString().c_str());
+//        response->callback(0,httpResponse->getResponseData()->toString());
+            response.callback(0,"aaaa");
+
+
     });
 
     CAHttpClient::getInstance(4)->send(request);
@@ -43,5 +46,9 @@ CurlUtil::CurlUtil() {
 }
 
 CurlUtil::~CurlUtil() {
+
+}
+
+void Response::callback(int result, string s) {
 
 }

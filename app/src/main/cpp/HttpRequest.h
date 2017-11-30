@@ -13,10 +13,10 @@
 
 
 class CAHttpClient;
-class CAHttpResponse;
+class HttpResponse;
 
 /**
- * Defines the object which users must packed for CAHttpClient::send(CAHttpRequest*) method.
+ * Defines the object which users must packed for CAHttpClient::send(HttpRequest*) method.
  * Please refer to tests/test-cpp/Classes/ExtensionTest/NetworkTest/CAHttpClientTest.cpp as a sample
  * @since v2.0.2
  *
@@ -29,11 +29,11 @@ class CAHttpResponse;
 #endif
 #endif
 
-class  CAHttpRequest
+class  HttpRequest
 {
 public:
     /**
-     * The CAHttpRequest type enum used in the CAHttpRequest::setRequestType.
+     * The HttpRequest type enum used in the HttpRequest::setRequestType.
      */
     enum class Type
     {
@@ -47,19 +47,19 @@ public:
     
     /**
      *  Constructor.
-     *   Because CAHttpRequest object will be used between UI thread and network thread,
+     *   Because HttpRequest object will be used between UI thread and network thread,
      requestObj->autorelease() is forbidden to avoid crashes in AutoreleasePool
      new/retain/release still works, which means you need to release it manually
      Please refer to CAHttpRequestTest.cpp to find its usage.
      */
-    CAHttpRequest()
+    HttpRequest()
     : _requestType(Type::Unkown)
     , _pCallback(nullptr)
     {
     }
     
     /** Destructor. */
-    virtual ~CAHttpRequest()
+    virtual ~HttpRequest()
     {
     }
     
@@ -67,7 +67,7 @@ public:
     // setter/getters for properties
     
     /**
-     * Set request type of CAHttpRequest object before being sent,now it support the enum value of CAHttpRequest::Type.
+     * Set request type of HttpRequest object before being sent,now it support the enum value of HttpRequest::Type.
      *
      * @param type the request type.
      */
@@ -77,9 +77,9 @@ public:
     }
     
     /**
-     * Get the request type of CAHttpRequest object.
+     * Get the request type of HttpRequest object.
      *
-     * @return CAHttpRequest::Type.
+     * @return HttpRequest::Type.
      */
     inline Type getRequestType() const
     {
@@ -87,7 +87,7 @@ public:
     }
     
     /**
-     * Set the url address of CAHttpRequest object.
+     * Set the url address of HttpRequest object.
      * The url value could be like these: "http://httpbin.org/ip" or "https://httpbin.org/get"
      *
      * @param url the string object.
@@ -98,7 +98,7 @@ public:
     }
     
     /**
-     * Get the url address of CAHttpRequest object.
+     * Get the url address of HttpRequest object.
      *
      * @return const char* the pointer of _url.
      */
@@ -108,7 +108,7 @@ public:
     }
     
     /**
-     * Set the request data of CAHttpRequest object.
+     * Set the request data of HttpRequest object.
      *
      * @param buffer the buffer of request data, it support binary data.
      * @param len    the size of request data.
@@ -119,7 +119,7 @@ public:
     }
     
     /**
-     * Get the request data pointer of CAHttpRequest object.
+     * Get the request data pointer of HttpRequest object.
      *
      * @return char* the request data pointer.
      */
@@ -152,12 +152,12 @@ public:
         return _fileNameToPost.c_str();
     }
     /**
-     * Set response callback function of CAHttpRequest object.
+     * Set response callback function of HttpRequest object.
      * When response come back, we would call _pCallback to process response data.
      *
      * @param callback the Callback function.
      */
-    inline void setResponseCallback(const std::function<void(CAHttpClient* client, CAHttpResponse* response)>& callback)
+    inline void setResponseCallback(const std::function<void(CAHttpClient* client, HttpResponse* response)>& callback)
     {
         _pCallback = callback;
     }
@@ -167,7 +167,7 @@ public:
      *
      * @return const Callback& callback function.
      */
-    inline const std::function<void(CAHttpClient* client, CAHttpResponse* response)>& getCallback() const
+    inline const std::function<void(CAHttpClient* client, HttpResponse* response)>& getCallback() const
     {
         return _pCallback;
     }
@@ -207,7 +207,7 @@ protected:
     Type                        _requestType;    /// kCAHttpRequestGet, kCAHttpRequestPost or other enums
     std::string                 _url;            /// target url that this request is sent to
     std::vector<char>           _requestData;    /// used for POST
-    std::function<void(CAHttpClient* client, CAHttpResponse* response)>
+    std::function<void(CAHttpClient* client, HttpResponse* response)>
                                 _pCallback;      /// C++11 style callbacks
     std::vector<std::string>    _headers;              /// custom http headers
     std::string					_fileNameToPost;

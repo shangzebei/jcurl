@@ -40,12 +40,12 @@ static size_t writeHeaderData(void *ptr, size_t size, size_t nmemb, void *stream
 }
 
 
-static int processGetTask(CAHttpClient* client, CAHttpRequest* request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
-static int processPostTask(CAHttpClient* client, CAHttpRequest* request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
-static int processPutTask(CAHttpClient* client,  CAHttpRequest* request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
-static int processDeleteTask(CAHttpClient* client,  CAHttpRequest* request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
-static int processPostFileTask(CAHttpClient* client,  CAHttpRequest *request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
-// int processDownloadTask(CAHttpRequest *task, write_callback callback, void *stream, int32_t *errorCode);
+static int processGetTask(CAHttpClient* client, HttpRequest* request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
+static int processPostTask(CAHttpClient* client, HttpRequest* request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
+static int processPutTask(CAHttpClient* client,  HttpRequest* request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
+static int processDeleteTask(CAHttpClient* client,  HttpRequest* request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
+static int processPostFileTask(CAHttpClient* client,  HttpRequest *request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
+// int processDownloadTask(HttpRequest *task, write_callback callback, void *stream, int32_t *errorCode);
 
 // Worker thread
 void CAHttpClient::networkThread()
@@ -54,7 +54,7 @@ void CAHttpClient::networkThread()
     
     while (true)
     {
-        CAHttpRequest *request;
+        HttpRequest *request;
         
         // step 1: send http request if the requestQueue isn't empty
         {
@@ -73,8 +73,8 @@ void CAHttpClient::networkThread()
         
         // step 2: libcurl sync access
         
-        // Create a CAHttpResponse object, the default setting is http access failed
-        CAHttpResponse *response = new (std::nothrow) CAHttpResponse(request);
+        // Create a HttpResponse object, the default setting is http access failed
+        HttpResponse *response = new (std::nothrow) HttpResponse(request);
         
         processResponse(response, _responseMessage);
         
@@ -109,7 +109,7 @@ void CAHttpClient::networkThread()
 }
 
 // Worker thread
-void CAHttpClient::networkThreadAlone(CAHttpRequest* request, CAHttpResponse* response)
+void CAHttpClient::networkThreadAlone(HttpRequest* request, HttpResponse* response)
 {
     increaseThreadCount();
     
@@ -217,7 +217,7 @@ public:
      * @param callback Response write callback
      * @param stream Response write stream
      */
-    bool init(CAHttpClient* client, CAHttpRequest* request, write_callback callback, void* stream, write_callback headerCallback, void* headerStream, char* errorBuffer)
+    bool init(CAHttpClient* client, HttpRequest* request, write_callback callback, void* stream, write_callback headerCallback, void* headerStream, char* errorBuffer)
     {
         if (!_curl)
             return false;
@@ -270,7 +270,7 @@ public:
 };
 
 //Process Get Request
-static int processGetTask(CAHttpClient* client, CAHttpRequest* request, write_callback callback, void* stream, long* responseCode, write_callback headerCallback, void* headerStream, char* errorBuffer)
+static int processGetTask(CAHttpClient* client, HttpRequest* request, write_callback callback, void* stream, long* responseCode, write_callback headerCallback, void* headerStream, char* errorBuffer)
 {
     CURLRaii curl;
     bool ok = curl.init(client, request, callback, stream, headerCallback, headerStream, errorBuffer)
@@ -280,7 +280,7 @@ static int processGetTask(CAHttpClient* client, CAHttpRequest* request, write_ca
 }
 
 //Process POST Request
-static int processPostTask(CAHttpClient* client, CAHttpRequest* request, write_callback callback, void* stream, long* responseCode, write_callback headerCallback, void* headerStream, char* errorBuffer)
+static int processPostTask(CAHttpClient* client, HttpRequest* request, write_callback callback, void* stream, long* responseCode, write_callback headerCallback, void* headerStream, char* errorBuffer)
 {
     CURLRaii curl;
     bool ok = curl.init(client, request, callback, stream, headerCallback, headerStream, errorBuffer)
@@ -292,7 +292,7 @@ static int processPostTask(CAHttpClient* client, CAHttpRequest* request, write_c
 }
 
 //Process PUT Request
-static int processPutTask(CAHttpClient* client, CAHttpRequest* request, write_callback callback, void* stream, long* responseCode, write_callback headerCallback, void* headerStream, char* errorBuffer)
+static int processPutTask(CAHttpClient* client, HttpRequest* request, write_callback callback, void* stream, long* responseCode, write_callback headerCallback, void* headerStream, char* errorBuffer)
 {
     CURLRaii curl;
     bool ok = curl.init(client, request, callback, stream, headerCallback, headerStream, errorBuffer)
@@ -304,7 +304,7 @@ static int processPutTask(CAHttpClient* client, CAHttpRequest* request, write_ca
 }
 
 //Process DELETE Request
-static int processDeleteTask(CAHttpClient* client, CAHttpRequest* request, write_callback callback, void* stream, long* responseCode, write_callback headerCallback, void* headerStream, char* errorBuffer)
+static int processDeleteTask(CAHttpClient* client, HttpRequest* request, write_callback callback, void* stream, long* responseCode, write_callback headerCallback, void* headerStream, char* errorBuffer)
 {
     CURLRaii curl;
     bool ok = curl.init(client, request, callback, stream, headerCallback, headerStream, errorBuffer)
@@ -315,7 +315,7 @@ static int processDeleteTask(CAHttpClient* client, CAHttpRequest* request, write
 }
 
 //Process POSTFILE Request
-static int processPostFileTask(CAHttpClient* client,  CAHttpRequest *request, write_callback callback, void *stream, long *responseCode, write_callback headerCallback, void *headerStream, char* errorBuffer)
+static int processPostFileTask(CAHttpClient* client,  HttpRequest *request, write_callback callback, void *stream, long *responseCode, write_callback headerCallback, void *headerStream, char* errorBuffer)
 {
     CURLRaii curl;
     bool ok = curl.init(client, request, callback, stream, headerCallback, headerStream, errorBuffer);
@@ -436,7 +436,7 @@ CAHttpClient::CAHttpClient(ssize_t thread_id)
 , _timeoutForRead(60)
 , _isInited(false)
 , _threadCount(0)
-, _requestSentinel(new CAHttpRequest())
+, _requestSentinel(new HttpRequest())
 , _cookie(nullptr)
 {
 //    CCLOG("In the constructor of CAHttpClient!");
@@ -472,7 +472,7 @@ bool CAHttpClient::lazyInitThreadSemphore()
 }
 
 //Add a get task to queue
-void CAHttpClient::send(CAHttpRequest* request)
+void CAHttpClient::send(HttpRequest* request)
 {
     if (false == lazyInitThreadSemphore())
     {
@@ -493,7 +493,7 @@ void CAHttpClient::send(CAHttpRequest* request)
     _sleepCondition.notify_one();
 }
 
-void CAHttpClient::sendImmediate(CAHttpRequest* request)
+void CAHttpClient::sendImmediate(HttpRequest* request)
 {
     if(!request)
     {
@@ -501,8 +501,8 @@ void CAHttpClient::sendImmediate(CAHttpRequest* request)
     }
     
 //    request->retain();
-    // Create a CAHttpResponse object, the default setting is http access failed
-    CAHttpResponse *response = new (std::nothrow) CAHttpResponse(request);
+    // Create a HttpResponse object, the default setting is http access failed
+    HttpResponse *response = new (std::nothrow) HttpResponse(request);
     
     auto t = std::thread(&CAHttpClient::networkThreadAlone, this, request, response);
     t.detach();
@@ -513,7 +513,7 @@ void CAHttpClient::dispatchResponseCallbacks()
 {
     // log("CCCAHttpClient::dispatchResponseCallbacks is running");
     //occurs when cocos thread fires but the network thread has already quited
-    CAHttpResponse* response = nullptr;
+    HttpResponse* response = nullptr;
     
     _responseQueueMutex.lock();
     if (!_responseQueue.empty())
@@ -525,7 +525,7 @@ void CAHttpClient::dispatchResponseCallbacks()
     
     if (response)
     {
-        CAHttpRequest *request = response->getHttpRequest();
+        HttpRequest *request = response->getHttpRequest();
         const auto& callback = request->getCallback();
 
         if (callback != nullptr)
@@ -540,7 +540,7 @@ void CAHttpClient::dispatchResponseCallbacks()
 }
 
 // Process Response
-void CAHttpClient::processResponse(CAHttpResponse* response, char* responseMessage)
+void CAHttpClient::processResponse(HttpResponse* response, char* responseMessage)
 {
     auto request = response->getHttpRequest();
     long responseCode = -1;
@@ -551,7 +551,7 @@ void CAHttpClient::processResponse(CAHttpResponse* response, char* responseMessa
     // Process the request -> get response packet
     switch (request->getRequestType())
     {
-        case CAHttpRequest::Type::Get: // HTTP GET
+        case HttpRequest::Type::Get: // HTTP GET
             retValue = processGetTask(this, request,
                                       writeData,
                                       &responseData,
@@ -561,7 +561,7 @@ void CAHttpClient::processResponse(CAHttpResponse* response, char* responseMessa
                                       responseMessage);
             break;
             
-        case CAHttpRequest::Type::Post: // HTTP POST
+        case HttpRequest::Type::Post: // HTTP POST
             retValue = processPostTask(this, request,
                                        writeData,
                                        &responseData,
@@ -571,7 +571,7 @@ void CAHttpClient::processResponse(CAHttpResponse* response, char* responseMessa
                                        responseMessage);
             break;
             
-        case CAHttpRequest::Type::Put:
+        case HttpRequest::Type::Put:
             retValue = processPutTask(this, request,
                                       writeData,
                                       &responseData,
@@ -581,7 +581,7 @@ void CAHttpClient::processResponse(CAHttpResponse* response, char* responseMessa
                                       responseMessage);
             break;
             
-        case CAHttpRequest::Type::Delete:
+        case HttpRequest::Type::Delete:
             retValue = processDeleteTask(this, request,
                                          writeData,
                                          &responseData,
@@ -590,7 +590,7 @@ void CAHttpClient::processResponse(CAHttpResponse* response, char* responseMessa
                                          &responseHeader,
                                          responseMessage);
             break;
-        case CAHttpRequest::Type::PostFile:
+        case HttpRequest::Type::PostFile:
             retValue = processPostFileTask(this, request,
                                            writeData,
                                            &responseData,
@@ -622,7 +622,7 @@ void CAHttpClient::processResponse(CAHttpResponse* response, char* responseMessa
     ca_responseHeader->fastSet(c_responseHeader, c_responseHeaderLength);
     response->setResponseHeader(ca_responseHeader);
 
-    // write data to CAHttpResponse
+    // write data to HttpResponse
     response->setResponseCode(responseCode);
     if (retValue != 0)
     {

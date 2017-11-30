@@ -8,36 +8,39 @@
 
 package s.docker.com.jcurl;
 
-public class CurlUtil {
+public class Response {
   private long swigCPtr;
   protected boolean swigCMemOwn;
 
-  protected CurlUtil(long cPtr, boolean cMemoryOwn) {
+  protected Response(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(CurlUtil obj) {
+  protected static long getCPtr(Response obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
+  }
+
+  protected void finalize() {
+    delete();
   }
 
   public synchronized void delete() {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        throw new UnsupportedOperationException("C++ destructor does not have public access");
+        CurlUtilsJNI.delete_Response(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
-  public static CurlUtil getInstance() {
-    long cPtr = CurlUtilsJNI.CurlUtil_getInstance();
-    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  public void callback(int result, String s) {
+    CurlUtilsJNI.Response_callback(swigCPtr, this, result, s);
   }
 
-  public String get(String url, Response response) {
-    return CurlUtilsJNI.CurlUtil_get(swigCPtr, this, url, Response.getCPtr(response), response);
+  public Response() {
+    this(CurlUtilsJNI.new_Response(), true);
   }
 
 }

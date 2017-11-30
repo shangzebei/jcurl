@@ -66,18 +66,18 @@ public:
     /**
      * Add a get request to task queue
      *
-     * @param request a CAHttpRequest object, which includes url, response callback etc.
+     * @param request a HttpRequest object, which includes url, response callback etc.
      please make sure request->_requestData is clear before calling "send" here.
      */
-    void send(CAHttpRequest* request);
+    void send(HttpRequest* request);
     
     /**
      * Immediate send a request
      *
-     * @param request a CAHttpRequest object, which includes url, response callback etc.
+     * @param request a HttpRequest object, which includes url, response callback etc.
      please make sure request->_requestData is clear before calling "sendImmediate" here.
      */
-    void sendImmediate(CAHttpRequest* request);
+    void sendImmediate(HttpRequest* request);
     
     /**
      * Set the timeout value for connecting.
@@ -125,11 +125,11 @@ private:
      */
     bool lazyInitThreadSemphore();
     void networkThread();
-    void networkThreadAlone(CAHttpRequest* request, CAHttpResponse* response);
+    void networkThreadAlone(HttpRequest* request, HttpResponse* response);
     /** Poll function called from main thread to dispatch callbacks when http requests finished **/
     void dispatchResponseCallbacks();
     
-    void processResponse(CAHttpResponse* response, char* responseMessage);
+    void processResponse(HttpResponse* response, char* responseMessage);
     void increaseThreadCount();
     void decreaseThreadCountAndMayDeleteThis();
     
@@ -149,10 +149,10 @@ private:
     
     std::mutex _schedulerMutex;
     
-    std::vector<CAHttpRequest*>  _requestQueue;
+    std::vector<HttpRequest*>  _requestQueue;
     std::mutex _requestQueueMutex;
 
-    std::vector<CAHttpResponse*> _responseQueue;
+    std::vector<HttpResponse*> _responseQueue;
     std::mutex _responseQueueMutex;
     
     std::string _cookieFilename;
@@ -167,7 +167,7 @@ private:
     
     char _responseMessage[RESPONSE_BUFFER_SIZE];
     
-    CAHttpRequest* _requestSentinel;
+    HttpRequest* _requestSentinel;
 };
 
 

@@ -6,25 +6,30 @@
 #define JCURL_CURLUTIL_H
 
 
-
-
-
 #include <iostream>
-using namespace std;
 
-class  CurlUtil {
+using namespace std;
+class Response;
+class CurlUtil {
 private:
     CurlUtil();
 
     virtual ~CurlUtil();
 
 public:
-    static CurlUtil* getInstance();
-    string get(string url);
+    static CurlUtil *getInstance();
 
 public:
 
+    string get(string url, Response &response);
 };
-static CurlUtil *curlUtil= nullptr;
+
+class Response{
+public:
+    void callback(int result, string s);
+
+};
+
+static CurlUtil *curlUtil = nullptr;
 
 #endif //JCURL_CURLUTIL_H
