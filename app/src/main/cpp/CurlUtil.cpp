@@ -9,6 +9,8 @@
 #define LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG,__VA_ARGS__) // 定义LOGW类型
 #define LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG,__VA_ARGS__) // 定义LOGE类型
 #define LOGF(...)  __android_log_print(ANDROID_LOG_FATAL,LOG,__VA_ARGS__) //
+
+
 #include "CurlUtil.h"
 #include "HttpClient.h"
 #include "HttpRequest.h"
@@ -20,25 +22,20 @@ CurlUtil *CurlUtil::getInstance() {
     return curlUtil;
 }
 
-string CurlUtil::get(string url,Response& response) {
-    HttpRequest* request = new HttpRequest();
+CurlUtil *CurlUtil::get(string url,Response* response) {
+    HttpRequest *request = new HttpRequest();
     request->setUrl(url);
 
     request->setRequestType(HttpRequest::Type::Get);
 
-    LOGD("go");
-    request->setResponseCallback([&](CAHttpClient* client, HttpResponse* httpResponse){
-//        LOGD("%s",httpResponse->getResponseData()->toString().c_str());
-//        response->callback(0,httpResponse->getResponseData()->toString());
-            response.callback(0,"aaaa");
-
-
+    request->setResponseCallback([=](CAHttpClient *client, HttpResponse *httpResponse) {
+        if (response != nullptr) {
+            response->callback(0, httpResponse->getResponseData()->toString());
+        }
     });
-
     CAHttpClient::getInstance(4)->send(request);
 
 
-    return "my name is shang";
 }
 
 CurlUtil::CurlUtil() {
@@ -49,6 +46,10 @@ CurlUtil::~CurlUtil() {
 
 }
 
-void Response::callback(int result, string s) {
 
+
+Response::Response() {}
+
+void Response::callback(int result, string s) {
+    LOGD("%d--%s", result, s.c_str());
 }

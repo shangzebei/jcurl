@@ -9,7 +9,16 @@
 #include <iostream>
 
 using namespace std;
-class Response;
+
+class Response{
+public:
+    Response();
+
+public:
+    virtual void callback(int result, string s);
+};
+
+
 class CurlUtil {
 private:
     CurlUtil();
@@ -20,15 +29,12 @@ public:
     static CurlUtil *getInstance();
 
 public:
+    CurlUtil * get(string url,Response* response);
 
-    string get(string url, Response &response);
+private:
 };
 
-class Response{
-public:
-    void callback(int result, string s);
 
-};
 
 static CurlUtil *curlUtil = nullptr;
 

@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("szb", "callback: "+s);
                     }
                 });
+
             }
         });
         tv.setText("hello");
