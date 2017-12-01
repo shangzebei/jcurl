@@ -1,5 +1,9 @@
 %module(directors="1") CurlUtils
+
 %feature("director",assumeoverride=1) Response;
+
+%feature("director",assumeoverride=1) ByteResponse;
+
 %include "std_string.i"
 
 %ignore CurlUtil::get(string url, std::function<void(int, string)> func);
