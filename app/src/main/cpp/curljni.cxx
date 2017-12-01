@@ -748,22 +748,22 @@ void SwigDirector_Response::swig_connect_director(JNIEnv *jenv, jobject jself, j
 SwigDirector_ByteResponse::SwigDirector_ByteResponse(JNIEnv *jenv) : ByteResponse(), Swig::Director(jenv) {
 }
 
-void SwigDirector_ByteResponse::callback(int result, unsigned char *byte) {
+void SwigDirector_ByteResponse::callback(int result, unsigned char *buf) {
   JNIEnvWrapper swigjnienv(this) ;
   JNIEnv * jenv = swigjnienv.getJNIEnv() ;
   jobject swigjobj = (jobject) NULL ;
   jint jresult  ;
-  jlong jarg1 = 0 ;
+  jobject jbuf = 0 ;
   
   if (!swig_override[0]) {
-    ByteResponse::callback(result,byte);
+    ByteResponse::callback(result,buf);
     return;
   }
   swigjobj = swig_get_self(jenv);
   if (swigjobj && jenv->IsSameObject(swigjobj, NULL) == JNI_FALSE) {
     jresult = (jint) result;
-    *((unsigned char **)&jarg1) = (unsigned char *) byte; 
-    jenv->CallStaticVoidMethod(Swig::jclass_CurlUtilsJNI, Swig::director_method_ids[1], swigjobj, jresult, jarg1);
+    *((unsigned char **)&jbuf) = (unsigned char *) buf; 
+    jenv->CallStaticVoidMethod(Swig::jclass_CurlUtilsJNI, Swig::director_method_ids[1], swigjobj, jresult, jbuf);
     jthrowable swigerror = jenv->ExceptionOccurred();
     if (swigerror) {
       jenv->ExceptionClear();
@@ -898,7 +898,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1change_1o
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callback(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3) {
+SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callback(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jobject jarg3) {
   ByteResponse *arg1 = (ByteResponse *) 0 ;
   int arg2 ;
   unsigned char *arg3 = (unsigned char *) 0 ;
@@ -908,12 +908,18 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callb
   (void)jarg1_;
   arg1 = *(ByteResponse **)&jarg1; 
   arg2 = (int)jarg2; 
-  arg3 = *(unsigned char **)&jarg3; 
+  {
+    arg3 = (unsigned char *) jenv->GetDirectBufferAddress(jarg3); 
+    if (arg3 == NULL) {
+      SWIG_JavaThrowException(jenv, SWIG_JavaRuntimeException, "Unable to get address of a java.nio.ByteBuffer direct byte buffer. Buffer must be a direct buffer and not a non-direct buffer.");  
+    }  
+  }
   (arg1)->callback(arg2,arg3);
+  
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callbackSwigExplicitByteResponse(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3) {
+SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callbackSwigExplicitByteResponse(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jobject jarg3) {
   ByteResponse *arg1 = (ByteResponse *) 0 ;
   int arg2 ;
   unsigned char *arg3 = (unsigned char *) 0 ;
@@ -923,8 +929,14 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callb
   (void)jarg1_;
   arg1 = *(ByteResponse **)&jarg1; 
   arg2 = (int)jarg2; 
-  arg3 = *(unsigned char **)&jarg3; 
+  {
+    arg3 = (unsigned char *) jenv->GetDirectBufferAddress(jarg3); 
+    if (arg3 == NULL) {
+      SWIG_JavaThrowException(jenv, SWIG_JavaRuntimeException, "Unable to get address of a java.nio.ByteBuffer direct byte buffer. Buffer must be a direct buffer and not a non-direct buffer.");  
+    }  
+  }
   (arg1)->ByteResponse::callback(arg2,arg3);
+  
 }
 
 
@@ -982,7 +994,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getInsta
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1get_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jlong jarg3, jobject jarg3_) {
   jlong jresult = 0 ;
   CurlUtil *arg1 = (CurlUtil *) 0 ;
   std::string arg2 ;
@@ -1003,38 +1015,6 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1get_1_1S
   (&arg2)->assign(arg2_pstr);
   jenv->ReleaseStringUTFChars(jarg2, arg2_pstr); 
   arg3 = *(Response **)&jarg3; 
-  result = (CurlUtil *)(arg1)->get(arg2,arg3);
-  *(CurlUtil **)&jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1get_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jlong jarg3) {
-  jlong jresult = 0 ;
-  CurlUtil *arg1 = (CurlUtil *) 0 ;
-  std::string arg2 ;
-  SwigValueWrapper< std::function< void (int,std::string) > > arg3 ;
-  std::function< void (int,std::string) > *argp3 ;
-  CurlUtil *result = 0 ;
-  
-  (void)jenv;
-  (void)jcls;
-  (void)jarg1_;
-  arg1 = *(CurlUtil **)&jarg1; 
-  if(!jarg2) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
-    return 0;
-  } 
-  const char *arg2_pstr = (const char *)jenv->GetStringUTFChars(jarg2, 0); 
-  if (!arg2_pstr) return 0;
-  (&arg2)->assign(arg2_pstr);
-  jenv->ReleaseStringUTFChars(jarg2, arg2_pstr); 
-  argp3 = *(std::function< void (int,std::string) > **)&jarg3; 
-  if (!argp3) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Attempt to dereference null std::function< void (int,std::string) >");
-    return 0;
-  }
-  arg3 = *argp3; 
   result = (CurlUtil *)(arg1)->get(arg2,arg3);
   *(CurlUtil **)&jresult = result; 
   return jresult;
@@ -1102,7 +1082,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_swig_1module_1init(
       "SwigDirector_Response_callback", "(Ls/docker/com/jcurl/Response;ILjava/lang/String;)V" 
     },
     {
-      "SwigDirector_ByteResponse_callback", "(Ls/docker/com/jcurl/ByteResponse;IJ)V" 
+      "SwigDirector_ByteResponse_callback", "(Ls/docker/com/jcurl/ByteResponse;ILs/docker/com/jcurl/SWIGTYPE_jobject;)V" 
     }
   };
   Swig::jclass_CurlUtilsJNI = (jclass) jenv->NewGlobalRef(jcls);

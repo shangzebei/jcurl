@@ -15,15 +15,14 @@ public class CurlUtilsJNI {
   public final static native void delete_Response(long jarg1);
   public final static native void Response_director_connect(Response obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void Response_change_ownership(Response obj, long cptr, boolean take_or_release);
-  public final static native void ByteResponse_callback(long jarg1, ByteResponse jarg1_, int jarg2, long jarg3);
-  public final static native void ByteResponse_callbackSwigExplicitByteResponse(long jarg1, ByteResponse jarg1_, int jarg2, long jarg3);
+  public final static native void ByteResponse_callback(long jarg1, ByteResponse jarg1_, int jarg2, java.nio.ByteBuffer jarg3);
+  public final static native void ByteResponse_callbackSwigExplicitByteResponse(long jarg1, ByteResponse jarg1_, int jarg2, java.nio.ByteBuffer jarg3);
   public final static native long new_ByteResponse();
   public final static native void delete_ByteResponse(long jarg1);
   public final static native void ByteResponse_director_connect(ByteResponse obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void ByteResponse_change_ownership(ByteResponse obj, long cptr, boolean take_or_release);
   public final static native long CurlUtil_getInstance();
-  public final static native long CurlUtil_get__SWIG_0(long jarg1, CurlUtil jarg1_, String jarg2, long jarg3, Response jarg3_);
-  public final static native long CurlUtil_get__SWIG_1(long jarg1, CurlUtil jarg1_, String jarg2, long jarg3);
+  public final static native long CurlUtil_get(long jarg1, CurlUtil jarg1_, String jarg2, long jarg3, Response jarg3_);
   public final static native long CurlUtil_getBytes(long jarg1, CurlUtil jarg1_, String jarg2, long jarg3, ByteResponse jarg3_);
   public final static native void curlUtil_set(long jarg1, CurlUtil jarg1_);
   public final static native long curlUtil_get();
@@ -31,8 +30,8 @@ public class CurlUtilsJNI {
   public static void SwigDirector_Response_callback(Response jself, int result, String s) {
     jself.callback(result, s);
   }
-  public static void SwigDirector_ByteResponse_callback(ByteResponse jself, int result, long arg1) {
-    jself.callback(result, (arg1 == 0) ? null : new SWIGTYPE_p_unsigned_char(arg1, false));
+  public static void SwigDirector_ByteResponse_callback(ByteResponse jself, int result, java.nio.ByteBuffer buf) {
+    jself.callback(result, (buf == 0) ? null : new SWIGTYPE_p_unsigned_char(buf, false));
   }
 
   private final static native void swig_module_init();

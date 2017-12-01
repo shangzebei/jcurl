@@ -1,12 +1,19 @@
 %module(directors="1") CurlUtils
 
-%ignore CurlUtil::get(string url, std::function<void(int, string)> func);
+%include <std_string.i>
+
+%include <typemaps.i>
+%include <various.i>
+
+%apply unsigned char *NIOBUFFER { unsigned char *buf };
+
+%ignore CurlUtil::get(std::string url, std::function<void(int, std::string)>);
 
 %feature("director",assumeoverride=1) Response;
 
 %feature("director",assumeoverride=1) ByteResponse;
 
-%include "std_string.i"
+
 
 
 %insert("runtime") %{
