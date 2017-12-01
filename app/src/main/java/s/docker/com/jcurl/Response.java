@@ -50,13 +50,13 @@ public class Response {
     CurlUtilsJNI.Response_change_ownership(this, swigCPtr, true);
   }
 
+  public void callback(int result, String s) {
+    if (getClass() == Response.class) CurlUtilsJNI.Response_callback(swigCPtr, this, result, s); else CurlUtilsJNI.Response_callbackSwigExplicitResponse(swigCPtr, this, result, s);
+  }
+
   public Response() {
     this(CurlUtilsJNI.new_Response(), true);
     CurlUtilsJNI.Response_director_connect(this, swigCPtr, swigCMemOwn, true);
-  }
-
-  public void callback(int result, String s) {
-    if (getClass() == Response.class) CurlUtilsJNI.Response_callback(swigCPtr, this, result, s); else CurlUtilsJNI.Response_callbackSwigExplicitResponse(swigCPtr, this, result, s);
   }
 
 }

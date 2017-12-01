@@ -25,5 +25,19 @@ protected:
     Swig::BoolArray<1> swig_override;
 };
 
+class SwigDirector_ByteResponse : public ByteResponse, public Swig::Director {
+
+public:
+    void swig_connect_director(JNIEnv *jenv, jobject jself, jclass jcls, bool swig_mem_own, bool weak_global);
+    SwigDirector_ByteResponse(JNIEnv *jenv);
+    virtual void callback(int result, unsigned char *byte);
+public:
+    bool swig_overrides(int n) {
+      return (n < 1 ? swig_override[n] : false);
+    }
+protected:
+    Swig::BoolArray<1> swig_override;
+};
+
 
 #endif

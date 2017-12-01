@@ -37,7 +37,17 @@ public class CurlUtil {
   }
 
   public CurlUtil get(String url, Response response) {
-    long cPtr = CurlUtilsJNI.CurlUtil_get(swigCPtr, this, url, Response.getCPtr(response), response);
+    long cPtr = CurlUtilsJNI.CurlUtil_get__SWIG_0(swigCPtr, this, url, Response.getCPtr(response), response);
+    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  }
+
+  public CurlUtil get(String url, SWIGTYPE_p_std__functionT_void_fint_std__stringF_t arg1) {
+    long cPtr = CurlUtilsJNI.CurlUtil_get__SWIG_1(swigCPtr, this, url, SWIGTYPE_p_std__functionT_void_fint_std__stringF_t.getCPtr(arg1));
+    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  }
+
+  public CurlUtil getBytes(String url, ByteResponse response) {
+    long cPtr = CurlUtilsJNI.CurlUtil_getBytes(swigCPtr, this, url, ByteResponse.getCPtr(response), response);
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 

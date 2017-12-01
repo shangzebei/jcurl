@@ -1,12 +1,13 @@
 %module(directors="1") CurlUtils
 
+%ignore CurlUtil::get(string url, std::function<void(int, string)> func);
+
 %feature("director",assumeoverride=1) Response;
 
 %feature("director",assumeoverride=1) ByteResponse;
 
 %include "std_string.i"
 
-%ignore CurlUtil::get(string url, std::function<void(int, string)> func);
 
 %insert("runtime") %{
     //#define DEBUG_DIRECTOR_OWNED
