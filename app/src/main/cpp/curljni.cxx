@@ -739,12 +739,7 @@ void SwigDirector_Response::swig_connect_director(JNIEnv *jenv, jobject jself, j
         methods[i].base_methid = jenv->GetMethodID(baseclass, methods[i].mname, methods[i].mdesc);
         if (!methods[i].base_methid) return;
       }
-      swig_override[i] = false;
-      if (derived) {
-        jmethodID methid = jenv->GetMethodID(jcls, methods[i].mname, methods[i].mdesc);
-        swig_override[i] = (methid != methods[i].base_methid);
-        jenv->ExceptionClear();
-      }
+      swig_override[i] = derived;
     }
   }
 }

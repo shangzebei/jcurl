@@ -7,9 +7,9 @@
 
 
 #include <iostream>
+#include <functional>
 
 using namespace std;
-
 class Response{
 public:
     Response();
@@ -30,6 +30,7 @@ public:
 
 public:
     CurlUtil * get(string url,Response* response);
+    CurlUtil * get(string url,std::function<void(int, string)>);
 
 private:
 };

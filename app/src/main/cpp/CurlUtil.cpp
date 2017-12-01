@@ -22,15 +22,16 @@ CurlUtil *CurlUtil::getInstance() {
     return curlUtil;
 }
 
-CurlUtil *CurlUtil::get(string url,Response* response) {
-    HttpRequest *request = new HttpRequest();
+CurlUtil *CurlUtil::get(string url, Response *response) {
+    auto *request = new HttpRequest();
     request->setUrl(url);
 
     request->setRequestType(HttpRequest::Type::Get);
 
     request->setResponseCallback([=](CAHttpClient *client, HttpResponse *httpResponse) {
         if (response != nullptr) {
-            response->callback(0, httpResponse->getResponseData()->toString());
+            response->callback(httpResponse->getResponseCode(),
+                               httpResponse->getResponseData()->toString());
         }
     });
     CAHttpClient::getInstance(4)->send(request);
@@ -43,9 +44,22 @@ CurlUtil::CurlUtil() {
 }
 
 CurlUtil::~CurlUtil() {
-
+    LOGD("CurlUtil::~CurlUtil");
 }
 
+CurlUtil *CurlUtil::get(string url, std::function<void(int, string)> func) {
+    auto *request = new HttpRequest();
+    request->setUrl(url);
+
+    request->setRequestType(HttpRequest::Type::Get);
+
+    request->setResponseCallback([=](CAHttpClient *client, HttpResponse *httpResponse) {
+        if (func != nullptr) {
+            func(httpResponse->getResponseCode(), httpResponse->getResponseData()->toString());
+        }
+    });
+    CAHttpClient::getInstance(4)->send(request);
+}
 
 
 Response::Response() {}

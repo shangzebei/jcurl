@@ -20,15 +20,16 @@ public class MainActivity extends AppCompatActivity {
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
 
+        final Response res = new Response() {
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: " + s);
+            }
+        };
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CurlUtil.getInstance().get("http://www.baidu.com",new Response(){
-                    @Override
-                    public void callback(int result, String s) {
-                        Log.i("szb", "callback: "+s);
-                    }
-                });
+                CurlUtil.getInstance().get("http://www.hao123.com",res);
 
             }
         });
