@@ -1,9 +1,15 @@
 %module(directors="1") CurlUtils
 
+%typemap(directorin, descriptor="java.nio.ByteBuffer") unsigned char *NIOBUFFER  "$input =  $1;"
+
+%typemap(javadirectorin) unsigned char *NIOBUFFER "$jniinput"
+
 %include <std_string.i>
 
 %include <typemaps.i>
+
 %include <various.i>
+
 
 %apply unsigned char *NIOBUFFER { unsigned char *buf };
 

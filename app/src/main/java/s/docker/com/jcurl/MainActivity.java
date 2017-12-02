@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.nio.ByteBuffer;
+
 public class MainActivity extends AppCompatActivity {
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -20,16 +22,17 @@ public class MainActivity extends AppCompatActivity {
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
 
-        final Response res = new Response() {
+        final ByteResponse res = new ByteResponse() {
             @Override
-            public void callback(int result, String s) {
-                Log.i("szb", "callback: " + s);
+            public void callback(int result, ByteBuffer buf) {
+                byte[] array = buf.array();
+                Log.i("szb", "callback: "+ new String(array));
             }
         };
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CurlUtil.getInstance().get("http://www.hao123.com",res);
+                CurlUtil.getInstance().getBytes("http://www.hao123.com",res);
 
             }
         });
