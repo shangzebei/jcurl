@@ -621,6 +621,19 @@ namespace Swig {
   }
 }
 
+static inline void printException(JNIEnv * jenv, jthrowable throwable){
+    if (throwable) {
+        jclass throwclz = jenv->FindClass("java/lang/Throwable");
+        if (throwclz) {
+            jmethodID printStackMethod = jenv->GetMethodID(throwclz, "printStackTrace", "()V");
+            if (printStackMethod) {
+                jenv->CallNonvirtualVoidMethod(throwable, throwclz, printStackMethod);
+            }
+        }
+    }
+}
+
+
 #include <string>
 
 
@@ -654,9 +667,11 @@ void SwigDirector_Response::callback(int result, std::string s) {
     js = jenv->NewStringUTF((&s)->c_str());
     Swig::LocalRefGuard s_refguard(jenv, js); 
     jenv->CallStaticVoidMethod(Swig::jclass_CurlUtilsJNI, Swig::director_methids[0], swigjobj, jresult, js);
+    
     jthrowable swigerror = jenv->ExceptionOccurred();
     if (swigerror) {
       jenv->ExceptionClear();
+      printException(jenv, swigerror);
       throw Swig::DirectorException(jenv, swigerror);
     }
     
@@ -718,9 +733,11 @@ void SwigDirector_ByteResponse::callback(int result, unsigned char *buf) {
       jbuf = jenv->NewDirectByteBuffer(buf, strlen(buf));
     }
     jenv->CallStaticVoidMethod(Swig::jclass_CurlUtilsJNI, Swig::director_methids[1], swigjobj, jresult, jbuf);
+    
     jthrowable swigerror = jenv->ExceptionOccurred();
     if (swigerror) {
       jenv->ExceptionClear();
+      printException(jenv, swigerror);
       throw Swig::DirectorException(jenv, swigerror);
     }
     
@@ -737,7 +754,7 @@ void SwigDirector_ByteResponse::swig_connect_director(JNIEnv *jenv, jobject jsel
     jmethodID base_methid;
   } methods[] = {
     {
-      "callback", "(Ijava.nio.ByteBuffer)V", NULL 
+      "callback", "(ILjava/nio/ByteBuffer;)V", NULL 
     }
   };
   
@@ -1036,7 +1053,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_swig_1module_1init(
       "SwigDirector_Response_callback", "(Ls/docker/com/jcurl/Response;ILjava/lang/String;)V" 
     },
     {
-      "SwigDirector_ByteResponse_callback", "(Ls/docker/com/jcurl/ByteResponse;Ijava.nio.ByteBuffer)V" 
+      "SwigDirector_ByteResponse_callback", "(Ls/docker/com/jcurl/ByteResponse;ILjava/nio/ByteBuffer;)V" 
     }
   };
   Swig::jclass_CurlUtilsJNI = (jclass) jenv->NewGlobalRef(jcls);

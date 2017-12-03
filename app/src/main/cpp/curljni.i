@@ -1,10 +1,32 @@
 %module(directors="1") CurlUtils
 
-%typemap(directorin, descriptor="java.nio.ByteBuffer") unsigned char *NIOBUFFER  {
+%typemap(directorin, descriptor="Ljava/nio/ByteBuffer;") unsigned char *NIOBUFFER  {
     $input = JCALL2(NewDirectByteBuffer,jenv,$1,strlen($1));
 }
 
 %typemap(javadirectorin) unsigned char *NIOBUFFER "$jniinput"
+
+%{
+static inline void printException(JNIEnv * jenv, jthrowable throwable){
+    if (throwable) {
+        jclass throwclz = jenv->FindClass("java/lang/Throwable");
+        if (throwclz) {
+            jmethodID printStackMethod = jenv->GetMethodID(throwclz, "printStackTrace", "()V");
+            if (printStackMethod) {
+                jenv->CallNonvirtualVoidMethod(throwable, throwclz, printStackMethod);
+            }
+        }
+    }
+}
+%}
+%feature("director:except") %{
+    jthrowable $error = jenv->ExceptionOccurred();
+    if ($error) {
+        jenv->ExceptionClear();
+        printException(jenv, $error);
+        throw Swig::DirectorException(jenv, $error);
+    }
+%}
 
 %include <std_string.i>
 
