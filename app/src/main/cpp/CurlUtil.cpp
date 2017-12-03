@@ -69,8 +69,9 @@ CurlUtil *CurlUtil::getBytes(std::string url, ByteResponse *response) {
 
     request->setResponseCallback([=](CAHttpClient *client, HttpResponse *httpResponse) {
         if (response != nullptr) {
-            response->callback(httpResponse->getResponseCode(),
-                               httpResponse->getResponseData()->getBytes());
+             auto data= httpResponse->getResponseData();
+            response->callback(httpResponse->getResponseCode(), data->getBytes(),data->getLength());
+//            LOGD("%s",httpResponse->getResponseData()->toString().c_str());
         }
     });
     CAHttpClient::getInstance(4)->send(request);

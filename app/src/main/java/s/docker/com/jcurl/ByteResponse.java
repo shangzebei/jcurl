@@ -50,10 +50,10 @@ public class ByteResponse {
     CurlUtilsJNI.ByteResponse_change_ownership(this, swigCPtr, true);
   }
 
-  public void callback(int result, java.nio.ByteBuffer buf) {
+  public void callback(int result, java.nio.ByteBuffer buf, long len) {
   assert buf.isDirect() : "Buffer must be allocated direct.";
     {
-      if (getClass() == ByteResponse.class) CurlUtilsJNI.ByteResponse_callback(swigCPtr, this, result, buf); else CurlUtilsJNI.ByteResponse_callbackSwigExplicitByteResponse(swigCPtr, this, result, buf);
+      if (getClass() == ByteResponse.class) CurlUtilsJNI.ByteResponse_callback(swigCPtr, this, result, buf, len); else CurlUtilsJNI.ByteResponse_callbackSwigExplicitByteResponse(swigCPtr, this, result, buf, len);
     }
   }
 

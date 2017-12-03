@@ -65,10 +65,8 @@ public class MainActivity extends AppCompatActivity {
         };
 
         final ByteResponse res = new ByteResponse() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
-            public void callback(int result, ByteBuffer buf) {
-                Log.i("szb", "callback: "+getString(buf));
+            public void callback(int result, ByteBuffer buf, long len) {
 
                 byte[] bytes = new byte[buf.remaining()];
                 buf.get(bytes, 0, bytes.length);
@@ -88,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CurlUtil.getInstance().getBytes("http://img.taopic.com/uploads/allimg/120727/201995-120HG1030762.jpg", res);
+                CurlUtil.getInstance().getBytes("http://pic2.nipic.com/20090424/1242397_110033072_2.jpg", res);
 
             }
         });

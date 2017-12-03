@@ -1,7 +1,8 @@
 %module(directors="1") CurlUtils
 
 %typemap(directorin, descriptor="Ljava/nio/ByteBuffer;") unsigned char *NIOBUFFER  {
-    $input = JCALL2(NewDirectByteBuffer,jenv,$1,strlen($1));
+
+    $input = JCALL2(NewDirectByteBuffer,jenv,$1,len);
 }
 
 %typemap(javadirectorin) unsigned char *NIOBUFFER "$jniinput"

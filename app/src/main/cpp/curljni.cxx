@@ -715,24 +715,26 @@ void SwigDirector_Response::swig_connect_director(JNIEnv *jenv, jobject jself, j
 SwigDirector_ByteResponse::SwigDirector_ByteResponse(JNIEnv *jenv) : ByteResponse(), Swig::Director(jenv) {
 }
 
-void SwigDirector_ByteResponse::callback(int result, unsigned char *buf) {
+void SwigDirector_ByteResponse::callback(int result, unsigned char *buf, size_t len) {
   JNIEnvWrapper swigjnienv(this) ;
   JNIEnv * jenv = swigjnienv.getJNIEnv() ;
   jobject swigjobj = (jobject) NULL ;
   jint jresult  ;
   jobject jbuf = 0 ;
+  jlong jlen  ;
   
   if (!swig_override[0]) {
-    ByteResponse::callback(result,buf);
+    ByteResponse::callback(result,buf,len);
     return;
   }
   swigjobj = swig_get_self(jenv);
   if (swigjobj && jenv->IsSameObject(swigjobj, NULL) == JNI_FALSE) {
     jresult = (jint) result;
     {
-      jbuf = jenv->NewDirectByteBuffer(buf, strlen(buf));
+      jbuf = jenv->NewDirectByteBuffer(buf, len);
     }
-    jenv->CallStaticVoidMethod(Swig::jclass_CurlUtilsJNI, Swig::director_methids[1], swigjobj, jresult, jbuf);
+    jlen = (jlong) len;
+    jenv->CallStaticVoidMethod(Swig::jclass_CurlUtilsJNI, Swig::director_methids[1], swigjobj, jresult, jbuf, jlen);
     
     jthrowable swigerror = jenv->ExceptionOccurred();
     if (swigerror) {
@@ -754,7 +756,7 @@ void SwigDirector_ByteResponse::swig_connect_director(JNIEnv *jenv, jobject jsel
     jmethodID base_methid;
   } methods[] = {
     {
-      "callback", "(ILjava/nio/ByteBuffer;)V", NULL 
+      "callback", "(ILjava/nio/ByteBuffer;J)V", NULL 
     }
   };
   
@@ -869,10 +871,11 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1change_1o
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callback(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jobject jarg3) {
+SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callback(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jobject jarg3, jlong jarg4) {
   ByteResponse *arg1 = (ByteResponse *) 0 ;
   int arg2 ;
   unsigned char *arg3 = (unsigned char *) 0 ;
+  size_t arg4 ;
   
   (void)jenv;
   (void)jcls;
@@ -885,15 +888,17 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callb
       SWIG_JavaThrowException(jenv, SWIG_JavaRuntimeException, "Unable to get address of a java.nio.ByteBuffer direct byte buffer. Buffer must be a direct buffer and not a non-direct buffer.");  
     }  
   }
-  (arg1)->callback(arg2,arg3);
+  arg4 = (size_t)jarg4; 
+  (arg1)->callback(arg2,arg3,arg4);
   
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callbackSwigExplicitByteResponse(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jobject jarg3) {
+SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callbackSwigExplicitByteResponse(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jobject jarg3, jlong jarg4) {
   ByteResponse *arg1 = (ByteResponse *) 0 ;
   int arg2 ;
   unsigned char *arg3 = (unsigned char *) 0 ;
+  size_t arg4 ;
   
   (void)jenv;
   (void)jcls;
@@ -906,7 +911,8 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callb
       SWIG_JavaThrowException(jenv, SWIG_JavaRuntimeException, "Unable to get address of a java.nio.ByteBuffer direct byte buffer. Buffer must be a direct buffer and not a non-direct buffer.");  
     }  
   }
-  (arg1)->ByteResponse::callback(arg2,arg3);
+  arg4 = (size_t)jarg4; 
+  (arg1)->ByteResponse::callback(arg2,arg3,arg4);
   
 }
 
@@ -1053,7 +1059,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_swig_1module_1init(
       "SwigDirector_Response_callback", "(Ls/docker/com/jcurl/Response;ILjava/lang/String;)V" 
     },
     {
-      "SwigDirector_ByteResponse_callback", "(Ls/docker/com/jcurl/ByteResponse;ILjava/nio/ByteBuffer;)V" 
+      "SwigDirector_ByteResponse_callback", "(Ls/docker/com/jcurl/ByteResponse;ILjava/nio/ByteBuffer;J)V" 
     }
   };
   Swig::jclass_CurlUtilsJNI = (jclass) jenv->NewGlobalRef(jcls);

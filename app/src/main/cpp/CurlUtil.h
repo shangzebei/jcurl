@@ -24,7 +24,7 @@ public:
 
 class ByteResponse {
 public:
-    virtual void callback(int result, unsigned char *buf) {
+    virtual void callback(int result, unsigned char *buf,size_t len) {
 
     }
 };
