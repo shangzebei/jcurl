@@ -714,7 +714,9 @@ void SwigDirector_ByteResponse::callback(int result, unsigned char *buf) {
   swigjobj = swig_get_self(jenv);
   if (swigjobj && jenv->IsSameObject(swigjobj, NULL) == JNI_FALSE) {
     jresult = (jint) result;
-    jbuf =  buf;
+    {
+      jbuf = jenv->NewDirectByteBuffer(buf, strlen(buf));
+    }
     jenv->CallStaticVoidMethod(Swig::jclass_CurlUtilsJNI, Swig::director_methids[1], swigjobj, jresult, jbuf);
     jthrowable swigerror = jenv->ExceptionOccurred();
     if (swigerror) {
