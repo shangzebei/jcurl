@@ -1,5 +1,12 @@
 package s.docker.com.jcurl;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     static {
         System.loadLibrary("jcurl");
     }
+
+    private Bitmap bitmap;
+
     public static String getString(ByteBuffer buffer)
     {
         Charset charset = null;
@@ -43,17 +53,42 @@ public class MainActivity extends AppCompatActivity {
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
 
+
+        final View viewById = findViewById(R.id.bk);
+
+        final Handler handler = new Handler() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void handleMessage(Message msg) {
+                viewById.setBackground(new BitmapDrawable(bitmap));
+            }
+        };
+
         final ByteResponse res = new ByteResponse() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void callback(int result, ByteBuffer buf) {
-                buf.array();
-                Log.i("szb", "callback: "+ getString(buf));
+                Log.i("szb", "callback: "+getString(buf));
+
+                byte[] bytes = new byte[buf.remaining()];
+                buf.get(bytes, 0, bytes.length);
+                bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                handler.sendEmptyMessage(1);
+            }
+        };
+
+
+
+        final Response response = new Response() {
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: "+s);
             }
         };
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CurlUtil.getInstance().getBytes("http://www.hao123.com",res);
+                CurlUtil.getInstance().getBytes("http://img.taopic.com/uploads/allimg/120727/201995-120HG1030762.jpg", res);
 
             }
         });
