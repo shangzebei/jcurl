@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CurlUtil.getInstance().getBytes("http://pic2.nipic.com/20090424/1242397_110033072_2.jpg", res);
+                CurlUtil.getInstance().getBytes("http://c.hiphotos.baidu.com/image/pic/item/4d086e061d950a7be822550e03d162d9f3d3c9e1.jpg", res);
 
             }
         });

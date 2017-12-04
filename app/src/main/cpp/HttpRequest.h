@@ -62,6 +62,8 @@ public:
     virtual ~HttpRequest()
     {
     }
+
+
     
 
     // setter/getters for properties
@@ -201,7 +203,7 @@ public:
     {
         return _threadID;
     };
-    
+
 protected:
     // properties
     Type                        _requestType;    /// kCAHttpRequestGet, kCAHttpRequestPost or other enums
@@ -209,9 +211,11 @@ protected:
     std::vector<char>           _requestData;    /// used for POST
     std::function<void(CAHttpClient* client, HttpResponse* response)>
                                 _pCallback;      /// C++11 style callbacks
+
     std::vector<std::string>    _headers;              /// custom http headers
     std::string					_fileNameToPost;
     ssize_t                     _threadID;
+
 };
 
 

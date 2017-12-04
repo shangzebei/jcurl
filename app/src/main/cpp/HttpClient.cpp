@@ -7,7 +7,10 @@
 #include <map>
 #include <string.h>
 #include <cstdlib>
+#include <android/log.h>
 
+#define LOG    "curl" // 这个是自定义的LOG的标识
+#define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG,__VA_ARGS__) // 定义LOGD类型
 
 static std::map<ssize_t, CAHttpClient*> s_mHttpClient; // pointer to singleton
 
@@ -39,6 +42,14 @@ static size_t writeHeaderData(void *ptr, size_t size, size_t nmemb, void *stream
     return sizes;
 }
 
+inline int progressFunc(char *progress_data,
+                         double t, /* dltotal */
+                         double d, /* dlnow */
+                         double ultotal,
+                         double ulnow)
+{
+    LOGD("%s %g / %g (%g %%)/n", progress_data, d, t, d*100.0/t);
+}
 
 static int processGetTask(CAHttpClient* client, HttpRequest* request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
 static int processPostTask(CAHttpClient* client, HttpRequest* request, write_callback callback, void *stream, long *errorCode, write_callback headerCallback, void *headerStream, char* errorBuffer);
@@ -244,13 +255,14 @@ public:
                 return false;
             }
         }
-        
         return setOption(CURLOPT_URL, request->getUrl())
         && setOption(CURLOPT_WRITEFUNCTION, callback)
         && setOption(CURLOPT_WRITEDATA, stream)
         && setOption(CURLOPT_HEADERFUNCTION, headerCallback)
-        && setOption(CURLOPT_HEADERDATA, headerStream);
-        
+        && setOption(CURLOPT_HEADERDATA, headerStream)
+ ;
+
+
     }
     
     /// @param responseCode Null not allowed
