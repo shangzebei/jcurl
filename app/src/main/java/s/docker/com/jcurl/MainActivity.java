@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.math.BigInteger;
@@ -53,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-
-
         final View viewById = findViewById(R.id.bk);
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+
 
         final Handler handler = new Handler() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -88,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void progress(long unow, long utotal, long dnow, long dtotal) {
                 Log.i("szb", "progress: "+dnow+":"+dtotal);
+                progressBar.setMax((int) dtotal);
+                progressBar.setProgress((int) dnow);
             }
         };
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
