@@ -10,12 +10,6 @@
 #define LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG,__VA_ARGS__) // 定义LOGE类型
 #define LOGF(...)  __android_log_print(ANDROID_LOG_FATAL,LOG,__VA_ARGS__) //
 
-
-
-
-
-
-
 CurlUtil *CurlUtil::get(std::string url, Response *response) {
 
     auto curlutil = new CurlUtil();
@@ -31,7 +25,7 @@ CurlUtil *CurlUtil::get(std::string url, Response *response) {
                                httpResponse->getResponseData()->toString());
         }
     });
-
+    curlutil->_execute= false;
     curlutil->setHttpRequest(request);
     return curlutil;
 
@@ -57,8 +51,10 @@ CurlUtil *CurlUtil::get(std::string url, std::function<void(int, std::string)> f
     request->setResponseCallback([=](CAHttpClient *client, HttpResponse *httpResponse) {
         if (func != nullptr) {
             func(httpResponse->getResponseCode(), httpResponse->getResponseData()->toString());
+
         }
     });
+    util->_execute= false;
 
     util->setHttpRequest(request);
 
@@ -80,9 +76,11 @@ CurlUtil *CurlUtil::getBytes(std::string url, ByteResponse *response) {
             auto data = httpResponse->getResponseData();
             response->callback(httpResponse->getResponseCode(), data->getBytes(),
                                data->getLength());
+
         }
     });
 
+    util->_execute= false;
     util->setHttpRequest(request);
 
     return util;
@@ -90,15 +88,15 @@ CurlUtil *CurlUtil::getBytes(std::string url, ByteResponse *response) {
 
 void CurlUtil::execute() {
 
-//    if (_execute) {
-//        return;
-//    }
-//    switch (_httpRequest->getRequestType()) {
-//        case HttpRequest::Type::Get:
+    if (_execute) {
+        return;
+    }
+    switch (_httpRequest->getRequestType()) {
+        case HttpRequest::Type::Get:
             CAHttpClient::getInstance(4)->send(getHttpRequest());
             _execute = true;
-//            break;
-//    }
+            break;
+    }
 
 }
 

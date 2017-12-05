@@ -1,42 +1,47 @@
 %module(directors="1") CurlUtils
+#if defined(SWIGJAVA)
 
-%typemap(directorin, descriptor="Ljava/nio/ByteBuffer;") unsigned char *NIOBUFFER  {
+    %typemap(directorin, descriptor="Ljava/nio/ByteBuffer;") unsigned char *NIOBUFFER  {
 
-    $input = JCALL2(NewDirectByteBuffer,jenv,$1,len);
-}
+        $input = JCALL2(NewDirectByteBuffer,jenv,$1,len);
+    }
 
-%typemap(javadirectorin) unsigned char *NIOBUFFER "$jniinput"
+    %typemap(javadirectorin) unsigned char *NIOBUFFER "$jniinput"
 
-%{
-static inline void printException(JNIEnv * jenv, jthrowable throwable){
-    if (throwable) {
-        jclass throwclz = jenv->FindClass("java/lang/Throwable");
-        if (throwclz) {
-            jmethodID printStackMethod = jenv->GetMethodID(throwclz, "printStackTrace", "()V");
-            if (printStackMethod) {
-                jenv->CallNonvirtualVoidMethod(throwable, throwclz, printStackMethod);
+    %{
+    static inline void printException(JNIEnv * jenv, jthrowable throwable){
+        if (throwable) {
+            jclass throwclz = jenv->FindClass("java/lang/Throwable");
+            if (throwclz) {
+                jmethodID printStackMethod = jenv->GetMethodID(throwclz, "printStackTrace", "()V");
+                if (printStackMethod) {
+                    jenv->CallNonvirtualVoidMethod(throwable, throwclz, printStackMethod);
+                }
             }
         }
     }
-}
-%}
-%feature("director:except") %{
-    jthrowable $error = jenv->ExceptionOccurred();
-    if ($error) {
-        jenv->ExceptionClear();
-        printException(jenv, $error);
-        throw Swig::DirectorException(jenv, $error);
-    }
-%}
-
-%include <std_string.i>
-
-%include <typemaps.i>
-
-%include <various.i>
+    %}
+    %feature("director:except") %{
+        jthrowable $error = jenv->ExceptionOccurred();
+        if ($error) {
+            jenv->ExceptionClear();
+            printException(jenv, $error);
+            throw Swig::DirectorException(jenv, $error);
+        }
+    %}
 
 
-%apply unsigned char *NIOBUFFER { unsigned char *buf };
+    %include <std_string.i>
+
+    %include <typemaps.i>
+
+    %include <various.i>
+
+
+    %apply unsigned char *NIOBUFFER { unsigned char *buf };
+
+
+#endif
 
 %ignore CurlUtil::get(std::string url, std::function<void(int, std::string)>);
 

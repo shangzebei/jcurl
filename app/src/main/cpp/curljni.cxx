@@ -621,18 +621,18 @@ namespace Swig {
   }
 }
 
-static inline void printException(JNIEnv * jenv, jthrowable throwable){
-    if (throwable) {
-        jclass throwclz = jenv->FindClass("java/lang/Throwable");
-        if (throwclz) {
-            jmethodID printStackMethod = jenv->GetMethodID(throwclz, "printStackTrace", "()V");
-            if (printStackMethod) {
-                jenv->CallNonvirtualVoidMethod(throwable, throwclz, printStackMethod);
+    static inline void printException(JNIEnv * jenv, jthrowable throwable){
+        if (throwable) {
+            jclass throwclz = jenv->FindClass("java/lang/Throwable");
+            if (throwclz) {
+                jmethodID printStackMethod = jenv->GetMethodID(throwclz, "printStackTrace", "()V");
+                if (printStackMethod) {
+                    jenv->CallNonvirtualVoidMethod(throwable, throwclz, printStackMethod);
+                }
             }
         }
     }
-}
-
+    
 
 #include <string>
 
