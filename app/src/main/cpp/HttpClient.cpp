@@ -207,7 +207,7 @@ int xferinfo(void *p,
     if (_progress) {
         try {
             Progress *progress =(Progress*)_progress;
-            progress->progress(dlnow, dltotal, ulnow, ultotal);
+            progress->progress(ulnow, ultotal,dlnow, dltotal);
         }catch (...){
 
         }

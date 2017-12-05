@@ -84,16 +84,17 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("szb", "callback: "+s);
             }
         };
+        final Progress progress = new Progress() {
+            @Override
+            public void progress(long unow, long utotal, long dnow, long dtotal) {
+                Log.i("szb", "progress: "+dnow+":"+dtotal);
+            }
+        };
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CurlUtil.getBytes("http://c.hiphotos.baidu.com/image/pic/item/4d086e061d950a7be822550e03d162d9f3d3c9e1.jpg", res)
-                        .setProgress(new Progress(){
-                            @Override
-                            public void progress(BigInteger unow, BigInteger utotal, BigInteger dnow, BigInteger dtotal) {
-                                Log.i("szb", "progress: "+dnow+":"+dtotal);
-                            }
-                        })
+                        .setProgress(progress)
                         .execute();
 
             }

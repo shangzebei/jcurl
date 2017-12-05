@@ -32,7 +32,7 @@ public:
 #pragma once
 class Progress{
 public:
-    virtual void progress(unsigned long long unow,unsigned long long utotal,unsigned long long dnow,unsigned long long dtotal) {
+    virtual void progress(long long unow,long long utotal,long long dnow,long long dtotal) {
 
     }
 };

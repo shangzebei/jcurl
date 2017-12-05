@@ -105,9 +105,9 @@ void CurlUtil::execute() {
 void CurlUtil::setHttpRequest(HttpRequest *httpRequest) {
     _httpRequest = httpRequest;
 }
-
+extern void *_progress;
 CurlUtil *CurlUtil::setProgress(Progress *progress) {
-    _httpRequest->setProgress(progress);
+    _progress=progress;
     return this;
 }
 

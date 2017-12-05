@@ -8,16 +8,16 @@
 
 package s.docker.com.jcurl;
 
-public class ByteResponse {
+public class Progress {
   private long swigCPtr;
   protected boolean swigCMemOwn;
 
-  protected ByteResponse(long cPtr, boolean cMemoryOwn) {
+  protected Progress(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(ByteResponse obj) {
+  protected static long getCPtr(Progress obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,7 +29,7 @@ public class ByteResponse {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        CurlUtilsJNI.delete_ByteResponse(swigCPtr);
+        CurlUtilsJNI.delete_Progress(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -42,24 +42,21 @@ public class ByteResponse {
 
   public void swigReleaseOwnership() {
     swigCMemOwn = false;
-    CurlUtilsJNI.ByteResponse_change_ownership(this, swigCPtr, false);
+    CurlUtilsJNI.Progress_change_ownership(this, swigCPtr, false);
   }
 
   public void swigTakeOwnership() {
     swigCMemOwn = true;
-    CurlUtilsJNI.ByteResponse_change_ownership(this, swigCPtr, true);
+    CurlUtilsJNI.Progress_change_ownership(this, swigCPtr, true);
   }
 
-  public void callback(int result, java.nio.ByteBuffer buf, long len) {
-  assert buf.isDirect() : "Buffer must be allocated direct.";
-    {
-      if (getClass() == ByteResponse.class) CurlUtilsJNI.ByteResponse_callback(swigCPtr, this, result, buf, len); else CurlUtilsJNI.ByteResponse_callbackSwigExplicitByteResponse(swigCPtr, this, result, buf, len);
-    }
+  public void progress(long unow, long utotal, long dnow, long dtotal) {
+    if (getClass() == Progress.class) CurlUtilsJNI.Progress_progress(swigCPtr, this, unow, utotal, dnow, dtotal); else CurlUtilsJNI.Progress_progressSwigExplicitProgress(swigCPtr, this, unow, utotal, dnow, dtotal);
   }
 
-  public ByteResponse() {
-    this(CurlUtilsJNI.new_ByteResponse(), true);
-    CurlUtilsJNI.ByteResponse_director_connect(this, swigCPtr, swigCMemOwn, true);
+  public Progress() {
+    this(CurlUtilsJNI.new_Progress(), true);
+    CurlUtilsJNI.Progress_director_connect(this, swigCPtr, swigCMemOwn, true);
   }
 
 }
