@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -86,7 +87,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CurlUtil.getInstance().getBytes("http://c.hiphotos.baidu.com/image/pic/item/4d086e061d950a7be822550e03d162d9f3d3c9e1.jpg", res);
+                CurlUtil.getBytes("http://c.hiphotos.baidu.com/image/pic/item/4d086e061d950a7be822550e03d162d9f3d3c9e1.jpg", res)
+                        .setProgress(new Progress(){
+                            @Override
+                            public void progress(BigInteger unow, BigInteger utotal, BigInteger dnow, BigInteger dtotal) {
+                                Log.i("szb", "progress: "+dnow+":"+dtotal);
+                            }
+                        })
+                        .execute();
 
             }
         });

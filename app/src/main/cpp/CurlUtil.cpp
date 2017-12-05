@@ -2,7 +2,7 @@
 // Created by chinamall on 2017/11/30.
 //
 #include<android/log.h>
-
+#include "CurlUtil.h"
 #define LOG    "curl" // 这个是自定义的LOG的标识
 #define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG,__VA_ARGS__) // 定义LOGD类型
 #define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
@@ -11,18 +11,15 @@
 #define LOGF(...)  __android_log_print(ANDROID_LOG_FATAL,LOG,__VA_ARGS__) //
 
 
-#include "CurlUtil.h"
-#include "HttpClient.h"
-#include "HttpRequest.h"
 
-CurlUtil *CurlUtil::getInstance() {
-    if (curlUtil == nullptr) {
-        curlUtil = new CurlUtil();
-    }
-    return curlUtil;
-}
+
+
+
 
 CurlUtil *CurlUtil::get(std::string url, Response *response) {
+
+    auto curlutil = new CurlUtil();
+
     auto *request = new HttpRequest();
     request->setUrl(url);
 
@@ -34,8 +31,9 @@ CurlUtil *CurlUtil::get(std::string url, Response *response) {
                                httpResponse->getResponseData()->toString());
         }
     });
-    CAHttpClient::getInstance(4)->send(request);
 
+    curlutil->setHttpRequest(request);
+    return curlutil;
 
 }
 
@@ -48,6 +46,9 @@ CurlUtil::~CurlUtil() {
 }
 
 CurlUtil *CurlUtil::get(std::string url, std::function<void(int, std::string)> func) {
+
+    auto util = new CurlUtil();
+
     auto *request = new HttpRequest();
     request->setUrl(url);
 
@@ -58,22 +59,60 @@ CurlUtil *CurlUtil::get(std::string url, std::function<void(int, std::string)> f
             func(httpResponse->getResponseCode(), httpResponse->getResponseData()->toString());
         }
     });
-    CAHttpClient::getInstance(4)->send(request);
+
+    util->setHttpRequest(request);
+
+    return util;
 }
 
 CurlUtil *CurlUtil::getBytes(std::string url, ByteResponse *response) {
+
+    auto util = new CurlUtil();
+
     auto *request = new HttpRequest();
+
     request->setUrl(url);
 
     request->setRequestType(HttpRequest::Type::Get);
 
     request->setResponseCallback([=](CAHttpClient *client, HttpResponse *httpResponse) {
         if (response != nullptr) {
-             auto data= httpResponse->getResponseData();
-            response->callback(httpResponse->getResponseCode(), data->getBytes(),data->getLength());
-//            LOGD("%s",httpResponse->getResponseData()->toString().c_str());
+            auto data = httpResponse->getResponseData();
+            response->callback(httpResponse->getResponseCode(), data->getBytes(),
+                               data->getLength());
         }
     });
-    CAHttpClient::getInstance(4)->send(request);
+
+    util->setHttpRequest(request);
+
+    return util;
 }
+
+void CurlUtil::execute() {
+
+//    if (_execute) {
+//        return;
+//    }
+//    switch (_httpRequest->getRequestType()) {
+//        case HttpRequest::Type::Get:
+            CAHttpClient::getInstance(4)->send(getHttpRequest());
+            _execute = true;
+//            break;
+//    }
+
+}
+
+void CurlUtil::setHttpRequest(HttpRequest *httpRequest) {
+    _httpRequest = httpRequest;
+}
+
+CurlUtil *CurlUtil::setProgress(Progress *progress) {
+    _httpRequest->setProgress(progress);
+    return this;
+}
+
+HttpRequest *CurlUtil::getHttpRequest() {
+    return _httpRequest;
+}
+
 

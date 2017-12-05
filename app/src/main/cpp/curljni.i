@@ -44,6 +44,8 @@ static inline void printException(JNIEnv * jenv, jthrowable throwable){
 
 %feature("director",assumeoverride=1) ByteResponse;
 
+%feature("director",assumeoverride=1) Progress;
+
 
 
 

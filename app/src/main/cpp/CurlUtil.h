@@ -8,7 +8,8 @@
 
 #include <iostream>
 #include <functional>
-
+#include "HttpClient.h"
+#include "HttpRequest.h"
 
 #pragma once
 
@@ -28,6 +29,13 @@ public:
 
     }
 };
+#pragma once
+class Progress{
+public:
+    virtual void progress(unsigned long long unow,unsigned long long utotal,unsigned long long dnow,unsigned long long dtotal) {
+
+    }
+};
 
 #pragma once
 
@@ -38,23 +46,30 @@ private:
 
     virtual ~CurlUtil();
 
-public:
 
-    static CurlUtil *getInstance();
 
 public:
 
-    CurlUtil *get(std::string url, Response *response);
+    static CurlUtil *get(std::string url, Response *response);
 
-    CurlUtil *get(std::string url, std::function<void(int, std::string)>);
+    static CurlUtil *get(std::string url, std::function<void(int, std::string)>);
 
-    CurlUtil *getBytes(std::string url, ByteResponse *response);
+    static CurlUtil *getBytes(std::string url, ByteResponse *response);
 
+    CurlUtil * setProgress(Progress *progress);
+
+    void execute();
 
 private:
+
+    void setHttpRequest( HttpRequest *httpRequest);
+
+    HttpRequest *getHttpRequest();
+
+    HttpRequest *_httpRequest;
+
+    bool _execute = false;
 };
 
-
-static CurlUtil *curlUtil = nullptr;
 
 #endif //JCURL_CURLUTIL_H
