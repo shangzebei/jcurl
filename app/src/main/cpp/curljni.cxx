@@ -389,7 +389,7 @@ namespace Swig {
 #else
         void **jenv = (void **)&jenv_;
 #endif
-        env_status = director_->swig_jvm_->GetEnv((void **)&jenv_, JNI_VERSION_1_2);
+        env_status = director_->swig_jvm_->GetEnv((void **)&jenv_, JNI_VERSION_1_4);
 #if defined(SWIG_JAVA_ATTACH_CURRENT_THREAD_AS_DAEMON)
         // Attach a daemon thread to the JVM. Useful when the JVM should not wait for
         // the thread to exit upon shutdown. Only for jdk-1.4 and later.
