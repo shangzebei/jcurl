@@ -1,3 +1,9 @@
+%{
+#include <stdexcept>
+
+/**
+ *  A stash area embedded in each allocation to hold java handles
+ */
 struct Jalloc {
   jbyteArray jba;
   jobject ref;
@@ -7,7 +13,7 @@ static JavaVM *cached_jvm = 0;
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved) {
   cached_jvm = jvm;
-  return JNI_VERSION_1_2;
+  return JNI_VERSION_1_6;
 }
 
 static JNIEnv * JNU_GetEnv() {
@@ -25,22 +31,22 @@ void * operator new(size_t t) {
     JNIEnv *env = JNU_GetEnv();
     jbyteArray jba = env->NewByteArray((int) t + sizeof(Jalloc));
     if (env->ExceptionOccurred())
-      throw bad_alloc();
+      throw std::bad_exception();
     void *jbuffer = static_cast<void *>(env->GetByteArrayElements(jba, 0));
     if (env->ExceptionOccurred())
-      throw bad_alloc();
+      throw std::bad_exception();
     Jalloc *pJalloc = static_cast<Jalloc *>(jbuffer);
     pJalloc->jba = jba;
     /* Assign a global reference so byte array will persist until delete'ed */
     pJalloc->ref = env->NewGlobalRef(jba);
     if (env->ExceptionOccurred())
-      throw bad_alloc();
+      throw std::bad_exception();
     return static_cast<void *>(static_cast<char *>(jbuffer) + sizeof(Jalloc));
   }
   else { /* JNI_OnLoad not called, use malloc and mark as special */
     Jalloc *pJalloc = static_cast<Jalloc *>(malloc((int) t + sizeof(Jalloc)));
     if (!pJalloc)
-      throw bad_alloc();
+      throw std::bad_exception();
     pJalloc->ref = 0;
     return static_cast<void *>(
         static_cast<char *>(static_cast<void *>(pJalloc)) + sizeof(Jalloc));
