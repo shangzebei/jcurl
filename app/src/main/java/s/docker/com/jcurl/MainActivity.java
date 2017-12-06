@@ -44,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
         final ImageViewAdapter imageViewAdapter = new ImageViewAdapter(this);
         final GridView viewById = findViewById(R.id.grid);
         viewById.setAdapter(imageViewAdapter);
-        viewById.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                imageViewAdapter.notifyDataSetChanged();
-            }
-        });
+//        viewById.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                imageViewAdapter.notifyDataSetChanged();
+//            }
+//        });
 
     }
 

@@ -3,7 +3,7 @@
 
     $input = JCALL2(NewDirectByteBuffer,jenv,$1,len);
 }
-//%typemap(jtype, nopgcpp="1") ByteResponse & "long"
+%newobject callback(int result, unsigned char *buf,size_t len);
 
 %typemap(javadirectorin) unsigned char *NIOBUFFER "$jniinput"
 

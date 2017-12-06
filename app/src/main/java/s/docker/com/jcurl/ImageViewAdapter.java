@@ -71,8 +71,8 @@ public class ImageViewAdapter extends BaseAdapter {
 
 
     private void getIamge(final int position, final ImageView imageView) {
-//        if (true) {
-        if (cache.get(position) == null) {
+        if (true) {
+//        if (cache.get(position) == null) {
 
             CurlUtil.getBytes(aa[position], new ByteResponse() {
                 @Override
@@ -81,15 +81,15 @@ public class ImageViewAdapter extends BaseAdapter {
                     byte[] bytes = new byte[(int) len];
                     buf.get(bytes, 0, (int) len);
                     cache.put(position, bytes);
-//                    handler.sendEmptyMessage(0);
-//                    handler.post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            byte[] bytess = cache.get(position);
-//                            Log.i("szb", "handler: "+Thread.currentThread().getName());
-//                            imageView.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(bytess,0,bytess.length)));
-//                        }
-//                    });
+                    handler.sendEmptyMessage(0);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            byte[] bytess = cache.get(position);
+                            Log.i("szb", "handler: "+Thread.currentThread().getName());
+                            imageView.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(bytess,0,bytess.length)));
+                        }
+                    });
 
                 }
             }).execute();
