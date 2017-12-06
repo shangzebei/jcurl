@@ -232,7 +232,7 @@ static void SWIGUNUSED SWIG_JavaThrowException(JNIEnv *jenv, SWIG_JavaExceptionC
 
 
     //#define DEBUG_DIRECTOR_OWNED
-    #define SWIG_JAVA_NO_DETACH_CURRENT_THREAD
+    #define SWIG_JAVA_ATTACH_CURRENT_THREAD_AS_DAEMON
 
 /* -----------------------------------------------------------------------------
  * director_common.swg
@@ -919,6 +919,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1callback(
   if (!arg3_pstr) return ;
   (&arg3)->assign(arg3_pstr);
   jenv->ReleaseStringUTFChars(jarg3, arg3_pstr); 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
   (arg1)->callback(arg2,arg3);
 }
 
@@ -941,6 +948,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1callbackS
   if (!arg3_pstr) return ;
   (&arg3)->assign(arg3_pstr);
   jenv->ReleaseStringUTFChars(jarg3, arg3_pstr); 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
   (arg1)->Response::callback(arg2,arg3);
 }
 
@@ -963,6 +977,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1Response(JN
   (void)jenv;
   (void)jcls;
   arg1 = *(Response **)&jarg1; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
   delete arg1;
 }
 
@@ -1005,6 +1026,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callb
     }  
   }
   arg4 = (size_t)jarg4; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
   (arg1)->callback(arg2,arg3,arg4);
   
 }
@@ -1028,6 +1056,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callb
     }  
   }
   arg4 = (size_t)jarg4; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
   (arg1)->ByteResponse::callback(arg2,arg3,arg4);
   
 }
@@ -1051,6 +1086,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1ByteRespons
   (void)jenv;
   (void)jcls;
   arg1 = *(ByteResponse **)&jarg1; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
   delete arg1;
 }
 
@@ -1090,6 +1132,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1progress(
   arg3 = (long long)jarg3; 
   arg4 = (long long)jarg4; 
   arg5 = (long long)jarg5; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
   (arg1)->progress(arg2,arg3,arg4,arg5);
 }
 
@@ -1109,6 +1158,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1progressS
   arg3 = (long long)jarg3; 
   arg4 = (long long)jarg4; 
   arg5 = (long long)jarg5; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
   (arg1)->Progress::progress(arg2,arg3,arg4,arg5);
 }
 
@@ -1131,6 +1187,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1Progress(JN
   (void)jenv;
   (void)jcls;
   arg1 = *(Progress **)&jarg1; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
   delete arg1;
 }
 
@@ -1215,6 +1278,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setProgr
   (void)jarg2_;
   arg1 = *(CurlUtil **)&jarg1; 
   arg2 = *(Progress **)&jarg2; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return 0;
+  }
+  
   result = (CurlUtil *)(arg1)->setProgress(arg2);
   *(CurlUtil **)&jresult = result; 
   return jresult;
@@ -1228,6 +1298,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1execute(J
   (void)jcls;
   (void)jarg1_;
   arg1 = *(CurlUtil **)&jarg1; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
   (arg1)->execute();
 }
 

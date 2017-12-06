@@ -1,5 +1,6 @@
 package s.docker.com.jcurl;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -11,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -26,83 +30,27 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("jcurl");
     }
 
-    private Bitmap bitmap;
 
-    public static String getString(ByteBuffer buffer)
-    {
-        Charset charset = null;
-        CharsetDecoder decoder = null;
-        CharBuffer charBuffer = null;
-        try
-        {
-            charset = Charset.forName("UTF-8");
-            decoder = charset.newDecoder();
-            // charBuffer = decoder.decode(buffer);//用这个的话，只能输出来一次结果，第二次显示为空
-            charBuffer = decoder.decode(buffer.asReadOnlyBuffer());
-            return charBuffer.toString();
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-            return "";
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // Example of a call to a native method
-        TextView tv = (TextView) findViewById(R.id.sample_text);
-        final View viewById = findViewById(R.id.bk);
-        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        setContentView(R.layout.grid_layout);
+        initView(this);
 
 
-        final Handler handler = new Handler() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    }
+
+    private void initView(Context mainActivity) {
+        final ImageViewAdapter imageViewAdapter = new ImageViewAdapter(this);
+        final GridView viewById = findViewById(R.id.grid);
+        viewById.setAdapter(imageViewAdapter);
+        viewById.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void handleMessage(Message msg) {
-                viewById.setBackground(new BitmapDrawable(bitmap));
-            }
-        };
-
-        final ByteResponse res = new ByteResponse() {
-            @Override
-            public void callback(int result, ByteBuffer buf, long len) {
-
-                byte[] bytes = new byte[buf.remaining()];
-                buf.get(bytes, 0, bytes.length);
-                bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                handler.sendEmptyMessage(1);
-            }
-        };
-
-
-
-        final Response response = new Response() {
-            @Override
-            public void callback(int result, String s) {
-                Log.i("szb", "callback: "+s);
-            }
-        };
-        final Progress progress = new Progress() {
-            @Override
-            public void progress(long unow, long utotal, long dnow, long dtotal) {
-                Log.i("szb", "progress: "+dnow+":"+dtotal);
-                progressBar.setMax((int) dtotal);
-                progressBar.setProgress((int) dnow);
-            }
-        };
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CurlUtil.getBytes("http://c.hiphotos.baidu.com/image/pic/item/4d086e061d950a7be822550e03d162d9f3d3c9e1.jpg", res)
-                        .setProgress(progress)
-                        .execute();
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                imageViewAdapter.notifyDataSetChanged();
             }
         });
-        tv.setText("hello");
+
     }
 
     /**

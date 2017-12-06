@@ -1,5 +1,6 @@
 %module(directors="1") CurlUtils
 #if defined(SWIGJAVA)
+%include "jni/momory.i"
 %include "jni/fixjava.i"
 #endif
 

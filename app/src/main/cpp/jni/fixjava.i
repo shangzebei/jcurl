@@ -28,9 +28,17 @@ static inline void printException(JNIEnv * jenv, jthrowable throwable){
     }
 %}
 
+%typemap(check) SWIGTYPE *self %{
+if (!$1) {
+  SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+    "invalid native object; delete() likely already called");
+  return $null;
+}
+%}
+
 %insert("runtime") %{
     //#define DEBUG_DIRECTOR_OWNED
-    #define SWIG_JAVA_NO_DETACH_CURRENT_THREAD
+    #define SWIG_JAVA_ATTACH_CURRENT_THREAD_AS_DAEMON
 %}
 
 %include <std_string.i>
