@@ -41,7 +41,7 @@ if (!$1) {
     #define SWIG_JAVA_ATTACH_CURRENT_THREAD_AS_DAEMON
 %}
 
-%typemap(javafinalize) SWIGTYPE ""
+//%typemap(javafinalize) SWIGTYPE ""
 
 %include <std_string.i>
 

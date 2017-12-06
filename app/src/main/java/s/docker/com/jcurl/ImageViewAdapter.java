@@ -81,7 +81,7 @@ public class ImageViewAdapter extends BaseAdapter {
                     byte[] bytes = new byte[(int) len];
                     buf.get(bytes, 0, (int) len);
                     cache.put(position, bytes);
-                    handler.sendEmptyMessage(0);
+//                    handler.sendEmptyMessage(0);
 //                    handler.post(new Runnable() {
 //                        @Override
 //                        public void run() {
