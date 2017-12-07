@@ -31,6 +31,7 @@ class HttpResponse;
 #undef DELETE
 #endif
 #endif
+
 class HttpRequest {
 public:
     /**
@@ -75,9 +76,12 @@ public:
     }
 
     void setProgress(void *progress) {
-        _progress= progress;
+        _progress = progress;
     }
 
+    void *getProgress() {
+        return _progress;
+    }
 
     /**
      * Get the request type of HttpRequest object.
@@ -207,7 +211,7 @@ protected:
     std::string _fileNameToPost;
     ssize_t _threadID;
 
-public:
+private:
 
     void *_progress;
 };

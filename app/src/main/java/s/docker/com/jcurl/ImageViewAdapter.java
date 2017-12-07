@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -66,13 +67,12 @@ public class ImageViewAdapter extends BaseAdapter {
         ImageView imageView = inflate.findViewById(R.id.imagev);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         ProgressBar progressBar = inflate.findViewById(R.id.progressBar);
-        progressBar.setMax(10000);
+
 
         getIamge(position, imageView,progressBar);
         return inflate;
     }
 
-//    Map<Integer, byte[]> cache = new HashMap<Integer, byte[]>();
 
 
     private void getIamge(final int position, final ImageView imageView, final ProgressBar progressBar) {
@@ -96,11 +96,12 @@ public class ImageViewAdapter extends BaseAdapter {
         }).setProgress(new Progress() {
             @Override
             public void progress(long unow, long utotal, final long dnow, final long dtotal) {
-
+//                Log.i("szb", "position: "+position +"##"+ dnow + ":" + dtotal+"  ");
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
                         Log.i("szb", "progress: " + dnow + ":" + dtotal+"  "+Thread.currentThread().getName());
+                        progressBar.setMax((int) dtotal);
                         progressBar.setProgress((int) dnow);
 
                     }

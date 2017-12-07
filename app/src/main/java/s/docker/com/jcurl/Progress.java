@@ -54,6 +54,14 @@ public class Progress {
     if (getClass() == Progress.class) CurlUtilsJNI.Progress_progress(swigCPtr, this, unow, utotal, dnow, dtotal); else CurlUtilsJNI.Progress_progressSwigExplicitProgress(swigCPtr, this, unow, utotal, dnow, dtotal);
   }
 
+  public void setTag(String tag) {
+    CurlUtilsJNI.Progress_setTag(swigCPtr, this, tag);
+  }
+
+  public String getTag() {
+    return CurlUtilsJNI.Progress_getTag(swigCPtr, this);
+  }
+
   public Progress() {
     this(CurlUtilsJNI.new_Progress(), true);
     CurlUtilsJNI.Progress_director_connect(this, swigCPtr, swigCMemOwn, false);

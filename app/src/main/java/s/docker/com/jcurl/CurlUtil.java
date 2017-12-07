@@ -46,8 +46,20 @@ public class CurlUtil {
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 
+  public void execute(String tag) {
+    CurlUtilsJNI.CurlUtil_execute__SWIG_0(swigCPtr, this, tag);
+  }
+
   public void execute() {
-    CurlUtilsJNI.CurlUtil_execute(swigCPtr, this);
+    CurlUtilsJNI.CurlUtil_execute__SWIG_1(swigCPtr, this);
+  }
+
+  public void setTag(String tag) {
+    CurlUtilsJNI.CurlUtil_setTag(swigCPtr, this, tag);
+  }
+
+  public String getTag() {
+    return CurlUtilsJNI.CurlUtil_getTag(swigCPtr, this);
   }
 
 }

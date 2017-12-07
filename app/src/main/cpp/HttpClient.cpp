@@ -204,9 +204,12 @@ class Progress;
 int xferinfo(void *p,
              curl_off_t dltotal, curl_off_t dlnow,
              curl_off_t ultotal, curl_off_t ulnow) {
-    if (_progress) {
+    double curtime = 0;
+
+//    curl_easy_getinfo(, CURLINFO_TOTAL_TIME, &curtime);
+    if (p) {
         try {
-            Progress *progress =(Progress*)_progress;
+            Progress *progress =(Progress*)p;
             progress->progress(ulnow, ultotal,dlnow, dltotal);
         }catch (...){
 
@@ -246,8 +249,14 @@ public:
      * @param callback Response write callback
      * @param stream Response write stream
      */
-    bool init(CAHttpClient *client, HttpRequest *request, write_callback callback, void *stream,
-              write_callback headerCallback, void *headerStream, char *errorBuffer) {
+    bool init(CAHttpClient *client,
+              HttpRequest *request,
+              write_callback callback,
+              void *stream,
+              write_callback headerCallback,
+              void *headerStream,
+              char *errorBuffer)
+    {
         if (!_curl)
             return false;
         if (!configureCURL(client, _curl, errorBuffer))
@@ -274,9 +283,11 @@ public:
             }
         }
 
-        if (_progress != nullptr) {
+        if (request->getProgress() != nullptr) {
+
             setOption(CURLOPT_NOPROGRESS, 0L);
             setOption(CURLOPT_XFERINFOFUNCTION, xferinfo);
+            setOption(CURLOPT_XFERINFODATA, request->getProgress());
         }
         return setOption(CURLOPT_URL, request->getUrl())
                && setOption(CURLOPT_WRITEFUNCTION, callback)

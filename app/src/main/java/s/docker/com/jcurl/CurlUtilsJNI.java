@@ -23,6 +23,8 @@ public class CurlUtilsJNI {
   public final static native void ByteResponse_change_ownership(ByteResponse obj, long cptr, boolean take_or_release);
   public final static native void Progress_progress(long jarg1, Progress jarg1_, long jarg2, long jarg3, long jarg4, long jarg5);
   public final static native void Progress_progressSwigExplicitProgress(long jarg1, Progress jarg1_, long jarg2, long jarg3, long jarg4, long jarg5);
+  public final static native void Progress_setTag(long jarg1, Progress jarg1_, String jarg2);
+  public final static native String Progress_getTag(long jarg1, Progress jarg1_);
   public final static native long new_Progress();
   public final static native void delete_Progress(long jarg1);
   public final static native void Progress_director_connect(Progress obj, long cptr, boolean mem_own, boolean weak_global);
@@ -30,7 +32,10 @@ public class CurlUtilsJNI {
   public final static native long CurlUtil_get(String jarg1, long jarg2, Response jarg2_);
   public final static native long CurlUtil_getBytes(String jarg1, long jarg2, ByteResponse jarg2_);
   public final static native long CurlUtil_setProgress(long jarg1, CurlUtil jarg1_, long jarg2, Progress jarg2_);
-  public final static native void CurlUtil_execute(long jarg1, CurlUtil jarg1_);
+  public final static native void CurlUtil_execute__SWIG_0(long jarg1, CurlUtil jarg1_, String jarg2);
+  public final static native void CurlUtil_execute__SWIG_1(long jarg1, CurlUtil jarg1_);
+  public final static native void CurlUtil_setTag(long jarg1, CurlUtil jarg1_, String jarg2);
+  public final static native String CurlUtil_getTag(long jarg1, CurlUtil jarg1_);
 
   public static void SwigDirector_Response_callback(Response jself, int result, String s) {
     jself.callback(result, s);

@@ -3,6 +3,7 @@
 //
 #include<android/log.h>
 #include "CurlUtil.h"
+
 #define LOG    "curl" // 这个是自定义的LOG的标识
 #define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG,__VA_ARGS__) // 定义LOGD类型
 #define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG,__VA_ARGS__) // 定义LOGI类型
@@ -25,7 +26,7 @@ CurlUtil *CurlUtil::get(std::string url, Response *response) {
                                httpResponse->getResponseData()->toString());
         }
     });
-    curlutil->_execute= false;
+    curlutil->_execute = false;
     curlutil->setHttpRequest(request);
     return curlutil;
 
@@ -54,7 +55,7 @@ CurlUtil *CurlUtil::get(std::string url, std::function<void(int, std::string)> f
 
         }
     });
-    util->_execute= false;
+    util->_execute = false;
 
     util->setHttpRequest(request);
 
@@ -80,37 +81,51 @@ CurlUtil *CurlUtil::getBytes(std::string url, ByteResponse *response) {
         }
     });
 
-    util->_execute= false;
+    util->_execute = false;
     util->setHttpRequest(request);
 
     return util;
 }
 
-void CurlUtil::execute() {
+
+void CurlUtil::setHttpRequest(HttpRequest *httpRequest) {
+    _httpRequest = httpRequest;
+}
+
+
+CurlUtil *CurlUtil::setProgress(Progress *progress) {
+    _httpRequest->setProgress(progress);
+    return this;
+}
+
+HttpRequest *CurlUtil::getHttpRequest() {
+    return _httpRequest;
+}
+
+void CurlUtil::execute(std::string tag) {
 
     if (_execute) {
         return;
     }
+    setTag(tag);
     switch (_httpRequest->getRequestType()) {
         case HttpRequest::Type::Get:
             CAHttpClient::getInstance(4)->send(getHttpRequest());
             _execute = true;
             break;
     }
-
 }
 
-void CurlUtil::setHttpRequest(HttpRequest *httpRequest) {
-    _httpRequest = httpRequest;
-}
-extern void *_progress;
-CurlUtil *CurlUtil::setProgress(Progress *progress) {
-    _progress=progress;
-    return this;
+void CurlUtil::setTag(std::string tag) {
+    _tag = tag;
 }
 
-HttpRequest *CurlUtil::getHttpRequest() {
-    return _httpRequest;
+std::string CurlUtil::getTag() {
+    return _tag;
+}
+
+void CurlUtil::execute() {
+    execute("curl");
 }
 
 

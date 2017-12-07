@@ -25,16 +25,32 @@ public:
 
 class ByteResponse {
 public:
-    virtual void callback(int result, unsigned char *buf,size_t len) {
+    virtual void callback(int result, unsigned char *buf, size_t len) {
 
     }
+
+private:
+    std::string _tag;
 };
+
 #pragma once
-class Progress{
+
+class Progress {
 public:
-    virtual void progress(long long unow,long long utotal,long long dnow,long long dtotal) {
+    virtual void progress(long long unow, long long utotal, long long dnow, long long dtotal) {
 
     }
+
+    void setTag(std::string tag) {
+        _tag = tag;
+    }
+
+    std::string getTag(){
+        return _tag;
+    }
+
+private:
+    std::string _tag;
 };
 
 #pragma once
@@ -47,7 +63,6 @@ private:
     virtual ~CurlUtil();
 
 
-
 public:
 
     static CurlUtil *get(std::string url, Response *response);
@@ -56,19 +71,27 @@ public:
 
     static CurlUtil *getBytes(std::string url, ByteResponse *response);
 
-    CurlUtil * setProgress(Progress *progress);
+    CurlUtil *setProgress(Progress *progress);
+
+    void execute(std::string tag);
 
     void execute();
 
+    void setTag(std::string tag);
+
+    std::string getTag();
+
 private:
 
-    void setHttpRequest( HttpRequest *httpRequest);
+    void setHttpRequest(HttpRequest *httpRequest);
 
     HttpRequest *getHttpRequest();
 
     HttpRequest *_httpRequest;
 
     bool _execute = false;
+
+    std::string _tag;
 };
 
 
