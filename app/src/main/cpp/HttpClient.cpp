@@ -198,7 +198,6 @@ static bool configureCURL(CAHttpClient *client, CURL *handle, char *errorBuffer)
     return true;
 }
 
-void *_progress = nullptr;
 class Progress;
 
 int xferinfo(void *p,
