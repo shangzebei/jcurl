@@ -86,8 +86,6 @@ public class ImageViewAdapter extends BaseAdapter {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-//                            byte[] bytess = cache.get(position);
-                        Log.i("szb", "handler: " + Thread.currentThread().getName());
                         imageView.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(bytes, 0, bytes.length)));
                     }
                 });
@@ -96,11 +94,9 @@ public class ImageViewAdapter extends BaseAdapter {
         }).setProgress(new Progress() {
             @Override
             public void progress(long unow, long utotal, final long dnow, final long dtotal) {
-//                Log.i("szb", "position: "+position +"##"+ dnow + ":" + dtotal+"  ");
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.i("szb", "progress: " + dnow + ":" + dtotal+"  "+Thread.currentThread().getName());
                         progressBar.setMax((int) dtotal);
                         progressBar.setProgress((int) dnow);
 
