@@ -781,7 +781,6 @@ void SwigDirector_ByteResponse::callback(int result, unsigned char *buf, size_t 
     jresult = (jint) result;
     {
       jbuf = jenv->NewDirectByteBuffer(buf, len);
-      
     }
     jlen = (jlong) len;
     jenv->CallStaticVoidMethod(Swig::jclass_CurlUtilsJNI, Swig::director_method_ids[1], swigjobj, jresult, jbuf, jlen);

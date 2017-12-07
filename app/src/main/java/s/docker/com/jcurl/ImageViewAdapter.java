@@ -6,10 +6,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -29,7 +31,7 @@ public class ImageViewAdapter extends BaseAdapter {
             "http://img4.duitang.com/uploads/item/201402/18/20140218234821_8MMwE.jpeg"
     };
 
-    Handler handler=new Handler(){
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -57,48 +59,54 @@ public class ImageViewAdapter extends BaseAdapter {
         return position;
     }
 
-    Map<ImageView, byte[]> maps = new HashMap<>();
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final ImageView imageView = new ImageView(context);
-        imageView.setBackgroundColor(android.R.color.darker_gray);
-        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        getIamge(position,imageView);
-        return imageView;
+        View inflate = LayoutInflater.from(context).inflate(R.layout.activity_main, null);
+        ImageView imageView = inflate.findViewById(R.id.imagev);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        ProgressBar progressBar = inflate.findViewById(R.id.progressBar);
+        progressBar.setMax(10000);
+
+        getIamge(position, imageView,progressBar);
+        return inflate;
     }
 
 //    Map<Integer, byte[]> cache = new HashMap<Integer, byte[]>();
 
 
-    private void getIamge(final int position, final ImageView imageView) {
-        if (true) {
-//        if (cache.get(position) == null) {
-
-            CurlUtil.getBytes(aa[position], new ByteResponse() {
-                @Override
-                public void callback(int result, ByteBuffer buf, long len) {
-                    Log.i("szb", "callback: "+Thread.currentThread().getName());
-                    final byte[] bytes = new byte[(int) len];
-                    buf.get(bytes, 0, (int) len);
+    private void getIamge(final int position, final ImageView imageView, final ProgressBar progressBar) {
+        CurlUtil.getBytes(aa[position], new ByteResponse() {
+            @Override
+            public void callback(int result, ByteBuffer buf, long len) {
+                Log.i("szb", "callback: " + Thread.currentThread().getName());
+                final byte[] bytes = new byte[(int) len];
+                buf.get(bytes, 0, (int) len);
 //                    cache.put(position, bytes);
-                    handler.sendEmptyMessage(0);
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
 //                            byte[] bytess = cache.get(position);
-                            Log.i("szb", "handler: "+Thread.currentThread().getName());
-                            imageView.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(bytes,0,bytes.length)));
-                        }
-                    });
+                        Log.i("szb", "handler: " + Thread.currentThread().getName());
+                        imageView.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(bytes, 0, bytes.length)));
+                    }
+                });
 
-                }
-            }).execute();
-        } else {
-//            byte[] bytes = cache.get(position);
-//           imageView.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(bytes,0,bytes.length)));
+            }
+        }).setProgress(new Progress() {
+            @Override
+            public void progress(long unow, long utotal, final long dnow, final long dtotal) {
 
-        }
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("szb", "progress: " + dnow + ":" + dtotal+"  "+Thread.currentThread().getName());
+                        progressBar.setProgress((int) dnow);
+
+                    }
+                });
+            }
+        }).execute();
 
 
     }

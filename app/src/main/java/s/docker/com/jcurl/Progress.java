@@ -56,7 +56,7 @@ public class Progress {
 
   public Progress() {
     this(CurlUtilsJNI.new_Progress(), true);
-    CurlUtilsJNI.Progress_director_connect(this, swigCPtr, swigCMemOwn, true);
+    CurlUtilsJNI.Progress_director_connect(this, swigCPtr, swigCMemOwn, false);
   }
 
 }

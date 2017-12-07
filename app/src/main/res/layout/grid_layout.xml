@@ -5,6 +5,8 @@
     <GridView
         android:id="@+id/grid"
         android:numColumns="2"
+        android:horizontalSpacing="4dp"
+        android:verticalSpacing="4dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
