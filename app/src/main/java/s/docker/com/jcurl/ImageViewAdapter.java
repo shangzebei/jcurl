@@ -62,12 +62,13 @@ public class ImageViewAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ImageView imageView = new ImageView(context);
-        imageView.setImageResource(R.drawable.aaa);
+        imageView.setBackgroundColor(android.R.color.darker_gray);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         getIamge(position,imageView);
         return imageView;
     }
 
-    Map<Integer, byte[]> cache = new HashMap<Integer, byte[]>();
+//    Map<Integer, byte[]> cache = new HashMap<Integer, byte[]>();
 
 
     private void getIamge(final int position, final ImageView imageView) {
@@ -78,24 +79,24 @@ public class ImageViewAdapter extends BaseAdapter {
                 @Override
                 public void callback(int result, ByteBuffer buf, long len) {
                     Log.i("szb", "callback: "+Thread.currentThread().getName());
-                    byte[] bytes = new byte[(int) len];
+                    final byte[] bytes = new byte[(int) len];
                     buf.get(bytes, 0, (int) len);
-                    cache.put(position, bytes);
+//                    cache.put(position, bytes);
                     handler.sendEmptyMessage(0);
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            byte[] bytess = cache.get(position);
+//                            byte[] bytess = cache.get(position);
                             Log.i("szb", "handler: "+Thread.currentThread().getName());
-                            imageView.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(bytess,0,bytess.length)));
+                            imageView.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(bytes,0,bytes.length)));
                         }
                     });
 
                 }
             }).execute();
         } else {
-            byte[] bytes = cache.get(position);
-           imageView.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(bytes,0,bytes.length)));
+//            byte[] bytes = cache.get(position);
+//           imageView.setImageDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(bytes,0,bytes.length)));
 
         }
 

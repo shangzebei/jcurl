@@ -2,8 +2,10 @@
 %typemap(directorin, descriptor="Ljava/nio/ByteBuffer;") unsigned char *NIOBUFFER  {
 
     $input = JCALL2(NewDirectByteBuffer,jenv,$1,len);
+
 }
-%newobject callback(int result, unsigned char *buf,size_t len);
+
+SWIG_DIRECTOR_OWNED(ByteResponse)
 
 %typemap(javadirectorin) unsigned char *NIOBUFFER "$jniinput"
 
@@ -43,6 +45,7 @@ if (!$1) {
 
 %}
 
+
 //%typemap(javafinalize) SWIGTYPE ""
 
 %include <std_string.i>
@@ -53,3 +56,4 @@ if (!$1) {
 
 
 %apply unsigned char *NIOBUFFER { unsigned char *buf };
+

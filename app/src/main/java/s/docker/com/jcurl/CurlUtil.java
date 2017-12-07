@@ -32,22 +32,22 @@ public class CurlUtil {
   }
 
   public static CurlUtil get(String url, Response response) {
-    long cPtr = CurlUtilsJNI.CurlUtil_get(url, Response.getCPtr(response));
+    long cPtr = CurlUtilsJNI.CurlUtil_get(url, Response.getCPtr(response), response);
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 
   public static CurlUtil getBytes(String url, ByteResponse response) {
-    long cPtr = CurlUtilsJNI.CurlUtil_getBytes(url, ByteResponse.getCPtr(response));
+    long cPtr = CurlUtilsJNI.CurlUtil_getBytes(url, ByteResponse.getCPtr(response), response);
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 
   public CurlUtil setProgress(Progress progress) {
-    long cPtr = CurlUtilsJNI.CurlUtil_setProgress(swigCPtr, Progress.getCPtr(progress));
+    long cPtr = CurlUtilsJNI.CurlUtil_setProgress(swigCPtr, this, Progress.getCPtr(progress), progress);
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 
   public void execute() {
-    CurlUtilsJNI.CurlUtil_execute(swigCPtr);
+    CurlUtilsJNI.CurlUtil_execute(swigCPtr, this);
   }
 
 }

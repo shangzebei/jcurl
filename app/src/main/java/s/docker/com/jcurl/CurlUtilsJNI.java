@@ -9,28 +9,28 @@
 package s.docker.com.jcurl;
 
 public class CurlUtilsJNI {
-  public final static native void Response_callback(long jarg1, int jarg2, String jarg3);
-  public final static native void Response_callbackSwigExplicitResponse(long jarg1, int jarg2, String jarg3);
+  public final static native void Response_callback(long jarg1, Response jarg1_, int jarg2, String jarg3);
+  public final static native void Response_callbackSwigExplicitResponse(long jarg1, Response jarg1_, int jarg2, String jarg3);
   public final static native long new_Response();
   public final static native void delete_Response(long jarg1);
   public final static native void Response_director_connect(Response obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void Response_change_ownership(Response obj, long cptr, boolean take_or_release);
-  public final static native void ByteResponse_callback(long jarg1, int jarg2, java.nio.ByteBuffer jarg3, long jarg4);
-  public final static native void ByteResponse_callbackSwigExplicitByteResponse(long jarg1, int jarg2, java.nio.ByteBuffer jarg3, long jarg4);
+  public final static native void ByteResponse_callback(long jarg1, ByteResponse jarg1_, int jarg2, java.nio.ByteBuffer jarg3, long jarg4);
+  public final static native void ByteResponse_callbackSwigExplicitByteResponse(long jarg1, ByteResponse jarg1_, int jarg2, java.nio.ByteBuffer jarg3, long jarg4);
   public final static native long new_ByteResponse();
   public final static native void delete_ByteResponse(long jarg1);
   public final static native void ByteResponse_director_connect(ByteResponse obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void ByteResponse_change_ownership(ByteResponse obj, long cptr, boolean take_or_release);
-  public final static native void Progress_progress(long jarg1, long jarg2, long jarg3, long jarg4, long jarg5);
-  public final static native void Progress_progressSwigExplicitProgress(long jarg1, long jarg2, long jarg3, long jarg4, long jarg5);
+  public final static native void Progress_progress(long jarg1, Progress jarg1_, long jarg2, long jarg3, long jarg4, long jarg5);
+  public final static native void Progress_progressSwigExplicitProgress(long jarg1, Progress jarg1_, long jarg2, long jarg3, long jarg4, long jarg5);
   public final static native long new_Progress();
   public final static native void delete_Progress(long jarg1);
   public final static native void Progress_director_connect(Progress obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void Progress_change_ownership(Progress obj, long cptr, boolean take_or_release);
-  public final static native long CurlUtil_get(String jarg1, long jarg2);
-  public final static native long CurlUtil_getBytes(String jarg1, long jarg2);
-  public final static native long CurlUtil_setProgress(long jarg1, long jarg2);
-  public final static native void CurlUtil_execute(long jarg1);
+  public final static native long CurlUtil_get(String jarg1, long jarg2, Response jarg2_);
+  public final static native long CurlUtil_getBytes(String jarg1, long jarg2, ByteResponse jarg2_);
+  public final static native long CurlUtil_setProgress(long jarg1, CurlUtil jarg1_, long jarg2, Progress jarg2_);
+  public final static native void CurlUtil_execute(long jarg1, CurlUtil jarg1_);
 
   public static void SwigDirector_Response_callback(Response jself, int result, String s) {
     jself.callback(result, s);

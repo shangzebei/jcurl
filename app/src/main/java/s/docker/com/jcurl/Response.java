@@ -51,7 +51,7 @@ public class Response {
   }
 
   public void callback(int result, String s) {
-    if (getClass() == Response.class) CurlUtilsJNI.Response_callback(swigCPtr, result, s); else CurlUtilsJNI.Response_callbackSwigExplicitResponse(swigCPtr, result, s);
+    if (getClass() == Response.class) CurlUtilsJNI.Response_callback(swigCPtr, this, result, s); else CurlUtilsJNI.Response_callbackSwigExplicitResponse(swigCPtr, this, result, s);
   }
 
   public Response() {

@@ -53,13 +53,13 @@ public class ByteResponse {
   public void callback(int result, java.nio.ByteBuffer buf, long len) {
   assert buf.isDirect() : "Buffer must be allocated direct.";
     {
-      if (getClass() == ByteResponse.class) CurlUtilsJNI.ByteResponse_callback(swigCPtr, result, buf, len); else CurlUtilsJNI.ByteResponse_callbackSwigExplicitByteResponse(swigCPtr, result, buf, len);
+      if (getClass() == ByteResponse.class) CurlUtilsJNI.ByteResponse_callback(swigCPtr, this, result, buf, len); else CurlUtilsJNI.ByteResponse_callbackSwigExplicitByteResponse(swigCPtr, this, result, buf, len);
     }
   }
 
   public ByteResponse() {
     this(CurlUtilsJNI.new_ByteResponse(), true);
-    CurlUtilsJNI.ByteResponse_director_connect(this, swigCPtr, swigCMemOwn, true);
+    CurlUtilsJNI.ByteResponse_director_connect(this, swigCPtr, swigCMemOwn, false);
   }
 
 }

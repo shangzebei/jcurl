@@ -51,7 +51,7 @@ public class Progress {
   }
 
   public void progress(long unow, long utotal, long dnow, long dtotal) {
-    if (getClass() == Progress.class) CurlUtilsJNI.Progress_progress(swigCPtr, unow, utotal, dnow, dtotal); else CurlUtilsJNI.Progress_progressSwigExplicitProgress(swigCPtr, unow, utotal, dnow, dtotal);
+    if (getClass() == Progress.class) CurlUtilsJNI.Progress_progress(swigCPtr, this, unow, utotal, dnow, dtotal); else CurlUtilsJNI.Progress_progressSwigExplicitProgress(swigCPtr, this, unow, utotal, dnow, dtotal);
   }
 
   public Progress() {
