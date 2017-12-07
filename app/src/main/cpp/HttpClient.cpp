@@ -93,6 +93,7 @@ void CAHttpClient::networkThread() {
         // Create a HttpResponse object, the default setting is http access failed
         HttpResponse *response = new(std::nothrow) HttpResponse(request);
 
+
         processResponse(response, _responseMessage);
 
 
@@ -103,13 +104,7 @@ void CAHttpClient::networkThread() {
 
         _schedulerMutex.lock();
         this->dispatchResponseCallbacks();
-//        if (nullptr != _scheduler)
-//        {
-//            _scheduler->performFunctionInUIThread([=]
-//            {
-//                this->dispatchResponseCallbacks();
-//            });
-//        }
+
         _schedulerMutex.unlock();
     }
 
@@ -140,20 +135,6 @@ void CAHttpClient::networkThreadAlone(HttpRequest *request, HttpResponse *respon
     if (nullptr != callback) {
         callback(this, response);
     }
-//    if (nullptr != _scheduler)
-//    {
-//        _scheduler->performFunctionInUIThread([this, response, request]{
-//            const auto& callback = request->getCallback();
-//
-//            if (callback != nullptr)
-//            {
-//                callback(this, response);
-//            }
-////            response->release();
-////            // do not release in other thread
-////            request->release();
-//        });
-//    }
     _schedulerMutex.unlock();
 
     decreaseThreadCountAndMayDeleteThis();
@@ -208,9 +189,9 @@ int xferinfo(void *p,
 //    curl_easy_getinfo(, CURLINFO_TOTAL_TIME, &curtime);
     if (p) {
         try {
-            Progress *progress =(Progress*)p;
-            progress->progress(ulnow, ultotal,dlnow, dltotal);
-        }catch (...){
+            Progress *progress = (Progress *) p;
+            progress->progress(ulnow, ultotal, dlnow, dltotal);
+        } catch (...) {
 
         }
 
@@ -254,8 +235,7 @@ public:
               void *stream,
               write_callback headerCallback,
               void *headerStream,
-              char *errorBuffer)
-    {
+              char *errorBuffer) {
         if (!_curl)
             return false;
         if (!configureCURL(client, _curl, errorBuffer))
@@ -548,14 +528,10 @@ void CAHttpClient::dispatchResponseCallbacks() {
     if (response) {
         HttpRequest *request = response->getHttpRequest();
         const auto &callback = request->getCallback();
-
         if (callback != nullptr) {
             callback(this, response);
-        }
 
-//        response->release();
-//        // do not release in other thread
-//        request->release();
+        }
     }
 }
 

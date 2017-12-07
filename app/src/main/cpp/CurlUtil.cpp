@@ -24,6 +24,8 @@ CurlUtil *CurlUtil::get(std::string url, Response *response) {
         if (response != nullptr) {
             response->callback(httpResponse->getResponseCode(),
                                httpResponse->getResponseData()->toString());
+            httpResponse->getResponseData()->clear();
+            delete response;
         }
     });
     curlutil->_execute = false;
@@ -52,7 +54,7 @@ CurlUtil *CurlUtil::get(std::string url, std::function<void(int, std::string)> f
     request->setResponseCallback([=](CAHttpClient *client, HttpResponse *httpResponse) {
         if (func != nullptr) {
             func(httpResponse->getResponseCode(), httpResponse->getResponseData()->toString());
-
+            httpResponse->getResponseData()->clear();
         }
     });
     util->_execute = false;
@@ -77,6 +79,8 @@ CurlUtil *CurlUtil::getBytes(std::string url, ByteResponse *response) {
             auto data = httpResponse->getResponseData();
             response->callback(httpResponse->getResponseCode(), data->getBytes(),
                                data->getLength());
+            data->clear();
+            delete response;
 
         }
     });
@@ -110,7 +114,7 @@ void CurlUtil::execute(std::string tag) {
     setTag(tag);
     switch (_httpRequest->getRequestType()) {
         case HttpRequest::Type::Get:
-            CAHttpClient::getInstance(4)->send(getHttpRequest());
+            CAHttpClient::getInstance(4)->sendImmediate(getHttpRequest());
             _execute = true;
             break;
     }
