@@ -11,7 +11,7 @@ CurlUtil.get("http://192.168.0.88:15000/v1/local", new Response() {
 }).setParam(map).execute();
 ```
 post方法
-```
+```java
 ParamMap map = new ParamMap();
 map.set("username", "admin@localhost");
 map.set("password", "123456");
