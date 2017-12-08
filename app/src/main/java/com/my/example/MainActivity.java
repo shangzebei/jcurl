@@ -1,4 +1,4 @@
-package com.my.jcurl;
+package com.my.example;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,6 +6,12 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.GridView;
+
+import com.my.jcurl.CurlUtil;
+import com.my.jcurl.ParamMap;
+import com.my.jcurl.Progress;
+import com.my.jcurl.R;
+import com.my.jcurl.Response;
 
 public class MainActivity extends AppCompatActivity {
     // Used to load the 'native-lib' library on application startup.
@@ -18,23 +24,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grid_layout);
-//        initView(this);
-//        ParamMap map = new ParamMap();
-//        map.set("username", "admin@localhost");
-//        map.set("password", "123456");
-//        CurlUtil.post("http://192.168.0.88:15000/v1/login", new Response() {
-//            @Override
-//            public void callback(int result, String s) {
-//                Log.i("szb", "callback: " + s);
-//            }
-//        }).setParam(map).execute();
+        initView(this);
 
 
+//        getMethod();
+        getMethodParam();
+        getfile();
 
+    }
 
-        getMethod();
-//        getfile();
-
+    private void getMethodParam() {
+        ParamMap map = new ParamMap();
+        map.set("username", "admin@localhost");
+        map.set("password", "123456");
+        CurlUtil.post("http://192.168.0.88:15000/v1/login", new Response() {
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: " + s);
+            }
+        }).setParam(map).execute();
     }
 
     private void getMethod() {
@@ -44,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("szb", "callback: " + s);
             }
         }).setHeader("X-Auth-Token:admin@localhost:e58e67dba304027768c62c1160daeb3e")
-           .setHeader("Accept: application/json")
-           .execute();
+                .setHeader("Accept: application/json")
+                .execute();
     }
 
     private void getfile() {

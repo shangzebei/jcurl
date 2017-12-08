@@ -1,4 +1,4 @@
-package s.docker.com.jcurl;
+package com.my.jcurl;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

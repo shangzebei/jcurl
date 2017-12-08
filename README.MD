@@ -1,5 +1,17 @@
 ## JCURL的使用
-#### get方法
+
+项目编译需要swig的支持，需要配置环境变量。
+
+###简单请求
+```java
+CurlUtil.get("http://www.baidu.com", new Response() {
+    @Override
+    public void callback(int result, String s) {
+        Log.i("szb", "callback: " + s);
+    }
+}).execute();
+```
+#### get方法加参数
 ```java
 ParamMap map = new ParamMap();
 map.set("local", "zh");
@@ -10,7 +22,7 @@ CurlUtil.get("http://192.168.0.88:15000/v1/local", new Response() {
     }
 }).setParam(map).execute();
 ```
-#### post方法
+#### post方法加参数
 ```java
 ParamMap map = new ParamMap();
 map.set("username", "admin@localhost");
@@ -22,7 +34,7 @@ CurlUtil.post("http://192.168.0.88:15000/v1/login", new Response() {
     }
 }).setParam(map).execute();
 ```
-#### 设置header
+#### 设置header参数
 ```java
 CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
             @Override
@@ -33,7 +45,10 @@ CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
   .setHeader("Accept: application/json")
   .execute();
 ```
-
+###添加进度条
+```
+public CurlUtil setProgress(Progress progress);//任何方法都可以添加就可以实现进度条
+```
 #### 下载大文件加进度条
 ```java
 CurlUtil.getFile("https://wdl1.cache.wps.cn/wps/download/W.P.S.6930.19.552.exe",
@@ -56,7 +71,7 @@ CurlUtil.getBytes(aa[position], new ByteResponse() {
                 Log.i("szb", "callback: " + Thread.currentThread().getName());
                 final byte[] bytes = new byte[(int) len];
                 buf.get(bytes, 0, (int) len);
-//                    cache.put(position, bytes);
+//                    cache.put(position, bytes);//获取bytes
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 hashMap.put(position,bitmap);
                 handler.post(new Runnable() {
@@ -68,7 +83,7 @@ CurlUtil.getBytes(aa[position], new ByteResponse() {
                 });
 
             }
-        }).setProgress(new Progress() {
+        }).setProgress(new Progress() { //进度条
             @Override
             public void progress(long unow, long utotal, final long dnow, final long dtotal) {
                 handler.post(new Runnable() {

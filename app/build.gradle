@@ -12,11 +12,11 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11 -frtti -fexceptions -fpermissive"
-                arguments '-DANDROID_ABI=armeabi','-DANDROID_STL=gnustl_static'
+                arguments '-DANDROID_ABI=armeabi-v7a','-DANDROID_STL=gnustl_static'
             }
         }
         ndk {
-            abiFilters  'armeabi'
+            abiFilters  'armeabi-v7a'
         }
     }
     buildTypes {

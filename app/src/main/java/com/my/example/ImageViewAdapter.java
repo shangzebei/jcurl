@@ -1,4 +1,4 @@
-package com.my.jcurl;
+package com.my.example;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,6 +11,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import com.my.jcurl.ByteResponse;
+import com.my.jcurl.CurlUtil;
+import com.my.jcurl.Progress;
+import com.my.jcurl.R;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
