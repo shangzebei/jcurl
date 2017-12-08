@@ -197,4 +197,12 @@ CurlUtil *CurlUtil::getFile(std::string url, std::string toPath) {
 
 }
 
+CurlUtil *CurlUtil::deleteJ(std::string url, Response *response) {
+    return process(url,HttpRequest::Type::Delete,response);
+}
+
+CurlUtil *CurlUtil::put(std::string url, Response *response) {
+    return process(url,HttpRequest::Type::Put,response);
+}
+
 

@@ -69,6 +69,10 @@ public:
 
     static CurlUtil *get(std::string url, Response *response);
 
+    static CurlUtil *deleteJ(std::string url, Response *response);
+
+    static CurlUtil *put(std::string url, Response *response);
+
     static CurlUtil *post(std::string url, Response *response);
 
     static CurlUtil *get(std::string url, std::function<void(int, std::string)>);

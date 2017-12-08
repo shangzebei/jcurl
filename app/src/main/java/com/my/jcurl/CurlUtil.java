@@ -36,6 +36,16 @@ public class CurlUtil {
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 
+  public static CurlUtil deleteJ(String url, Response response) {
+    long cPtr = CurlUtilsJNI.CurlUtil_deleteJ(url, Response.getCPtr(response), response);
+    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  }
+
+  public static CurlUtil put(String url, Response response) {
+    long cPtr = CurlUtilsJNI.CurlUtil_put(url, Response.getCPtr(response), response);
+    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  }
+
   public static CurlUtil post(String url, Response response) {
     long cPtr = CurlUtilsJNI.CurlUtil_post(url, Response.getCPtr(response), response);
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);

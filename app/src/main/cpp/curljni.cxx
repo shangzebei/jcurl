@@ -1788,6 +1788,66 @@ SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1get(JNIEnv *je
 }
 
 
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1deleteJ(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_) {
+  jlong jresult = 0 ;
+  std::string arg1 ;
+  Response *arg2 = (Response *) 0 ;
+  CurlUtil *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg2_;
+  if(!jarg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
+    return 0;
+  } 
+  const char *arg1_pstr = (const char *)jenv->GetStringUTFChars(jarg1, 0); 
+  if (!arg1_pstr) return 0;
+  (&arg1)->assign(arg1_pstr);
+  jenv->ReleaseStringUTFChars(jarg1, arg1_pstr); 
+  arg2 = *(Response **)&jarg2; 
+  
+  try {
+    result = (CurlUtil *)CurlUtil::deleteJ(arg1,arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
+  *(CurlUtil **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1put(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_) {
+  jlong jresult = 0 ;
+  std::string arg1 ;
+  Response *arg2 = (Response *) 0 ;
+  CurlUtil *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg2_;
+  if(!jarg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
+    return 0;
+  } 
+  const char *arg1_pstr = (const char *)jenv->GetStringUTFChars(jarg1, 0); 
+  if (!arg1_pstr) return 0;
+  (&arg1)->assign(arg1_pstr);
+  jenv->ReleaseStringUTFChars(jarg1, arg1_pstr); 
+  arg2 = *(Response **)&jarg2; 
+  
+  try {
+    result = (CurlUtil *)CurlUtil::put(arg1,arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
+  *(CurlUtil **)&jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1post(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   std::string arg1 ;

@@ -40,6 +40,8 @@ public class CurlUtilsJNI {
   public final static native void Progress_director_connect(Progress obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void Progress_change_ownership(Progress obj, long cptr, boolean take_or_release);
   public final static native long CurlUtil_get(String jarg1, long jarg2, Response jarg2_);
+  public final static native long CurlUtil_deleteJ(String jarg1, long jarg2, Response jarg2_);
+  public final static native long CurlUtil_put(String jarg1, long jarg2, Response jarg2_);
   public final static native long CurlUtil_post(String jarg1, long jarg2, Response jarg2_);
   public final static native long CurlUtil_getBytes(String jarg1, long jarg2, ByteResponse jarg2_);
   public final static native long CurlUtil_getFile(String jarg1, String jarg2);
