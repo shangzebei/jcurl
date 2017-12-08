@@ -47,6 +47,7 @@ CurlUtil *CurlUtil::get(std::string url, std::function<void(int, std::string)> f
     auto util = new CurlUtil();
 
     auto *request = new HttpRequest();
+
     request->setUrl(url);
 
     request->setRequestType(HttpRequest::Type::Get);
@@ -130,6 +131,35 @@ std::string CurlUtil::getTag() {
 
 void CurlUtil::execute() {
     execute("curl");
+}
+
+CurlUtil *CurlUtil::setParam(std::map<std::string, std::string> key_value) {
+    switch (_httpRequest->getRequestType()) {
+        case HttpRequest::Type::Get: {
+            std::string getRul = "";
+            if (!key_value.empty()) {
+                getRul += "?";
+
+                std::map<std::string, std::string>::iterator itr = key_value.begin();
+
+                do {
+                    getRul = getRul + itr->first + "=" + itr->second;
+                    itr++;
+                    if (itr == key_value.end()) {
+                        break;
+                    }
+                    getRul = getRul + "&";
+                } while (1);
+            }
+            getHttpRequest()->setUrl(getHttpRequest()->getUrl() + getRul);
+        }
+            break;
+        case HttpRequest::Type::Post: {
+
+        }
+            break;
+    }
+    return this;
 }
 
 

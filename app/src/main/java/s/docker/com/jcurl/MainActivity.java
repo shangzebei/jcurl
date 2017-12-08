@@ -35,7 +35,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grid_layout);
-        initView(this);
+//        initView(this);
+        Map map = new Map();
+        map.set("local", "zh");
+        CurlUtil.get("http://192.168.0.88:15000/v1/local", new Response() {
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: " + s);
+            }
+        }).setParam(map).execute();
 
 
     }

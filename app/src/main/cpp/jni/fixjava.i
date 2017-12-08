@@ -45,15 +45,15 @@ if (!$1) {
 
 %}
 
-
-//%typemap(javafinalize) SWIGTYPE ""
-
-%include <std_string.i>
+%include <stl.i>
 
 %include <typemaps.i>
 
 %include <various.i>
 
+namespace std {
+  %template(Map) map<std::string,std::string>;
+};
 
 %apply unsigned char *NIOBUFFER { unsigned char *buf };
 

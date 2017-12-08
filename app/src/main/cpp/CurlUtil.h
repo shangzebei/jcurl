@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <functional>
+#include <map>
 #include "HttpClient.h"
 #include "HttpRequest.h"
 
@@ -73,6 +74,8 @@ public:
     static CurlUtil *getBytes(std::string url, ByteResponse *response);
 
     CurlUtil *setProgress(Progress *progress);
+
+    CurlUtil *setParam(std::map<std::string,std::string> key_value);
 
     void execute(std::string tag);
 

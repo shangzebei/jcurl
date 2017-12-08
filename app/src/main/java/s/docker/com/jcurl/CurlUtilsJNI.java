@@ -9,6 +9,16 @@
 package s.docker.com.jcurl;
 
 public class CurlUtilsJNI {
+  public final static native long new_Map__SWIG_0();
+  public final static native long new_Map__SWIG_1(long jarg1, Map jarg1_);
+  public final static native long Map_size(long jarg1, Map jarg1_);
+  public final static native boolean Map_empty(long jarg1, Map jarg1_);
+  public final static native void Map_clear(long jarg1, Map jarg1_);
+  public final static native String Map_get(long jarg1, Map jarg1_, String jarg2);
+  public final static native void Map_set(long jarg1, Map jarg1_, String jarg2, String jarg3);
+  public final static native void Map_del(long jarg1, Map jarg1_, String jarg2);
+  public final static native boolean Map_has_key(long jarg1, Map jarg1_, String jarg2);
+  public final static native void delete_Map(long jarg1);
   public final static native void Response_callback(long jarg1, Response jarg1_, int jarg2, String jarg3);
   public final static native void Response_callbackSwigExplicitResponse(long jarg1, Response jarg1_, int jarg2, String jarg3);
   public final static native long new_Response();
@@ -32,6 +42,7 @@ public class CurlUtilsJNI {
   public final static native long CurlUtil_get(String jarg1, long jarg2, Response jarg2_);
   public final static native long CurlUtil_getBytes(String jarg1, long jarg2, ByteResponse jarg2_);
   public final static native long CurlUtil_setProgress(long jarg1, CurlUtil jarg1_, long jarg2, Progress jarg2_);
+  public final static native long CurlUtil_setParam(long jarg1, CurlUtil jarg1_, long jarg2, Map jarg2_);
   public final static native void CurlUtil_execute__SWIG_0(long jarg1, CurlUtil jarg1_, String jarg2);
   public final static native void CurlUtil_execute__SWIG_1(long jarg1, CurlUtil jarg1_);
   public final static native void CurlUtil_setTag(long jarg1, CurlUtil jarg1_, String jarg2);

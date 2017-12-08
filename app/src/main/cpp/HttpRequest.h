@@ -213,7 +213,7 @@ protected:
 
 private:
 
-    void *_progress;
+    void *_progress = nullptr;
 };
 
 

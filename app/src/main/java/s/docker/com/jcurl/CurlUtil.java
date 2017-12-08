@@ -46,6 +46,11 @@ public class CurlUtil {
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 
+  public CurlUtil setParam(Map key_value) {
+    long cPtr = CurlUtilsJNI.CurlUtil_setParam(swigCPtr, this, Map.getCPtr(key_value), key_value);
+    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  }
+
   public void execute(String tag) {
     CurlUtilsJNI.CurlUtil_execute__SWIG_0(swigCPtr, this, tag);
   }

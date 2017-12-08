@@ -1,5 +1,17 @@
 ###JCURL的使用
-getBytes
+-获取json
+```java
+Map map = new Map();
+map.set("local", "zh");
+CurlUtil.get("http://192.168.0.88:15000/v1/local", new Response() {
+    @Override
+    public void callback(int result, String s) {
+        Log.i("curl", "callback: " + s);
+    }
+}).setParam(map).execute();
+```
+- 获取二进制流如图片
+- getBytes(String url, ByteResponse response)
 ```java
 CurlUtil.getBytes(aa[position], new ByteResponse() {
             @Override
