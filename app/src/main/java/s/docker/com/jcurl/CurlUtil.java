@@ -36,6 +36,11 @@ public class CurlUtil {
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 
+  public static CurlUtil post(String url, Response response) {
+    long cPtr = CurlUtilsJNI.CurlUtil_post(url, Response.getCPtr(response), response);
+    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  }
+
   public static CurlUtil getBytes(String url, ByteResponse response) {
     long cPtr = CurlUtilsJNI.CurlUtil_getBytes(url, ByteResponse.getCPtr(response), response);
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
@@ -46,8 +51,8 @@ public class CurlUtil {
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 
-  public CurlUtil setParam(Map key_value) {
-    long cPtr = CurlUtilsJNI.CurlUtil_setParam(swigCPtr, this, Map.getCPtr(key_value), key_value);
+  public CurlUtil setParam(ParamMap key_value) {
+    long cPtr = CurlUtilsJNI.CurlUtil_setParam(swigCPtr, this, ParamMap.getCPtr(key_value), key_value);
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 

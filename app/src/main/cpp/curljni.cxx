@@ -994,7 +994,7 @@ void SwigDirector_Progress::swig_connect_director(JNIEnv *jenv, jobject jself, j
 extern "C" {
 #endif
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1Map_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1ParamMap_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   std::map< std::string,std::string > *result = 0 ;
   
@@ -1006,7 +1006,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1Map_1_1SWIG_1
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1Map_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1ParamMap_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::map< std::string,std::string > *arg1 = 0 ;
   std::map< std::string,std::string > *result = 0 ;
@@ -1025,7 +1025,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1Map_1_1SWIG_1
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1size(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1size(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   unsigned int result;
@@ -1047,7 +1047,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1size(JNIEnv *
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1empty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1empty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   bool result;
@@ -1069,7 +1069,7 @@ SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1empty(JNIE
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   
   (void)jenv;
@@ -1087,7 +1087,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1clear(JNIEnv *
 }
 
 
-SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jstring jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::string *arg2 = 0 ;
@@ -1126,7 +1126,7 @@ SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1get(JNIEnv 
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3) {
+SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -1164,7 +1164,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1set(JNIEnv *je
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1del(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1del(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1199,7 +1199,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1del(JNIEnv *je
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1has_1key(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1has_1key(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jboolean jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::string *arg2 = 0 ;
@@ -1231,7 +1231,7 @@ SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Map_1has_1key(J
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1Map(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1ParamMap(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   
   (void)jenv;
@@ -1633,6 +1633,30 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1get(JNIE
   jenv->ReleaseStringUTFChars(jarg1, arg1_pstr); 
   arg2 = *(Response **)&jarg2; 
   result = (CurlUtil *)CurlUtil::get(arg1,arg2);
+  *(CurlUtil **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1post(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_) {
+  jlong jresult = 0 ;
+  std::string arg1 ;
+  Response *arg2 = (Response *) 0 ;
+  CurlUtil *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg2_;
+  if(!jarg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
+    return 0;
+  } 
+  const char *arg1_pstr = (const char *)jenv->GetStringUTFChars(jarg1, 0); 
+  if (!arg1_pstr) return 0;
+  (&arg1)->assign(arg1_pstr);
+  jenv->ReleaseStringUTFChars(jarg1, arg1_pstr); 
+  arg2 = *(Response **)&jarg2; 
+  result = (CurlUtil *)CurlUtil::post(arg1,arg2);
   *(CurlUtil **)&jresult = result; 
   return jresult;
 }

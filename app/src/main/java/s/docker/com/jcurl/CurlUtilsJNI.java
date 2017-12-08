@@ -9,16 +9,16 @@
 package s.docker.com.jcurl;
 
 public class CurlUtilsJNI {
-  public final static native long new_Map__SWIG_0();
-  public final static native long new_Map__SWIG_1(long jarg1, Map jarg1_);
-  public final static native long Map_size(long jarg1, Map jarg1_);
-  public final static native boolean Map_empty(long jarg1, Map jarg1_);
-  public final static native void Map_clear(long jarg1, Map jarg1_);
-  public final static native String Map_get(long jarg1, Map jarg1_, String jarg2);
-  public final static native void Map_set(long jarg1, Map jarg1_, String jarg2, String jarg3);
-  public final static native void Map_del(long jarg1, Map jarg1_, String jarg2);
-  public final static native boolean Map_has_key(long jarg1, Map jarg1_, String jarg2);
-  public final static native void delete_Map(long jarg1);
+  public final static native long new_ParamMap__SWIG_0();
+  public final static native long new_ParamMap__SWIG_1(long jarg1, ParamMap jarg1_);
+  public final static native long ParamMap_size(long jarg1, ParamMap jarg1_);
+  public final static native boolean ParamMap_empty(long jarg1, ParamMap jarg1_);
+  public final static native void ParamMap_clear(long jarg1, ParamMap jarg1_);
+  public final static native String ParamMap_get(long jarg1, ParamMap jarg1_, String jarg2);
+  public final static native void ParamMap_set(long jarg1, ParamMap jarg1_, String jarg2, String jarg3);
+  public final static native void ParamMap_del(long jarg1, ParamMap jarg1_, String jarg2);
+  public final static native boolean ParamMap_has_key(long jarg1, ParamMap jarg1_, String jarg2);
+  public final static native void delete_ParamMap(long jarg1);
   public final static native void Response_callback(long jarg1, Response jarg1_, int jarg2, String jarg3);
   public final static native void Response_callbackSwigExplicitResponse(long jarg1, Response jarg1_, int jarg2, String jarg3);
   public final static native long new_Response();
@@ -40,9 +40,10 @@ public class CurlUtilsJNI {
   public final static native void Progress_director_connect(Progress obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void Progress_change_ownership(Progress obj, long cptr, boolean take_or_release);
   public final static native long CurlUtil_get(String jarg1, long jarg2, Response jarg2_);
+  public final static native long CurlUtil_post(String jarg1, long jarg2, Response jarg2_);
   public final static native long CurlUtil_getBytes(String jarg1, long jarg2, ByteResponse jarg2_);
   public final static native long CurlUtil_setProgress(long jarg1, CurlUtil jarg1_, long jarg2, Progress jarg2_);
-  public final static native long CurlUtil_setParam(long jarg1, CurlUtil jarg1_, long jarg2, Map jarg2_);
+  public final static native long CurlUtil_setParam(long jarg1, CurlUtil jarg1_, long jarg2, ParamMap jarg2_);
   public final static native void CurlUtil_execute__SWIG_0(long jarg1, CurlUtil jarg1_, String jarg2);
   public final static native void CurlUtil_execute__SWIG_1(long jarg1, CurlUtil jarg1_);
   public final static native void CurlUtil_setTag(long jarg1, CurlUtil jarg1_, String jarg2);

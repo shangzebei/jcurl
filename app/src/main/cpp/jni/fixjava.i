@@ -52,7 +52,7 @@ if (!$1) {
 %include <various.i>
 
 namespace std {
-  %template(Map) map<std::string,std::string>;
+  %template(ParamMap) map<std::string,std::string>;
 };
 
 %apply unsigned char *NIOBUFFER { unsigned char *buf };

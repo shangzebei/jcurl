@@ -8,16 +8,16 @@
 
 package s.docker.com.jcurl;
 
-public class Map {
+public class ParamMap {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected Map(long cPtr, boolean cMemoryOwn) {
+  protected ParamMap(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(Map obj) {
+  protected static long getCPtr(ParamMap obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,46 +29,46 @@ public class Map {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        CurlUtilsJNI.delete_Map(swigCPtr);
+        CurlUtilsJNI.delete_ParamMap(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
-  public Map() {
-    this(CurlUtilsJNI.new_Map__SWIG_0(), true);
+  public ParamMap() {
+    this(CurlUtilsJNI.new_ParamMap__SWIG_0(), true);
   }
 
-  public Map(Map arg0) {
-    this(CurlUtilsJNI.new_Map__SWIG_1(Map.getCPtr(arg0), arg0), true);
+  public ParamMap(ParamMap arg0) {
+    this(CurlUtilsJNI.new_ParamMap__SWIG_1(ParamMap.getCPtr(arg0), arg0), true);
   }
 
   public long size() {
-    return CurlUtilsJNI.Map_size(swigCPtr, this);
+    return CurlUtilsJNI.ParamMap_size(swigCPtr, this);
   }
 
   public boolean empty() {
-    return CurlUtilsJNI.Map_empty(swigCPtr, this);
+    return CurlUtilsJNI.ParamMap_empty(swigCPtr, this);
   }
 
   public void clear() {
-    CurlUtilsJNI.Map_clear(swigCPtr, this);
+    CurlUtilsJNI.ParamMap_clear(swigCPtr, this);
   }
 
   public String get(String key) {
-    return CurlUtilsJNI.Map_get(swigCPtr, this, key);
+    return CurlUtilsJNI.ParamMap_get(swigCPtr, this, key);
   }
 
   public void set(String key, String x) {
-    CurlUtilsJNI.Map_set(swigCPtr, this, key, x);
+    CurlUtilsJNI.ParamMap_set(swigCPtr, this, key, x);
   }
 
   public void del(String key) {
-    CurlUtilsJNI.Map_del(swigCPtr, this, key);
+    CurlUtilsJNI.ParamMap_del(swigCPtr, this, key);
   }
 
   public boolean has_key(String key) {
-    return CurlUtilsJNI.Map_has_key(swigCPtr, this, key);
+    return CurlUtilsJNI.ParamMap_has_key(swigCPtr, this, key);
   }
 
 }
