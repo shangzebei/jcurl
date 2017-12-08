@@ -1,5 +1,5 @@
-###JCURL的使用
-###get方法
+## JCURL的使用
+#### get方法
 ```java
 ParamMap map = new ParamMap();
 map.set("local", "zh");
@@ -10,7 +10,7 @@ CurlUtil.get("http://192.168.0.88:15000/v1/local", new Response() {
     }
 }).setParam(map).execute();
 ```
-###post方法
+#### post方法
 ```java
 ParamMap map = new ParamMap();
 map.set("username", "admin@localhost");
@@ -22,7 +22,7 @@ CurlUtil.post("http://192.168.0.88:15000/v1/login", new Response() {
     }
 }).setParam(map).execute();
 ```
-###设置header
+#### 设置header
 ```java
 CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
             @Override
@@ -34,7 +34,7 @@ CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
   .execute();
 ```
 
-###下载大文件加进度条
+#### 下载大文件加进度条
 ```java
 CurlUtil.getFile("https://wdl1.cache.wps.cn/wps/download/W.P.S.6930.19.552.exe",
         this.getFilesDir().getAbsolutePath()+"/wps.exe")
@@ -47,7 +47,7 @@ CurlUtil.getFile("https://wdl1.cache.wps.cn/wps/download/W.P.S.6930.19.552.exe",
 ```
 
 
-- 获取二进制流如图片
+#### 获取二进制流如图片
 - getBytes(String url, ByteResponse response)
 ```java
 CurlUtil.getBytes(aa[position], new ByteResponse() {
