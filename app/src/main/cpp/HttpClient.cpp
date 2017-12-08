@@ -263,7 +263,6 @@ public:
         }
 
         if (request->getProgress() != nullptr) {
-
             setOption(CURLOPT_NOPROGRESS, 0L);
             setOption(CURLOPT_XFERINFOFUNCTION, xferinfo);
             setOption(CURLOPT_XFERINFODATA, request->getProgress());
