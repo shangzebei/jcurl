@@ -66,34 +66,34 @@ CurlUtil.getFile("https://wdl1.cache.wps.cn/wps/download/W.P.S.6930.19.552.exe",
 - getBytes(String url, ByteResponse response)
 ```java
 CurlUtil.getBytes(aa[position], new ByteResponse() {
-            @Override
-            public void callback(int result, ByteBuffer buf, long len) {
-                Log.i("szb", "callback: " + Thread.currentThread().getName());
-                final byte[] bytes = new byte[(int) len];
-                buf.get(bytes, 0, (int) len);
-//                    cache.put(position, bytes);//获取bytes
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                hashMap.put(position,bitmap);
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        imageView.setImageBitmap(hashMap.get(position));
-                        imageView.setTag(position);
-                    }
-                });
+      @Override
+      public void callback(int result, ByteBuffer buf, long len) {
+          Log.i("szb", "callback: " + Thread.currentThread().getName());
+          final byte[] bytes = new byte[(int) len];
+          buf.get(bytes, 0, (int) len);
+                cache.put(position, bytes);//获取bytes
+          Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+          hashMap.put(position,bitmap);
+          handler.post(new Runnable() {
+              @Override
+              public void run() {
+                  imageView.setImageBitmap(hashMap.get(position));
+                  imageView.setTag(position);
+              }
+          });
 
-            }
-        }).setProgress(new Progress() { //进度条
-            @Override
-            public void progress(long unow, long utotal, final long dnow, final long dtotal) {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressBar.setMax((int) dtotal);
-                        progressBar.setProgress((int) dnow);
+      }
+  }).setProgress(new Progress() { //进度条
+      @Override
+      public void progress(long unow, long utotal, final long dnow, final long dtotal) {
+          handler.post(new Runnable() {
+              @Override
+              public void run() {
+                  progressBar.setMax((int) dtotal);
+                  progressBar.setProgress((int) dnow);
 
-                    }
-                });
-            }
-        }).execute();
+              }
+          });
+      }
+  }).execute();
 ```
