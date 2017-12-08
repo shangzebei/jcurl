@@ -1,4 +1,4 @@
-package s.docker.com.jcurl;
+package com.my.jcurl;
 
 import org.junit.Test;
 

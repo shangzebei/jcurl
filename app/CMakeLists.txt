@@ -5,8 +5,8 @@ add_subdirectory(src/main/cpp/Json/lib_json)
 
 set(SWIG_SOURCE_FILE src/main/cpp/curljni.i)
 SET(SWIG_CPP_OUT_FILE_NAME src/main/cpp/curljni.cxx)
-SET(SWIG_JAVA_OUT_DIR src/main/java/s/docker/com/jcurl)
-SET(SWIG_JAVA_PACKAGE s.docker.com.jcurl)
+SET(SWIG_JAVA_PACKAGE com.my.jcurl)
+SET(SWIG_JAVA_OUT_DIR src/main/java/com/my/jcurl)
 #/usr/local/opt/swig@3.04/bin/swig
 execute_process(COMMAND swig -c++ -outdir ${SWIG_JAVA_OUT_DIR} -o ${SWIG_CPP_OUT_FILE_NAME} -java -package ${SWIG_JAVA_PACKAGE} ${SWIG_SOURCE_FILE})#-o ${SWIG_CPP_OUT_FILE_NAME} -package ${SWIG_JAVA_PACKAGE}
 

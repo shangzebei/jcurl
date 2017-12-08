@@ -6,18 +6,18 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package s.docker.com.jcurl;
+package com.my.jcurl;
 
-public class ByteResponse {
+public class Response {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected ByteResponse(long cPtr, boolean cMemoryOwn) {
+  protected Response(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(ByteResponse obj) {
+  protected static long getCPtr(Response obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,7 +29,7 @@ public class ByteResponse {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        CurlUtilsJNI.delete_ByteResponse(swigCPtr);
+        CurlUtilsJNI.delete_Response(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -42,24 +42,21 @@ public class ByteResponse {
 
   public void swigReleaseOwnership() {
     swigCMemOwn = false;
-    CurlUtilsJNI.ByteResponse_change_ownership(this, swigCPtr, false);
+    CurlUtilsJNI.Response_change_ownership(this, swigCPtr, false);
   }
 
   public void swigTakeOwnership() {
     swigCMemOwn = true;
-    CurlUtilsJNI.ByteResponse_change_ownership(this, swigCPtr, true);
+    CurlUtilsJNI.Response_change_ownership(this, swigCPtr, true);
   }
 
-  public void callback(int result, java.nio.ByteBuffer buf, long len) {
-  assert buf.isDirect() : "Buffer must be allocated direct.";
-    {
-      if (getClass() == ByteResponse.class) CurlUtilsJNI.ByteResponse_callback(swigCPtr, this, result, buf, len); else CurlUtilsJNI.ByteResponse_callbackSwigExplicitByteResponse(swigCPtr, this, result, buf, len);
-    }
+  public void callback(int result, String s) {
+    if (getClass() == Response.class) CurlUtilsJNI.Response_callback(swigCPtr, this, result, s); else CurlUtilsJNI.Response_callbackSwigExplicitResponse(swigCPtr, this, result, s);
   }
 
-  public ByteResponse() {
-    this(CurlUtilsJNI.new_ByteResponse(), true);
-    CurlUtilsJNI.ByteResponse_director_connect(this, swigCPtr, swigCMemOwn, false);
+  public Response() {
+    this(CurlUtilsJNI.new_Response(), true);
+    CurlUtilsJNI.Response_director_connect(this, swigCPtr, swigCMemOwn, false);
   }
 
 }

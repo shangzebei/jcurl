@@ -6,7 +6,7 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package s.docker.com.jcurl;
+package com.my.jcurl;
 
 public class CurlUtils {
 }

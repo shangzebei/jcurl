@@ -6,18 +6,18 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package s.docker.com.jcurl;
+package com.my.jcurl;
 
-public class Progress {
+public class ByteResponse {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected Progress(long cPtr, boolean cMemoryOwn) {
+  protected ByteResponse(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(Progress obj) {
+  protected static long getCPtr(ByteResponse obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,7 +29,7 @@ public class Progress {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        CurlUtilsJNI.delete_Progress(swigCPtr);
+        CurlUtilsJNI.delete_ByteResponse(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -42,29 +42,24 @@ public class Progress {
 
   public void swigReleaseOwnership() {
     swigCMemOwn = false;
-    CurlUtilsJNI.Progress_change_ownership(this, swigCPtr, false);
+    CurlUtilsJNI.ByteResponse_change_ownership(this, swigCPtr, false);
   }
 
   public void swigTakeOwnership() {
     swigCMemOwn = true;
-    CurlUtilsJNI.Progress_change_ownership(this, swigCPtr, true);
+    CurlUtilsJNI.ByteResponse_change_ownership(this, swigCPtr, true);
   }
 
-  public void progress(long unow, long utotal, long dnow, long dtotal) {
-    if (getClass() == Progress.class) CurlUtilsJNI.Progress_progress(swigCPtr, this, unow, utotal, dnow, dtotal); else CurlUtilsJNI.Progress_progressSwigExplicitProgress(swigCPtr, this, unow, utotal, dnow, dtotal);
+  public void callback(int result, java.nio.ByteBuffer buf, long len) {
+  assert buf.isDirect() : "Buffer must be allocated direct.";
+    {
+      if (getClass() == ByteResponse.class) CurlUtilsJNI.ByteResponse_callback(swigCPtr, this, result, buf, len); else CurlUtilsJNI.ByteResponse_callbackSwigExplicitByteResponse(swigCPtr, this, result, buf, len);
+    }
   }
 
-  public void setTag(String tag) {
-    CurlUtilsJNI.Progress_setTag(swigCPtr, this, tag);
-  }
-
-  public String getTag() {
-    return CurlUtilsJNI.Progress_getTag(swigCPtr, this);
-  }
-
-  public Progress() {
-    this(CurlUtilsJNI.new_Progress(), true);
-    CurlUtilsJNI.Progress_director_connect(this, swigCPtr, swigCMemOwn, false);
+  public ByteResponse() {
+    this(CurlUtilsJNI.new_ByteResponse(), true);
+    CurlUtilsJNI.ByteResponse_director_connect(this, swigCPtr, swigCMemOwn, false);
   }
 
 }

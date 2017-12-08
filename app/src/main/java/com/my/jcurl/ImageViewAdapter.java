@@ -1,11 +1,9 @@
-package s.docker.com.jcurl;
+package com.my.jcurl;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +11,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by chinamall on 2017/12/6.

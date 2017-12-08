@@ -837,7 +837,7 @@ void SwigDirector_Response::swig_connect_director(JNIEnv *jenv, jobject jself, j
   
   if (swig_set_self(jenv, jself, swig_mem_own, weak_global)) {
     if (!baseclass) {
-      baseclass = jenv->FindClass("s/docker/com/jcurl/Response");
+      baseclass = jenv->FindClass("com/my/jcurl/Response");
       if (!baseclass) return;
       baseclass = (jclass) jenv->NewGlobalRef(baseclass);
     }
@@ -905,7 +905,7 @@ void SwigDirector_ByteResponse::swig_connect_director(JNIEnv *jenv, jobject jsel
   
   if (swig_set_self(jenv, jself, swig_mem_own, weak_global)) {
     if (!baseclass) {
-      baseclass = jenv->FindClass("s/docker/com/jcurl/ByteResponse");
+      baseclass = jenv->FindClass("com/my/jcurl/ByteResponse");
       if (!baseclass) return;
       baseclass = (jclass) jenv->NewGlobalRef(baseclass);
     }
@@ -973,7 +973,7 @@ void SwigDirector_Progress::swig_connect_director(JNIEnv *jenv, jobject jself, j
   
   if (swig_set_self(jenv, jself, swig_mem_own, weak_global)) {
     if (!baseclass) {
-      baseclass = jenv->FindClass("s/docker/com/jcurl/Progress");
+      baseclass = jenv->FindClass("com/my/jcurl/Progress");
       if (!baseclass) return;
       baseclass = (jclass) jenv->NewGlobalRef(baseclass);
     }
@@ -994,7 +994,7 @@ void SwigDirector_Progress::swig_connect_director(JNIEnv *jenv, jobject jself, j
 extern "C" {
 #endif
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1ParamMap_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_new_1ParamMap_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   std::map< std::string,std::string > *result = 0 ;
   
@@ -1012,7 +1012,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1ParamMap_1_1S
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1ParamMap_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_new_1ParamMap_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::map< std::string,std::string > *arg1 = 0 ;
   std::map< std::string,std::string > *result = 0 ;
@@ -1037,7 +1037,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1ParamMap_1_1S
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1size(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_ParamMap_1size(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   unsigned int result;
@@ -1065,7 +1065,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1size(JNI
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1empty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_com_my_jcurl_CurlUtilsJNI_ParamMap_1empty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   bool result;
@@ -1093,7 +1093,7 @@ SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1empty
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_ParamMap_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   
   (void)jenv;
@@ -1117,7 +1117,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1clear(JNI
 }
 
 
-SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jstring JNICALL Java_com_my_jcurl_CurlUtilsJNI_ParamMap_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jstring jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::string *arg2 = 0 ;
@@ -1162,7 +1162,7 @@ SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1get(JN
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_ParamMap_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -1206,7 +1206,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1set(JNIEn
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1del(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_ParamMap_1del(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1247,7 +1247,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1del(JNIEn
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1has_1key(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jboolean JNICALL Java_com_my_jcurl_CurlUtilsJNI_ParamMap_1has_1key(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jboolean jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::string *arg2 = 0 ;
@@ -1285,7 +1285,7 @@ SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1has_1
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1ParamMap(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_delete_1ParamMap(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   
   (void)jenv;
@@ -1308,7 +1308,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1ParamMap(JN
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1callback(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jstring jarg3) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_Response_1callback(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jstring jarg3) {
   Response *arg1 = (Response *) 0 ;
   int arg2 ;
   std::string arg3 ;
@@ -1343,7 +1343,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1callback(
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1callbackSwigExplicitResponse(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jstring jarg3) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_Response_1callbackSwigExplicitResponse(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jstring jarg3) {
   Response *arg1 = (Response *) 0 ;
   int arg2 ;
   std::string arg3 ;
@@ -1378,7 +1378,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1callbackS
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1Response(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_new_1Response(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Response *result = 0 ;
   
@@ -1396,7 +1396,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1Response(JNIE
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1Response(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_delete_1Response(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Response *arg1 = (Response *) 0 ;
   
   (void)jenv;
@@ -1419,7 +1419,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1Response(JN
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1director_1connect(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jswig_mem_own, jboolean jweak_global) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_Response_1director_1connect(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jswig_mem_own, jboolean jweak_global) {
   Response *obj = *((Response **)&objarg);
   (void)jcls;
   SwigDirector_Response *director = dynamic_cast<SwigDirector_Response *>(obj);
@@ -1429,7 +1429,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1director_
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1change_1ownership(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jtake_or_release) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_Response_1change_1ownership(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jtake_or_release) {
   Response *obj = *((Response **)&objarg);
   SwigDirector_Response *director = dynamic_cast<SwigDirector_Response *>(obj);
   (void)jcls;
@@ -1439,7 +1439,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1change_1o
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callback(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jobject jarg3, jlong jarg4) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_ByteResponse_1callback(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jobject jarg3, jlong jarg4) {
   ByteResponse *arg1 = (ByteResponse *) 0 ;
   int arg2 ;
   unsigned char *arg3 = (unsigned char *) 0 ;
@@ -1475,7 +1475,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callb
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callbackSwigExplicitByteResponse(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jobject jarg3, jlong jarg4) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_ByteResponse_1callbackSwigExplicitByteResponse(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jobject jarg3, jlong jarg4) {
   ByteResponse *arg1 = (ByteResponse *) 0 ;
   int arg2 ;
   unsigned char *arg3 = (unsigned char *) 0 ;
@@ -1511,7 +1511,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callb
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1ByteResponse(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_new_1ByteResponse(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   ByteResponse *result = 0 ;
   
@@ -1529,7 +1529,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1ByteResponse(
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1ByteResponse(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_delete_1ByteResponse(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   ByteResponse *arg1 = (ByteResponse *) 0 ;
   
   (void)jenv;
@@ -1552,7 +1552,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1ByteRespons
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1director_1connect(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jswig_mem_own, jboolean jweak_global) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_ByteResponse_1director_1connect(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jswig_mem_own, jboolean jweak_global) {
   ByteResponse *obj = *((ByteResponse **)&objarg);
   (void)jcls;
   SwigDirector_ByteResponse *director = dynamic_cast<SwigDirector_ByteResponse *>(obj);
@@ -1562,7 +1562,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1direc
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1change_1ownership(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jtake_or_release) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_ByteResponse_1change_1ownership(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jtake_or_release) {
   ByteResponse *obj = *((ByteResponse **)&objarg);
   SwigDirector_ByteResponse *director = dynamic_cast<SwigDirector_ByteResponse *>(obj);
   (void)jcls;
@@ -1572,7 +1572,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1chang
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1progress(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4, jlong jarg5) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_Progress_1progress(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4, jlong jarg5) {
   Progress *arg1 = (Progress *) 0 ;
   long long arg2 ;
   long long arg3 ;
@@ -1604,7 +1604,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1progress(
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1progressSwigExplicitProgress(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4, jlong jarg5) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_Progress_1progressSwigExplicitProgress(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4, jlong jarg5) {
   Progress *arg1 = (Progress *) 0 ;
   long long arg2 ;
   long long arg3 ;
@@ -1636,7 +1636,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1progressS
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1setTag(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_Progress_1setTag(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   Progress *arg1 = (Progress *) 0 ;
   std::string arg2 ;
   
@@ -1669,7 +1669,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1setTag(JN
 }
 
 
-SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1getTag(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_com_my_jcurl_CurlUtilsJNI_Progress_1getTag(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Progress *arg1 = (Progress *) 0 ;
   std::string result;
@@ -1697,7 +1697,7 @@ SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1getTag
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1Progress(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_new_1Progress(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Progress *result = 0 ;
   
@@ -1715,7 +1715,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1Progress(JNIE
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1Progress(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_delete_1Progress(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Progress *arg1 = (Progress *) 0 ;
   
   (void)jenv;
@@ -1738,7 +1738,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1Progress(JN
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1director_1connect(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jswig_mem_own, jboolean jweak_global) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_Progress_1director_1connect(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jswig_mem_own, jboolean jweak_global) {
   Progress *obj = *((Progress **)&objarg);
   (void)jcls;
   SwigDirector_Progress *director = dynamic_cast<SwigDirector_Progress *>(obj);
@@ -1748,7 +1748,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1director_
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1change_1ownership(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jtake_or_release) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_Progress_1change_1ownership(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jtake_or_release) {
   Progress *obj = *((Progress **)&objarg);
   SwigDirector_Progress *director = dynamic_cast<SwigDirector_Progress *>(obj);
   (void)jcls;
@@ -1758,7 +1758,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1change_1o
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1get(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1get(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   std::string arg1 ;
   Response *arg2 = (Response *) 0 ;
@@ -1788,7 +1788,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1get(JNIE
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1post(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1post(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   std::string arg1 ;
   Response *arg2 = (Response *) 0 ;
@@ -1818,7 +1818,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1post(JNI
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getBytes(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1getBytes(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   std::string arg1 ;
   ByteResponse *arg2 = (ByteResponse *) 0 ;
@@ -1848,7 +1848,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getBytes
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getFile(JNIEnv *jenv, jclass jcls, jstring jarg1, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1getFile(JNIEnv *jenv, jclass jcls, jstring jarg1, jstring jarg2) {
   jlong jresult = 0 ;
   std::string arg1 ;
   std::string arg2 ;
@@ -1884,7 +1884,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getFile(
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setProgress(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1setProgress(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   CurlUtil *arg1 = (CurlUtil *) 0 ;
   Progress *arg2 = (Progress *) 0 ;
@@ -1915,7 +1915,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setProgr
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setParam(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1setParam(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   CurlUtil *arg1 = (CurlUtil *) 0 ;
   std::map< std::string,std::string > arg2 ;
@@ -1952,7 +1952,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setParam
 }
 
 
-SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setHeader(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1setHeader(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   CurlUtil *arg1 = (CurlUtil *) 0 ;
   std::string arg2 ;
@@ -1989,7 +1989,7 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setHeade
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1execute_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1execute_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   CurlUtil *arg1 = (CurlUtil *) 0 ;
   std::string arg2 ;
   
@@ -2022,7 +2022,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1execute_1
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1execute_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1execute_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   CurlUtil *arg1 = (CurlUtil *) 0 ;
   
   (void)jenv;
@@ -2046,7 +2046,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1execute_1
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setTag(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1setTag(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   CurlUtil *arg1 = (CurlUtil *) 0 ;
   std::string arg2 ;
   
@@ -2079,7 +2079,7 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setTag(JN
 }
 
 
-SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getTag(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1getTag(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   CurlUtil *arg1 = (CurlUtil *) 0 ;
   std::string result;
@@ -2107,7 +2107,7 @@ SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getTag
 }
 
 
-SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_swig_1module_1init(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_swig_1module_1init(JNIEnv *jenv, jclass jcls) {
   int i;
   
   static struct {
@@ -2115,13 +2115,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_swig_1module_1init(
     const char *signature;
   } methods[3] = {
     {
-      "SwigDirector_Response_callback", "(Ls/docker/com/jcurl/Response;ILjava/lang/String;)V" 
+      "SwigDirector_Response_callback", "(Lcom/my/jcurl/Response;ILjava/lang/String;)V" 
     },
     {
-      "SwigDirector_ByteResponse_callback", "(Ls/docker/com/jcurl/ByteResponse;ILjava/nio/ByteBuffer;J)V" 
+      "SwigDirector_ByteResponse_callback", "(Lcom/my/jcurl/ByteResponse;ILjava/nio/ByteBuffer;J)V" 
     },
     {
-      "SwigDirector_Progress_progress", "(Ls/docker/com/jcurl/Progress;JJJJ)V" 
+      "SwigDirector_Progress_progress", "(Lcom/my/jcurl/Progress;JJJJ)V" 
     }
   };
   Swig::jclass_CurlUtilsJNI = (jclass) jenv->NewGlobalRef(jcls);
