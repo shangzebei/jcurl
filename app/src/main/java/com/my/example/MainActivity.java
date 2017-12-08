@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        getMethod();
         getMethodParam();
-        getfile();
+//        getfile();
 
     }
 
