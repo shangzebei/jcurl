@@ -46,15 +46,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }).setParam(map).execute();
 
-//        CurlUtil.post("http://192.168.0.88:15000/v1/login", new Response() {
-//            @Override
-//            public void callback(int result, String s) {
-//                Log.i("szb", "callback: " + s);
-//            }
-//        }).setParam(map)
-//                .execute();
-
-
     }
 
     private void initView(Context mainActivity) {
