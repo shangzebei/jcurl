@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 //           .execute();
 //this.getFilesDir().getAbsolutePath()+"/wps.exe"
             CurlUtil.getFile("https://wdl1.cache.wps.cn/wps/download/W.P.S.6930.19.552.exe",
-                    this.getFilesDir().getAbsolutePath()+"/wps.exe")
+                    Environment.getExternalStorageDirectory()+"/wps.exe")
             .setProgress(new Progress(){
                 @Override
                 public void progress(long unow, long utotal, long dnow, long dtotal) {

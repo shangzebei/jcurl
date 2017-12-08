@@ -3,12 +3,12 @@
 
     $input = JCALL2(NewDirectByteBuffer,jenv,$1,len);
 }
+%typemap(javadirectorin) unsigned char *NIOBUFFER "$jniinput"
 
 SWIG_DIRECTOR_OWNED(ByteResponse)
 SWIG_DIRECTOR_OWNED(Progress)
 SWIG_DIRECTOR_OWNED(Response)
 
-%typemap(javadirectorin) unsigned char *NIOBUFFER "$jniinput"
 
 %{
 static inline void printException(JNIEnv * jenv, jthrowable throwable){
@@ -38,6 +38,14 @@ if (!$1) {
     "invalid native object; delete() likely already called");
   return $null;
 }
+%}
+
+%exception %{
+     try {
+         $action
+     } catch (std::exception& e) {
+         SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+     }
 %}
 
 %insert("runtime") %{

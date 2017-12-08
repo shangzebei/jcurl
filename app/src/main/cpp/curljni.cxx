@@ -1000,7 +1000,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1ParamMap_1_1S
   
   (void)jenv;
   (void)jcls;
-  result = (std::map< std::string,std::string > *)new std::map< std::string,std::string >();
+  
+  try {
+    result = (std::map< std::string,std::string > *)new std::map< std::string,std::string >();
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   *(std::map< std::string,std::string > **)&jresult = result; 
   return jresult;
 }
@@ -1019,7 +1025,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1ParamMap_1_1S
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "std::map< std::string,std::string > const & reference is null");
     return 0;
   } 
-  result = (std::map< std::string,std::string > *)new std::map< std::string,std::string >((std::map< std::string,std::string > const &)*arg1);
+  
+  try {
+    result = (std::map< std::string,std::string > *)new std::map< std::string,std::string >((std::map< std::string,std::string > const &)*arg1);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   *(std::map< std::string,std::string > **)&jresult = result; 
   return jresult;
 }
@@ -1041,7 +1053,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1size(JNI
     return 0;
   }
   
-  result = (unsigned int)((std::map< std::string,std::string > const *)arg1)->size();
+  
+  try {
+    result = (unsigned int)((std::map< std::string,std::string > const *)arg1)->size();
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   jresult = (jlong)result; 
   return jresult;
 }
@@ -1063,7 +1081,13 @@ SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1empty
     return 0;
   }
   
-  result = (bool)((std::map< std::string,std::string > const *)arg1)->empty();
+  
+  try {
+    result = (bool)((std::map< std::string,std::string > const *)arg1)->empty();
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   jresult = (jboolean)result; 
   return jresult;
 }
@@ -1083,7 +1107,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1clear(JNI
     return ;
   }
   
-  (arg1)->clear();
+  
+  try {
+    (arg1)->clear();
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1113,12 +1143,18 @@ SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1get(JN
     return 0;
   }
   
+  
   try {
-    result = (std::string *) &std_map_Sl_std_string_Sc_std_string_Sg__get(arg1,(std::string const &)*arg2);
-  }
-  catch(std::out_of_range &_e) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaIndexOutOfBoundsException, (&_e)->what());
-    return 0;
+    try {
+      result = (std::string *) &std_map_Sl_std_string_Sc_std_string_Sg__get(arg1,(std::string const &)*arg2);
+    }
+    catch(std::out_of_range &_e) {
+      SWIG_JavaThrowException(jenv, SWIG_JavaIndexOutOfBoundsException, (&_e)->what());
+      return 0;
+    }
+    
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
   }
   
   jresult = jenv->NewStringUTF(result->c_str()); 
@@ -1160,7 +1196,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1set(JNIEn
     return ;
   }
   
-  std_map_Sl_std_string_Sc_std_string_Sg__set(arg1,(std::string const &)*arg2,(std::string const &)*arg3);
+  
+  try {
+    std_map_Sl_std_string_Sc_std_string_Sg__set(arg1,(std::string const &)*arg2,(std::string const &)*arg3);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1188,12 +1230,18 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1del(JNIEn
     return ;
   }
   
+  
   try {
-    std_map_Sl_std_string_Sc_std_string_Sg__del(arg1,(std::string const &)*arg2);
-  }
-  catch(std::out_of_range &_e) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaIndexOutOfBoundsException, (&_e)->what());
-    return ;
+    try {
+      std_map_Sl_std_string_Sc_std_string_Sg__del(arg1,(std::string const &)*arg2);
+    }
+    catch(std::out_of_range &_e) {
+      SWIG_JavaThrowException(jenv, SWIG_JavaIndexOutOfBoundsException, (&_e)->what());
+      return ;
+    }
+    
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
   }
   
 }
@@ -1225,7 +1273,13 @@ SWIGEXPORT jboolean JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ParamMap_1has_1
     return 0;
   }
   
-  result = (bool)std_map_Sl_std_string_Sc_std_string_Sg__has_key(arg1,(std::string const &)*arg2);
+  
+  try {
+    result = (bool)std_map_Sl_std_string_Sc_std_string_Sg__has_key(arg1,(std::string const &)*arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   jresult = (jboolean)result; 
   return jresult;
 }
@@ -1244,7 +1298,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1ParamMap(JN
     return ;
   }
   
-  delete arg1;
+  
+  try {
+    delete arg1;
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1273,7 +1333,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1callback(
     return ;
   }
   
-  (arg1)->callback(arg2,arg3);
+  
+  try {
+    (arg1)->callback(arg2,arg3);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1302,7 +1368,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Response_1callbackS
     return ;
   }
   
-  (arg1)->Response::callback(arg2,arg3);
+  
+  try {
+    (arg1)->Response::callback(arg2,arg3);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1312,7 +1384,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1Response(JNIE
   
   (void)jenv;
   (void)jcls;
-  result = (Response *)new SwigDirector_Response(jenv);
+  
+  try {
+    result = (Response *)new SwigDirector_Response(jenv);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   *(Response **)&jresult = result; 
   return jresult;
 }
@@ -1331,7 +1409,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1Response(JN
     return ;
   }
   
-  delete arg1;
+  
+  try {
+    delete arg1;
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1380,7 +1464,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callb
     return ;
   }
   
-  (arg1)->callback(arg2,arg3,arg4);
+  
+  try {
+    (arg1)->callback(arg2,arg3,arg4);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   
 }
 
@@ -1410,7 +1500,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_ByteResponse_1callb
     return ;
   }
   
-  (arg1)->ByteResponse::callback(arg2,arg3,arg4);
+  
+  try {
+    (arg1)->ByteResponse::callback(arg2,arg3,arg4);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   
 }
 
@@ -1421,7 +1517,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1ByteResponse(
   
   (void)jenv;
   (void)jcls;
-  result = (ByteResponse *)new SwigDirector_ByteResponse(jenv);
+  
+  try {
+    result = (ByteResponse *)new SwigDirector_ByteResponse(jenv);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   *(ByteResponse **)&jresult = result; 
   return jresult;
 }
@@ -1440,7 +1542,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1ByteRespons
     return ;
   }
   
-  delete arg1;
+  
+  try {
+    delete arg1;
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1486,7 +1594,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1progress(
     return ;
   }
   
-  (arg1)->progress(arg2,arg3,arg4,arg5);
+  
+  try {
+    (arg1)->progress(arg2,arg3,arg4,arg5);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1512,7 +1626,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1progressS
     return ;
   }
   
-  (arg1)->Progress::progress(arg2,arg3,arg4,arg5);
+  
+  try {
+    (arg1)->Progress::progress(arg2,arg3,arg4,arg5);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1539,7 +1659,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1setTag(JN
     return ;
   }
   
-  (arg1)->setTag(arg2);
+  
+  try {
+    (arg1)->setTag(arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1559,7 +1685,13 @@ SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_Progress_1getTag
     return 0;
   }
   
-  result = (arg1)->getTag();
+  
+  try {
+    result = (arg1)->getTag();
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   jresult = jenv->NewStringUTF((&result)->c_str()); 
   return jresult;
 }
@@ -1571,7 +1703,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_new_1Progress(JNIE
   
   (void)jenv;
   (void)jcls;
-  result = (Progress *)new SwigDirector_Progress(jenv);
+  
+  try {
+    result = (Progress *)new SwigDirector_Progress(jenv);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   *(Progress **)&jresult = result; 
   return jresult;
 }
@@ -1590,7 +1728,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_delete_1Progress(JN
     return ;
   }
   
-  delete arg1;
+  
+  try {
+    delete arg1;
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1632,7 +1776,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1get(JNIE
   (&arg1)->assign(arg1_pstr);
   jenv->ReleaseStringUTFChars(jarg1, arg1_pstr); 
   arg2 = *(Response **)&jarg2; 
-  result = (CurlUtil *)CurlUtil::get(arg1,arg2);
+  
+  try {
+    result = (CurlUtil *)CurlUtil::get(arg1,arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   *(CurlUtil **)&jresult = result; 
   return jresult;
 }
@@ -1656,7 +1806,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1post(JNI
   (&arg1)->assign(arg1_pstr);
   jenv->ReleaseStringUTFChars(jarg1, arg1_pstr); 
   arg2 = *(Response **)&jarg2; 
-  result = (CurlUtil *)CurlUtil::post(arg1,arg2);
+  
+  try {
+    result = (CurlUtil *)CurlUtil::post(arg1,arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   *(CurlUtil **)&jresult = result; 
   return jresult;
 }
@@ -1680,7 +1836,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getBytes
   (&arg1)->assign(arg1_pstr);
   jenv->ReleaseStringUTFChars(jarg1, arg1_pstr); 
   arg2 = *(ByteResponse **)&jarg2; 
-  result = (CurlUtil *)CurlUtil::getBytes(arg1,arg2);
+  
+  try {
+    result = (CurlUtil *)CurlUtil::getBytes(arg1,arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   *(CurlUtil **)&jresult = result; 
   return jresult;
 }
@@ -1710,12 +1872,11 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getFile(
   if (!arg2_pstr) return 0;
   (&arg2)->assign(arg2_pstr);
   jenv->ReleaseStringUTFChars(jarg2, arg2_pstr); 
+  
   try {
     result = (CurlUtil *)CurlUtil::getFile(arg1,arg2);
-  }
-  catch(std::runtime_error &_e) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaRuntimeException, (&_e)->what());
-    return 0;
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
   }
   
   *(CurlUtil **)&jresult = result; 
@@ -1742,7 +1903,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setProgr
     return 0;
   }
   
-  result = (CurlUtil *)(arg1)->setProgress(arg2);
+  
+  try {
+    result = (CurlUtil *)(arg1)->setProgress(arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   *(CurlUtil **)&jresult = result; 
   return jresult;
 }
@@ -1773,7 +1940,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setParam
     return 0;
   }
   
-  result = (CurlUtil *)(arg1)->setParam(arg2);
+  
+  try {
+    result = (CurlUtil *)(arg1)->setParam(arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   *(CurlUtil **)&jresult = result; 
   return jresult;
 }
@@ -1804,7 +1977,13 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setHeade
     return 0;
   }
   
-  result = (CurlUtil *)(arg1)->setHeader(arg2);
+  
+  try {
+    result = (CurlUtil *)(arg1)->setHeader(arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   *(CurlUtil **)&jresult = result; 
   return jresult;
 }
@@ -1833,7 +2012,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1execute_1
     return ;
   }
   
-  (arg1)->execute(arg2);
+  
+  try {
+    (arg1)->execute(arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1851,7 +2036,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1execute_1
     return ;
   }
   
-  (arg1)->execute();
+  
+  try {
+    (arg1)->execute();
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1878,7 +2069,13 @@ SWIGEXPORT void JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1setTag(JN
     return ;
   }
   
-  (arg1)->setTag(arg2);
+  
+  try {
+    (arg1)->setTag(arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
 }
 
 
@@ -1898,7 +2095,13 @@ SWIGEXPORT jstring JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getTag
     return 0;
   }
   
-  result = (arg1)->getTag();
+  
+  try {
+    result = (arg1)->getTag();
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
   jresult = jenv->NewStringUTF((&result)->c_str()); 
   return jresult;
 }
