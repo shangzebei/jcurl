@@ -176,6 +176,7 @@ CurlUtil *CurlUtil::post(std::string url, Response *response) {
 CurlUtil *CurlUtil::setHeader(std::string header) {
     auto headers = getHttpRequest()->getHeaders();
     headers.push_back(header);
+    getHttpRequest()->setHeaders(headers);
     return this;
 }
 

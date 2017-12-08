@@ -22,6 +22,17 @@ CurlUtil.post("http://192.168.0.88:15000/v1/login", new Response() {
     }
 }).setParam(map).execute();
 ```
+###设置header
+```java
+CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: " + s);
+            }
+}).setHeader("X-Auth-Token:admin@localhost:e58e67dba304027768c62c1160daeb3e")
+  .setHeader("Accept: application/json")
+  .execute();
+```
 - 获取二进制流如图片
 - getBytes(String url, ByteResponse response)
 ```java

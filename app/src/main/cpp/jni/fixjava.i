@@ -41,7 +41,7 @@ if (!$1) {
 %}
 
 %insert("runtime") %{
-    #define DEBUG_DIRECTOR_OWNED
+    //#define DEBUG_DIRECTOR_OWNED
     #define SWIG_JAVA_ATTACH_CURRENT_THREAD_AS_DAEMON
 
 %}

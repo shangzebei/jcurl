@@ -484,7 +484,6 @@ void CAHttpClient::send(HttpRequest *request) {
     if (false == lazyInitThreadSemphore()) {
         return;
     }
-
     if (!request) {
         return;
     }
