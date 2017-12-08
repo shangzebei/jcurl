@@ -2,7 +2,7 @@
 
 项目编译需要swig的支持，需要配置环境变量。
 
-### 简单请求
+### 简单请求,支持GET,POST,PUT,DELETE等方法
 ```java
 CurlUtil.get("http://www.baidu.com", new Response() {
     @Override
