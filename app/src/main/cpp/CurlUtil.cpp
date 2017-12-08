@@ -116,13 +116,13 @@ void CurlUtil::execute(std::string tag) {
     if (_execute) {
         return;
     }
+
     setTag(tag);
-    switch (_httpRequest->getRequestType()) {
-        case HttpRequest::Type::Get:
-            CAHttpClient::getInstance(4)->sendImmediate(getHttpRequest());
-            _execute = true;
-            break;
-    }
+
+    CAHttpClient::getInstance(4)->sendImmediate(getHttpRequest());
+
+    _execute = true;
+
 }
 
 void CurlUtil::setTag(std::string tag) {
@@ -141,12 +141,12 @@ CurlUtil *CurlUtil::setParam(std::map<std::string, std::string> key_value) {
     auto value = dealParam(key_value);
     switch (_httpRequest->getRequestType()) {
         case HttpRequest::Type::Get: {
-            getHttpRequest()->setUrl(getHttpRequest()->getUrl() + value);
+            getHttpRequest()->setUrl(getHttpRequest()->getUrl() + ("?" + value));
         }
             break;
         case HttpRequest::Type::Post: {
+            LOGD("%s", value.c_str());
             getHttpRequest()->setRequestData(value.c_str(), value.length());
-
         }
             break;
     }
@@ -156,10 +156,7 @@ CurlUtil *CurlUtil::setParam(std::map<std::string, std::string> key_value) {
 std::string CurlUtil::dealParam(std::map<std::string, std::string> key_value) {
     std::string getRul = "";
     if (!key_value.empty()) {
-        getRul += "?";
-
         std::map<std::string, std::string>::iterator itr = key_value.begin();
-
         do {
             getRul = getRul + itr->first + "=" + itr->second;
             itr++;
@@ -174,6 +171,12 @@ std::string CurlUtil::dealParam(std::map<std::string, std::string> key_value) {
 
 CurlUtil *CurlUtil::post(std::string url, Response *response) {
     return process(url, HttpRequest::Type::Post, response);
+}
+
+CurlUtil *CurlUtil::setHeader(std::string header) {
+    auto headers = getHttpRequest()->getHeaders();
+    headers.push_back(header);
+    return this;
 }
 
 

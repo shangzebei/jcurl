@@ -56,6 +56,11 @@ public class CurlUtil {
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 
+  public CurlUtil setHeader(String header) {
+    long cPtr = CurlUtilsJNI.CurlUtil_setHeader(swigCPtr, this, header);
+    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  }
+
   public void execute(String tag) {
     CurlUtilsJNI.CurlUtil_execute__SWIG_0(swigCPtr, this, tag);
   }

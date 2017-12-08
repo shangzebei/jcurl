@@ -37,13 +37,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.grid_layout);
 //        initView(this);
         ParamMap map = new ParamMap();
-        map.set("local", "zh");
-        CurlUtil.get("http://192.168.0.88:15000/v1/local", new Response() {
+        map.set("username", "admin@localhost");
+        map.set("password", "123456");
+        CurlUtil.post("http://192.168.0.88:15000/v1/login", new Response() {
             @Override
             public void callback(int result, String s) {
                 Log.i("szb", "callback: " + s);
             }
         }).setParam(map).execute();
+
+//        CurlUtil.post("http://192.168.0.88:15000/v1/login", new Response() {
+//            @Override
+//            public void callback(int result, String s) {
+//                Log.i("szb", "callback: " + s);
+//            }
+//        }).setParam(map)
+//                .execute();
 
 
     }

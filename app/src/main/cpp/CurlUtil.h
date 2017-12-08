@@ -79,6 +79,8 @@ public:
 
     CurlUtil *setParam(std::map<std::string,std::string> key_value);
 
+    CurlUtil *setHeader(std::string header);
+
     void execute(std::string tag);
 
     void execute();
@@ -102,6 +104,8 @@ private:
     static CurlUtil *process(std::string url, HttpRequest::Type type, Response *response);
 
     std::string dealParam(std::map<std::string, std::string> key_value);
+
+
 };
 
 

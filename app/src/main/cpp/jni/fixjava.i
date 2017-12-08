@@ -6,6 +6,7 @@
 
 SWIG_DIRECTOR_OWNED(ByteResponse)
 SWIG_DIRECTOR_OWNED(Progress)
+SWIG_DIRECTOR_OWNED(Response)
 
 %typemap(javadirectorin) unsigned char *NIOBUFFER "$jniinput"
 
