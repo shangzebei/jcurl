@@ -1,6 +1,6 @@
 ###JCURL的使用
 getBytes
-```
+```java
 CurlUtil.getBytes(aa[position], new ByteResponse() {
             @Override
             public void callback(int result, ByteBuffer buf, long len) {
