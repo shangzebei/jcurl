@@ -1,5 +1,5 @@
 ###JCURL的使用
--get获取json
+###get方法
 ```java
 ParamMap map = new ParamMap();
 map.set("local", "zh");
@@ -10,7 +10,7 @@ CurlUtil.get("http://192.168.0.88:15000/v1/local", new Response() {
     }
 }).setParam(map).execute();
 ```
-post方法
+###post方法
 ```java
 ParamMap map = new ParamMap();
 map.set("username", "admin@localhost");
@@ -33,6 +33,20 @@ CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
   .setHeader("Accept: application/json")
   .execute();
 ```
+
+###下载大文件加进度条
+```java
+CurlUtil.getFile("https://wdl1.cache.wps.cn/wps/download/W.P.S.6930.19.552.exe",
+        this.getFilesDir().getAbsolutePath()+"/wps.exe")
+.setProgress(new Progress(){
+    @Override
+    public void progress(long unow, long utotal, long dnow, long dtotal) {
+        Log.i("szb", "progress: "+dnow+"::"+dtotal);
+    }
+}).execute();
+```
+
+
 - 获取二进制流如图片
 - getBytes(String url, ByteResponse response)
 ```java

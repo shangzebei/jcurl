@@ -181,3 +181,20 @@ CurlUtil *CurlUtil::setHeader(std::string header) {
 }
 
 
+CurlUtil *CurlUtil::getFile(std::string url, std::string toPath) throw(std::runtime_error){
+    auto util = new CurlUtil();
+    auto *request = new HttpRequest();
+    request->setUrl(url);
+    request->setRequestType(HttpRequest::Type::GetFile);
+    auto file=fopen(toPath.c_str(), "wb");
+    if (!file){
+        throw std::runtime_error(toPath+" not writable or permission ");
+    }
+    request->setFileToGet(file);
+    util->_execute = false;
+    util->setHttpRequest(request);
+    return util;
+
+}
+
+

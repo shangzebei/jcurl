@@ -46,6 +46,11 @@ public class CurlUtil {
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 
+  public static CurlUtil getFile(String url, String toPath) {
+    long cPtr = CurlUtilsJNI.CurlUtil_getFile(url, toPath);
+    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  }
+
   public CurlUtil setProgress(Progress progress) {
     long cPtr = CurlUtilsJNI.CurlUtil_setProgress(swigCPtr, this, Progress.getCPtr(progress), progress);
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);

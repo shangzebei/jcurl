@@ -28,7 +28,11 @@ static size_t writeData(void *ptr, size_t size, size_t nmemb, void *stream) {
 
     return sizes;
 }
-
+static size_t write_file(void *ptr, size_t size, size_t nmemb, void *stream)
+{
+    size_t written = fwrite(ptr, size, nmemb, (FILE *)stream);
+    return written;
+}
 // Callback function used by libcurl for collect header data
 static size_t writeHeaderData(void *ptr, size_t size, size_t nmemb, void *stream) {
     std::vector<char> *recvBuffer = (std::vector<char> *) stream;
@@ -541,6 +545,7 @@ void CAHttpClient::processResponse(HttpResponse *response, char *responseMessage
 
     std::vector<char> responseData;
     std::vector<char> responseHeader;
+
     // Process the request -> get response packet
     switch (request->getRequestType()) {
         case HttpRequest::Type::Get: // HTTP GET
@@ -591,11 +596,23 @@ void CAHttpClient::processResponse(HttpResponse *response, char *responseMessage
                                            &responseHeader,
                                            responseMessage);
             break;
+        case HttpRequest::Type::GetFile:
+                retValue = processGetTask(this, request,
+                                          write_file,
+                                          request->getFileToGet(),
+                                          &responseCode,
+                                          writeHeaderData,
+                                          &responseHeader,
+                                          responseMessage);
+            break;
         default:
 //            CCASSERT(true, "CCCAHttpClient: unknown request type, only GET and POSt are supported");
             break;
     }
 
+    if (request->getRequestType()==HttpRequest::Type::GetFile) {
+        return;
+    }
     ssize_t c_responseDataLength = responseData.size();
     unsigned char *c_responseData = (unsigned char *) malloc(c_responseDataLength + 1);
     c_responseData[c_responseDataLength] = '\0';

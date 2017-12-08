@@ -2,6 +2,7 @@ package s.docker.com.jcurl;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.GridView;
@@ -29,14 +30,23 @@ public class MainActivity extends AppCompatActivity {
 //        }).setParam(map).execute();
 
 
-        CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
-            @Override
-            public void callback(int result, String s) {
-                Log.i("szb", "callback: " + s);
-            }
-        }).setHeader("X-Auth-Token:admin@localhost:e58e67dba304027768c62c1160daeb3e")
-           .setHeader("Accept: application/json")
-           .execute();
+//        CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
+//            @Override
+//            public void callback(int result, String s) {
+//                Log.i("szb", "callback: " + s);
+//            }
+//        }).setHeader("X-Auth-Token:admin@localhost:e58e67dba304027768c62c1160daeb3e")
+//           .setHeader("Accept: application/json")
+//           .execute();
+//this.getFilesDir().getAbsolutePath()+"/wps.exe"
+            CurlUtil.getFile("https://wdl1.cache.wps.cn/wps/download/W.P.S.6930.19.552.exe",
+                    this.getFilesDir().getAbsolutePath()+"/wps.exe")
+            .setProgress(new Progress(){
+                @Override
+                public void progress(long unow, long utotal, long dnow, long dtotal) {
+                    Log.i("szb", "progress: "+dnow+"::"+dtotal);
+                }
+            }).execute();
 
     }
 

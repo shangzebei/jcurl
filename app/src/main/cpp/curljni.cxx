@@ -231,7 +231,7 @@ static void SWIGUNUSED SWIG_JavaThrowException(JNIEnv *jenv, SWIG_JavaExceptionC
 #define SWIG_contract_assert(nullreturn, expr, msg) if (!(expr)) {SWIG_JavaThrowException(jenv, SWIG_JavaIllegalArgumentException, msg); return nullreturn; } else
 
 
-    #define DEBUG_DIRECTOR_OWNED
+    //#define DEBUG_DIRECTOR_OWNED
     #define SWIG_JAVA_ATTACH_CURRENT_THREAD_AS_DAEMON
 
 
@@ -1681,6 +1681,43 @@ SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getBytes
   jenv->ReleaseStringUTFChars(jarg1, arg1_pstr); 
   arg2 = *(ByteResponse **)&jarg2; 
   result = (CurlUtil *)CurlUtil::getBytes(arg1,arg2);
+  *(CurlUtil **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_s_docker_com_jcurl_CurlUtilsJNI_CurlUtil_1getFile(JNIEnv *jenv, jclass jcls, jstring jarg1, jstring jarg2) {
+  jlong jresult = 0 ;
+  std::string arg1 ;
+  std::string arg2 ;
+  CurlUtil *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  if(!jarg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
+    return 0;
+  } 
+  const char *arg1_pstr = (const char *)jenv->GetStringUTFChars(jarg1, 0); 
+  if (!arg1_pstr) return 0;
+  (&arg1)->assign(arg1_pstr);
+  jenv->ReleaseStringUTFChars(jarg1, arg1_pstr); 
+  if(!jarg2) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
+    return 0;
+  } 
+  const char *arg2_pstr = (const char *)jenv->GetStringUTFChars(jarg2, 0); 
+  if (!arg2_pstr) return 0;
+  (&arg2)->assign(arg2_pstr);
+  jenv->ReleaseStringUTFChars(jarg2, arg2_pstr); 
+  try {
+    result = (CurlUtil *)CurlUtil::getFile(arg1,arg2);
+  }
+  catch(std::runtime_error &_e) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaRuntimeException, (&_e)->what());
+    return 0;
+  }
+  
   *(CurlUtil **)&jresult = result; 
   return jresult;
 }

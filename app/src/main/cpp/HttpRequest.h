@@ -41,6 +41,7 @@ public:
         Get = 0,
         Post,
         PostFile,
+        GetFile,
         Put,
         Delete,
         Unkown,
@@ -198,6 +199,13 @@ public:
         return _threadID;
     };
 
+    inline void setFileToGet(FILE* file){
+        _fileToGet = file;
+    }
+    inline FILE* getFileToGet(){
+        return _fileToGet;
+    }
+
 
 protected:
     // properties
@@ -210,6 +218,7 @@ protected:
     std::vector<std::string> _headers;              /// custom http headers
     std::string _fileNameToPost;
     ssize_t _threadID;
+    FILE* _fileToGet;
 
 private:
 

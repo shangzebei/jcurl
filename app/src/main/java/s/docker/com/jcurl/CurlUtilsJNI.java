@@ -42,6 +42,7 @@ public class CurlUtilsJNI {
   public final static native long CurlUtil_get(String jarg1, long jarg2, Response jarg2_);
   public final static native long CurlUtil_post(String jarg1, long jarg2, Response jarg2_);
   public final static native long CurlUtil_getBytes(String jarg1, long jarg2, ByteResponse jarg2_);
+  public final static native long CurlUtil_getFile(String jarg1, String jarg2);
   public final static native long CurlUtil_setProgress(long jarg1, CurlUtil jarg1_, long jarg2, Progress jarg2_);
   public final static native long CurlUtil_setParam(long jarg1, CurlUtil jarg1_, long jarg2, ParamMap jarg2_);
   public final static native long CurlUtil_setHeader(long jarg1, CurlUtil jarg1_, String jarg2);

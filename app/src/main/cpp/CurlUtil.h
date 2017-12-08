@@ -75,6 +75,9 @@ public:
 
     static CurlUtil *getBytes(std::string url, ByteResponse *response);
 
+    static CurlUtil *getFile(std::string url, std::string toPath) throw(std::runtime_error);
+
+
     CurlUtil *setProgress(Progress *progress);
 
     CurlUtil *setParam(std::map<std::string,std::string> key_value);

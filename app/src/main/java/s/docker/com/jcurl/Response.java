@@ -56,7 +56,7 @@ public class Response {
 
   public Response() {
     this(CurlUtilsJNI.new_Response(), true);
-    CurlUtilsJNI.Response_director_connect(this, swigCPtr, swigCMemOwn, true);
+    CurlUtilsJNI.Response_director_connect(this, swigCPtr, swigCMemOwn, false);
   }
 
 }
