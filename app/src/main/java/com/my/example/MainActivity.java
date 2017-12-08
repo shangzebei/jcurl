@@ -25,10 +25,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grid_layout);
         initView(this);
-
+        ParamMap paramMap = new ParamMap();
+        paramMap.set("local","zh");
+        CurlUtil.get("https://apigateway.21chinamall.com/v1/local",new Response(){
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: "+s);
+            }
+        }).setParam(paramMap).execute();
 
 //        getMethod();
-        getMethodParam();
+//        getMethodParam();
 //        getfile();
 
     }

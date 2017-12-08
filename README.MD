@@ -1,4 +1,4 @@
-## JCURL的使用
+## JCURL的使用支持http和https
 
 项目编译需要swig的支持，需要配置环境变量。
 
