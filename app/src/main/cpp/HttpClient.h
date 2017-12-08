@@ -119,10 +119,7 @@ private:
     virtual ~CAHttpClient();
     bool init();
     
-    /**
-     * Init pthread mutex, semaphore, and create new thread for http requests
-     * @return bool
-     */
+
     bool lazyInitThreadSemphore();
     void networkThread();
     void networkThreadAlone(HttpRequest* request, HttpResponse* response);

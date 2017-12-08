@@ -39,14 +39,7 @@ public class ImageViewAdapter extends BaseAdapter {
             "http://pic.58pic.com/58pic/12/02/13/07p58PICgGD.jpg"
     };
 
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-//            ImageViewAdapter.this.notifyDataSetChanged();
-
-        }
-    };
+    Handler handler = new Handler();
 
     public ImageViewAdapter(Context context) {
         this.context = context;
