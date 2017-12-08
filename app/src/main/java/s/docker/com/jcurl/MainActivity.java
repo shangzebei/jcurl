@@ -30,24 +30,33 @@ public class MainActivity extends AppCompatActivity {
 //        }).setParam(map).execute();
 
 
-//        CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
-//            @Override
-//            public void callback(int result, String s) {
-//                Log.i("szb", "callback: " + s);
-//            }
-//        }).setHeader("X-Auth-Token:admin@localhost:e58e67dba304027768c62c1160daeb3e")
-//           .setHeader("Accept: application/json")
-//           .execute();
-//this.getFilesDir().getAbsolutePath()+"/wps.exe"
-            CurlUtil.getFile("https://wdl1.cache.wps.cn/wps/download/W.P.S.6930.19.552.exe",
-                    Environment.getExternalStorageDirectory()+"/wps.exe")
-            .setProgress(new Progress(){
-                @Override
-                public void progress(long unow, long utotal, long dnow, long dtotal) {
-                    Log.i("szb", "progress: "+dnow+"::"+dtotal);
-                }
-            }).execute();
 
+
+        getMethod();
+//        getfile();
+
+    }
+
+    private void getMethod() {
+        CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: " + s);
+            }
+        }).setHeader("X-Auth-Token:admin@localhost:e58e67dba304027768c62c1160daeb3e")
+           .setHeader("Accept: application/json")
+           .execute();
+    }
+
+    private void getfile() {
+        CurlUtil.getFile("https://wdl1.cache.wps.cn/wps/download/W.P.S.6930.19.552.exe",
+                Environment.getExternalStorageDirectory() + "/wps.exe")
+                .setProgress(new Progress() {
+                    @Override
+                    public void progress(long unow, long utotal, long dnow, long dtotal) {
+                        Log.i("szb", "progress: " + dnow + "::" + dtotal);
+                    }
+                }).execute();
     }
 
     private void initView(Context mainActivity) {
