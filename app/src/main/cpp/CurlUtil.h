@@ -69,6 +69,8 @@ public:
 
     static CurlUtil *get(std::string url, Response *response);
 
+    static CurlUtil *post(std::string url, Response *response);
+
     static CurlUtil *get(std::string url, std::function<void(int, std::string)>);
 
     static CurlUtil *getBytes(std::string url, ByteResponse *response);
@@ -96,6 +98,10 @@ private:
     bool _execute = false;
 
     std::string _tag;
+
+    static CurlUtil *process(std::string url, HttpRequest::Type type, Response *response);
+
+    std::string dealParam(std::map<std::string, std::string> key_value);
 };
 
 

@@ -11,14 +11,14 @@
 #define LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG,__VA_ARGS__) // 定义LOGE类型
 #define LOGF(...)  __android_log_print(ANDROID_LOG_FATAL,LOG,__VA_ARGS__) //
 
-CurlUtil *CurlUtil::get(std::string url, Response *response) {
 
+CurlUtil *CurlUtil::process(std::string url, HttpRequest::Type type, Response *response) {
     auto curlutil = new CurlUtil();
 
     auto *request = new HttpRequest();
     request->setUrl(url);
 
-    request->setRequestType(HttpRequest::Type::Get);
+    request->setRequestType(type);
 
     request->setResponseCallback([=](CAHttpClient *client, HttpResponse *httpResponse) {
         if (response != nullptr) {
@@ -31,7 +31,11 @@ CurlUtil *CurlUtil::get(std::string url, Response *response) {
     curlutil->_execute = false;
     curlutil->setHttpRequest(request);
     return curlutil;
+}
 
+
+CurlUtil *CurlUtil::get(std::string url, Response *response) {
+    return process(url, HttpRequest::Type::Get, response);
 }
 
 CurlUtil::CurlUtil() {
@@ -134,32 +138,42 @@ void CurlUtil::execute() {
 }
 
 CurlUtil *CurlUtil::setParam(std::map<std::string, std::string> key_value) {
+    auto value = dealParam(key_value);
     switch (_httpRequest->getRequestType()) {
         case HttpRequest::Type::Get: {
-            std::string getRul = "";
-            if (!key_value.empty()) {
-                getRul += "?";
-
-                std::map<std::string, std::string>::iterator itr = key_value.begin();
-
-                do {
-                    getRul = getRul + itr->first + "=" + itr->second;
-                    itr++;
-                    if (itr == key_value.end()) {
-                        break;
-                    }
-                    getRul = getRul + "&";
-                } while (1);
-            }
-            getHttpRequest()->setUrl(getHttpRequest()->getUrl() + getRul);
+            getHttpRequest()->setUrl(getHttpRequest()->getUrl() + value);
         }
             break;
         case HttpRequest::Type::Post: {
+            getHttpRequest()->setRequestData(value.c_str(), value.length());
 
         }
             break;
     }
     return this;
+}
+
+std::string CurlUtil::dealParam(std::map<std::string, std::string> key_value) {
+    std::string getRul = "";
+    if (!key_value.empty()) {
+        getRul += "?";
+
+        std::map<std::string, std::string>::iterator itr = key_value.begin();
+
+        do {
+            getRul = getRul + itr->first + "=" + itr->second;
+            itr++;
+            if (itr == key_value.end()) {
+                break;
+            }
+            getRul = getRul + "&";
+        } while (1);
+    }
+    return getRul;
+}
+
+CurlUtil *CurlUtil::post(std::string url, Response *response) {
+    return process(url, HttpRequest::Type::Post, response);
 }
 
 
