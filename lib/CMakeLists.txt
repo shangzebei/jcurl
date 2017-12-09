@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 project(jcurl)
 
-add_subdirectory(src/main/cpp/Json/lib_json)
+#add_subdirectory(src/main/cpp/Json/lib_json)
 
 set(SWIG_SOURCE_FILE src/main/cpp/curljni.i)
 SET(SWIG_CPP_OUT_FILE_NAME src/main/cpp/curljni.cxx)
@@ -37,11 +37,13 @@ set_target_properties(curl
   PROPERTIES IMPORTED_LOCATION
   ${curl_path})
 
-INCLUDE_DIRECTORIES(${JNI_INCLUDE_DIRS} src/main/cpp/curl/include/android/curl src/main/cpp/Json/lib_json)
+INCLUDE_DIRECTORIES(${JNI_INCLUDE_DIRS} src/main/cpp/curl/include/android/curl)
+
 find_library(log_lib log)
 find_library(z_lib z)
 add_library(jcurl
          SHARED
         ${SOURCE_FILES}
 )
-target_link_libraries(jcurl lib_json ${log_lib} ${curl_path} ${curl_ssl} ${curl_crypto} ${z_lib})
+message(warning ${z_lib})
+target_link_libraries(jcurl ${log_lib} ${curl_path} ${curl_ssl} ${curl_crypto} ${z_lib})
