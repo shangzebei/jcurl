@@ -1,9 +1,9 @@
 package com.my.example;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.GridView;
 
@@ -12,7 +12,7 @@ import com.my.jcurl.ParamMap;
 import com.my.jcurl.Progress;
 import com.my.jcurl.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("jcurl");
