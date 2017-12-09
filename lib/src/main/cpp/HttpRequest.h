@@ -18,6 +18,8 @@ class CAHttpClient;
 
 class HttpResponse;
 
+class ParamFormData;
+
 
 /**
  * Defines the object which users must packed for CAHttpClient::send(HttpRequest*) method.
@@ -207,6 +209,13 @@ public:
         return _fileToGet;
     }
 
+    inline void setMulPartFiles(std::map<std::string, ParamFormData *> mulPartFiles){
+        _mulPartFiles=mulPartFiles;
+    }
+
+    inline std::map<std::string, ParamFormData *> getMulPartFiles(){
+        return _mulPartFiles;
+    }
 
 protected:
     // properties
@@ -218,6 +227,7 @@ protected:
 
     std::vector<std::string> _headers;              /// custom http headers
     std::map<std::string,std::string> _fileNameToPost;
+    std::map<std::string, ParamFormData *> _mulPartFiles;
     ssize_t _threadID;
     FILE* _fileToGet;
 

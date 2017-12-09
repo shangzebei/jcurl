@@ -8,7 +8,7 @@ SET(SWIG_CPP_OUT_FILE_NAME src/main/cpp/curljni.cxx)
 SET(SWIG_JAVA_PACKAGE com.my.jcurl)
 SET(SWIG_JAVA_OUT_DIR src/main/java/com/my/jcurl)
 #/usr/local/opt/swig@3.04/bin/swig
-execute_process(COMMAND swig -c++ -outdir ${SWIG_JAVA_OUT_DIR} -o ${SWIG_CPP_OUT_FILE_NAME} -java -package ${SWIG_JAVA_PACKAGE} ${SWIG_SOURCE_FILE})#-o ${SWIG_CPP_OUT_FILE_NAME} -package ${SWIG_JAVA_PACKAGE}
+execute_process(COMMAND /usr/local/opt/swig@3.04/bin/swig -c++ -outdir ${SWIG_JAVA_OUT_DIR} -o ${SWIG_CPP_OUT_FILE_NAME} -java -package ${SWIG_JAVA_PACKAGE} ${SWIG_SOURCE_FILE})#-o ${SWIG_CPP_OUT_FILE_NAME} -package ${SWIG_JAVA_PACKAGE}
 
 set(SOURCE_FILES
         src/main/cpp/CurlUtil.cpp

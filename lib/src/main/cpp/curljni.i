@@ -17,6 +17,9 @@
     #include "CurlUtil.h"
 %}
 
-
+namespace std {
+  %template(ParamFormMap) map<std::string,ParamFormData *>;
+  %template(ParamMap) map<std::string,std::string>;
+};
 
 

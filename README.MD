@@ -125,7 +125,7 @@ CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
             }
         }).execute();
 ```
-### 带参多文件上传加进度条
+### 带参文件上传加进度条需要不同的key
 ```java
 ParamMap paramMap = new ParamMap();
 paramMap.set("files", "data/data/com.my.jcurl/lib/libjcurl.so");
@@ -140,6 +140,22 @@ CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
     @Override
     public void progress(long unow, long utotal, long dnow, long dtotal) {
         Log.i("szb", "progress: " + unow + ":::" + utotal);
+    }
+}).execute();
+```
+### 带参批量上传
+```java
+ParamFormMap paramFormMap = new ParamFormMap();
+ParamFormData pp = new ParamFormData();
+ParamArray arr = new ParamArray();
+arr.add("data/data/com.my.jcurl/lib/libjcurl.so");
+arr.add("/system/lib/libandroid.so");
+pp.setFiles(arr);
+paramFormMap.set("files", pp);
+CurlUtil.uploadMultiFile("http://192.168.1.88:8080/getFiles", paramFormMap, new Response() {
+    @Override
+    public void callback(int result, String s) {
+        Log.i("szb", "callback: " + s);
     }
 }).execute();
 ```

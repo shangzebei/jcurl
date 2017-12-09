@@ -5,12 +5,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.TouchDelegate;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.my.jcurl.CurlUtil;
+import com.my.jcurl.ParamArray;
+import com.my.jcurl.ParamFormData;
+import com.my.jcurl.ParamFormMap;
 import com.my.jcurl.ParamMap;
 import com.my.jcurl.Progress;
 import com.my.jcurl.Response;
@@ -30,7 +32,8 @@ public class MainActivity extends Activity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                postFile();
+                postMulFiles();
+
             }
         });
         initView(this);
@@ -40,14 +43,31 @@ public class MainActivity extends Activity {
 //        getMethodParam();
 //        getfile();
 //        postData();
+//        postFile();
 
 //        gethttps();
+
+    }
+
+    private void postMulFiles() {
+        ParamFormMap paramFormMap = new ParamFormMap();
+        ParamFormData pp = new ParamFormData();
+        ParamArray arr = new ParamArray();
+        arr.add("data/data/com.my.jcurl/lib/libjcurl.so");
+        arr.add("/system/lib/libandroid.so");
+        pp.setFiles(arr);
+        paramFormMap.set("files", pp);
+        CurlUtil.uploadMultiFile("http://192.168.1.88:8080/getFiles", paramFormMap, new Response() {
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: " + s);
+            }
+        }).execute();
     }
 
     private void postFile() {
         ParamMap paramMap = new ParamMap();
         paramMap.set("files", "data/data/com.my.jcurl/lib/libjcurl.so");
-        paramMap.set("files", "/data/app/com.my.jcurl-2/base.apk");
         CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
                 paramMap, new Response() {
                     @Override

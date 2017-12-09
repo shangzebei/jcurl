@@ -361,14 +361,48 @@ static int processPostFileTask(CAHttpClient *client, HttpRequest *request, write
 
     curl_httppost *pFormPost = NULL;
     curl_httppost *pLastElem = NULL;
-    typedef std::map<std::string,std::string> MyMap;
+    typedef std::map<std::string, std::string> MyMap;
+    typedef std::map<std::string, ParamFormData *> FormMap;
     auto maps = request->getFileNameToPost();
+    auto mulFiles = request->getMulPartFiles();
+    if (mulFiles.size() != 0) {
+        for (FormMap::iterator ite = mulFiles.begin(); ite != mulFiles.end(); ++ite) {
+            auto *fm = ite->second;
+            auto ve = fm->files;
+            if (ve.size() != 0) {
+                struct curl_forms array[ve.size()+1];
+                array[ve.size()].option  = CURLFORM_END;
+                for (int i = 0; i < ve.size(); ++i) {
+                    array[i].value = ve.at(i).c_str();
+                    array[i].option = CURLFORM_FILE;
+                }
+
+                curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, ite->first.c_str(),
+                             CURLFORM_ARRAY,
+                             array, CURLFORM_END);
+            }
+            if (!fm->value.empty()) {
+                if (fm->type == ParamFormData::Type::FILE) {
+                    curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, ite->first.c_str(),
+                                 CURLFORM_FILE,
+                                 fm->value.c_str(),
+                                 CURLFORM_END);
+                } else {
+                    curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, ite->first.c_str(),
+                                 CURLFORM_COPYCONTENTS, fm->value.c_str(), CURLFORM_END);
+                }
+            }
+
+        }
+    }
+
 
     if (maps.size() != 0) {
         for (MyMap::iterator ite = maps.begin(); ite != maps.end(); ++ite) {
-                curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, ite->first.c_str(), CURLFORM_FILE,
-                             ite->second.c_str(), CURLFORM_CONTENTTYPE, "application/octet-stream",
-                             CURLFORM_END);
+            curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, ite->first.c_str(),
+                         CURLFORM_FILE,
+                         ite->second.c_str(), CURLFORM_CONTENTTYPE, "application/octet-stream",
+                         CURLFORM_END);
         }
     }
     ssize_t requestDataSize = request->getRequestDataSize();
@@ -386,7 +420,8 @@ static int processPostFileTask(CAHttpClient *client, HttpRequest *request, write
         curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, "act", CURLFORM_COPYCONTENTS, "end",
                      CURLFORM_END);
     }
-
+//    curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, "act", CURLFORM_COPYCONTENTS, "end",
+//                 CURLFORM_END);
     ok = curl.setOption(CURLOPT_HTTPPOST, pFormPost)
          && curl.perform(responseCode);
     LOGD("ok===%d===%ld", ok, *responseCode);

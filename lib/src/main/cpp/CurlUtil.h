@@ -11,8 +11,8 @@
 #include <map>
 #include "HttpClient.h"
 #include "HttpRequest.h"
-#pragma FormDataParam
-class FormDataParam{
+#pragma ParamFormData
+class ParamFormData{
 public:
     enum class Type {
         TEXT = 0,
@@ -21,6 +21,7 @@ public:
     };
     std::string name;
     std::vector<std::string> files;
+    std::string value;
     Type type;
 };
 
@@ -96,6 +97,8 @@ public:
     static CurlUtil *postFormData(std::string url, Response *response);
 
     static CurlUtil *uploadMultiFile(std::string url, std::map<std::string,std::string> key_file,Response *response);
+
+    static CurlUtil *uploadMultiFile(std::string url, std::map<std::string,ParamFormData *> key_file,Response *response);
 
     CurlUtil *setProgress(Progress *progress);
 

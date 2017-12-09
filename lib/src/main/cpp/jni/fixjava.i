@@ -62,7 +62,7 @@ if (!$1) {
 
 namespace std {
   %template(ParamArray) vector<std::string>;
-  %template(ParamMap) map<std::string,FormDataParam>;
+  %template(ParamArray) vector<std::string>;
 };
 
 %apply unsigned char *NIOBUFFER { unsigned char *buf };
