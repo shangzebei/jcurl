@@ -140,6 +140,7 @@ void CurlUtil::execute() {
 CurlUtil *CurlUtil::setParam(std::map<std::string, std::string> key_value) {
     auto value = dealParam(key_value);
     switch (_httpRequest->getRequestType()) {
+        case HttpRequest::Type::Put:
         case HttpRequest::Type::Get: {
             getHttpRequest()->setUrl(getHttpRequest()->getUrl() + ("?" + value));
         }
@@ -198,11 +199,31 @@ CurlUtil *CurlUtil::getFile(std::string url, std::string toPath) {
 }
 
 CurlUtil *CurlUtil::deleteJ(std::string url, Response *response) {
-    return process(url,HttpRequest::Type::Delete,response);
+    return process(url, HttpRequest::Type::Delete, response);
 }
 
 CurlUtil *CurlUtil::put(std::string url, Response *response) {
-    return process(url,HttpRequest::Type::Put,response);
+    return process(url, HttpRequest::Type::Put, response);
+}
+
+CurlUtil *CurlUtil::uploadMultiFile(std::string url, std::map<std::string,std::string> key_file, Response *response) {
+    auto pss = process(url, HttpRequest::Type::PostFile, response);
+    pss->getHttpRequest()->setFileNameToPost(key_file);
+    return pss;
+}
+
+CurlUtil *CurlUtil::setParamData(std::string data) {
+    if (_httpRequest->getRequestType() == HttpRequest::Type::Post) {
+        this->getHttpRequest()->setRequestData(data.c_str(), data.length());
+        setHeader("Content-Type: application/json");
+    } else{
+        throw std::runtime_error("this method only support post Type");
+    }
+    return this;
+}
+
+CurlUtil *CurlUtil::postFormData(std::string url, Response *response) {
+    return process(url,HttpRequest::Type::PostFile,response);
 }
 
 

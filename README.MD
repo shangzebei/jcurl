@@ -34,6 +34,19 @@ CurlUtil.post("http://192.168.0.88:15000/v1/login", new Response() {
     }
 }).setParam(map).execute();
 ```
+
+
+#### post body体方式
+```java
+CurlUtil.post("http://192.168.0.164:8080/show",new Response(){
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: "+s);
+            }
+}).setParamData("{\"data\":\"jjjj\"}").execute();
+```
+
+
 #### 设置header参数
 ```java
 CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
@@ -45,7 +58,7 @@ CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
   .setHeader("Accept: application/json")
   .execute();
 ```
-###添加进度条
+####添加进度条
 ```
 public CurlUtil setProgress(Progress progress);//任何方法都可以添加就可以实现进度条
 ```
@@ -96,4 +109,19 @@ CurlUtil.getBytes(aa[position], new ByteResponse() {
           });
       }
   }).execute();
+```
+
+### 多文件上传
+```java
+ParamMap paramMap = new ParamMap();
+paramMap.set("file","data/data/com.my.jcurl/lib/libjcurl.so");
+paramMap.set("file","data/data/com.my.jcurl/lib/kkk.so");
+CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
+        paramMap,new Response(){
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: "+s);
+
+            }
+        }).execute();
 ```

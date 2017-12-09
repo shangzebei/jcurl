@@ -1944,6 +1944,75 @@ SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1getFile(JNIEnv
 }
 
 
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1postFormData(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_) {
+  jlong jresult = 0 ;
+  std::string arg1 ;
+  Response *arg2 = (Response *) 0 ;
+  CurlUtil *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg2_;
+  if(!jarg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
+    return 0;
+  } 
+  const char *arg1_pstr = (const char *)jenv->GetStringUTFChars(jarg1, 0); 
+  if (!arg1_pstr) return 0;
+  (&arg1)->assign(arg1_pstr);
+  jenv->ReleaseStringUTFChars(jarg1, arg1_pstr); 
+  arg2 = *(Response **)&jarg2; 
+  
+  try {
+    result = (CurlUtil *)CurlUtil::postFormData(arg1,arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
+  *(CurlUtil **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1uploadMultiFile(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_, jlong jarg3, jobject jarg3_) {
+  jlong jresult = 0 ;
+  std::string arg1 ;
+  std::map< std::string,std::string > arg2 ;
+  Response *arg3 = (Response *) 0 ;
+  std::map< std::string,std::string > *argp2 ;
+  CurlUtil *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg2_;
+  (void)jarg3_;
+  if(!jarg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
+    return 0;
+  } 
+  const char *arg1_pstr = (const char *)jenv->GetStringUTFChars(jarg1, 0); 
+  if (!arg1_pstr) return 0;
+  (&arg1)->assign(arg1_pstr);
+  jenv->ReleaseStringUTFChars(jarg1, arg1_pstr); 
+  argp2 = *(std::map< std::string,std::string > **)&jarg2; 
+  if (!argp2) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Attempt to dereference null std::map< std::string,std::string >");
+    return 0;
+  }
+  arg2 = *argp2; 
+  arg3 = *(Response **)&jarg3; 
+  
+  try {
+    result = (CurlUtil *)CurlUtil::uploadMultiFile(arg1,arg2,arg3);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
+  *(CurlUtil **)&jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1setProgress(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   CurlUtil *arg1 = (CurlUtil *) 0 ;
@@ -2003,6 +2072,43 @@ SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1setParam(JNIEn
   
   try {
     result = (CurlUtil *)(arg1)->setParam(arg2);
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
+  *(CurlUtil **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_CurlUtil_1setParamData(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+  jlong jresult = 0 ;
+  CurlUtil *arg1 = (CurlUtil *) 0 ;
+  std::string arg2 ;
+  CurlUtil *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(CurlUtil **)&jarg1; 
+  if(!jarg2) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
+    return 0;
+  } 
+  const char *arg2_pstr = (const char *)jenv->GetStringUTFChars(jarg2, 0); 
+  if (!arg2_pstr) return 0;
+  (&arg2)->assign(arg2_pstr);
+  jenv->ReleaseStringUTFChars(jarg2, arg2_pstr); 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return 0;
+  }
+  
+  
+  try {
+    result = (CurlUtil *)(arg1)->setParamData(arg2);
   } catch (std::exception& e) {
     SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
   }

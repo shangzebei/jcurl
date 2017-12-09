@@ -5,6 +5,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.TouchDelegate;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.my.jcurl.CurlUtil;
@@ -23,20 +26,61 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grid_layout);
-        initView(this);
-        ParamMap paramMap = new ParamMap();
-        paramMap.set("local","zh");
-        CurlUtil.get("https://apigateway.21chinamall.com/v1/local",new Response(){
+        GridView gridView = findViewById(R.id.grid);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void callback(int result, String s) {
-                Log.i("szb", "callback: "+s);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                postFile();
             }
-        }).setParam(paramMap).execute();
+        });
+        initView(this);
+
 
 //        getMethod();
 //        getMethodParam();
 //        getfile();
+//        postData();
 
+//        gethttps();
+    }
+
+    private void postFile() {
+        ParamMap paramMap = new ParamMap();
+        paramMap.set("files", "data/data/com.my.jcurl/lib/libjcurl.so");
+        paramMap.set("files", "/data/app/com.my.jcurl-2/base.apk");
+        CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
+                paramMap, new Response() {
+                    @Override
+                    public void callback(int result, String s) {
+                        Log.i("szb", "callback: " + s);
+
+                    }
+                }).setProgress(new Progress() {
+            @Override
+            public void progress(long unow, long utotal, long dnow, long dtotal) {
+                Log.i("szb", "progress: " + unow + ":::" + utotal);
+            }
+        }).execute();
+    }
+
+    private void gethttps() {
+        ParamMap paramMap = new ParamMap();
+        paramMap.set("local", "zh");
+        CurlUtil.get("https://apigateway.21chinamall.com/v1/local", new Response() {
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: " + s);
+            }
+        }).setParam(paramMap).execute();
+    }
+
+    private void postData() {
+        CurlUtil.post("http://192.168.0.164:8080/show", new Response() {
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: " + s);
+            }
+        }).setParamData("shang ze").execute();
     }
 
     private void getMethodParam() {

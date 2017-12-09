@@ -81,10 +81,15 @@ public:
 
     static CurlUtil *getFile(std::string url, std::string toPath);
 
+    static CurlUtil *postFormData(std::string url, Response *response);
+
+    static CurlUtil *uploadMultiFile(std::string url, std::map<std::string,std::string> key_file,Response *response);
 
     CurlUtil *setProgress(Progress *progress);
 
     CurlUtil *setParam(std::map<std::string,std::string> key_value);
+
+    CurlUtil *setParamData(std::string data);
 
     CurlUtil *setHeader(std::string header);
 

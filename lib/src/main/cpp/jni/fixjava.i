@@ -62,6 +62,7 @@ if (!$1) {
 
 namespace std {
   %template(ParamMap) map<std::string,std::string>;
+  %template(ParamMap) map<std::string,char **>;
 };
 
 %apply unsigned char *NIOBUFFER { unsigned char *buf };

@@ -6,6 +6,7 @@
 #include <vector>
 #include <functional>
 #include <curlbuild.h>
+#include <map>
 
 /**
  * @addtogroup network
@@ -144,12 +145,12 @@ public:
     }
 
     // setter/getters for properties
-    inline void setFileNameToPost(const std::string &fileName) {
+    inline void setFileNameToPost(const std::map<std::string,std::string> &fileName) {
         _fileNameToPost = fileName;
     }
 
-    inline const char *getFileNameToPost() {
-        return _fileNameToPost.c_str();
+    inline const std::map<std::string,std::string> getFileNameToPost() {
+        return _fileNameToPost;
     }
 
     /**
@@ -216,7 +217,7 @@ protected:
             _pCallback;      /// C++11 style callbacks
 
     std::vector<std::string> _headers;              /// custom http headers
-    std::string _fileNameToPost;
+    std::map<std::string,std::string> _fileNameToPost;
     ssize_t _threadID;
     FILE* _fileToGet;
 

@@ -61,6 +61,16 @@ public class CurlUtil {
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 
+  public static CurlUtil postFormData(String url, Response response) {
+    long cPtr = CurlUtilsJNI.CurlUtil_postFormData(url, Response.getCPtr(response), response);
+    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  }
+
+  public static CurlUtil uploadMultiFile(String url, ParamMap key_file, Response response) {
+    long cPtr = CurlUtilsJNI.CurlUtil_uploadMultiFile(url, ParamMap.getCPtr(key_file), key_file, Response.getCPtr(response), response);
+    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  }
+
   public CurlUtil setProgress(Progress progress) {
     long cPtr = CurlUtilsJNI.CurlUtil_setProgress(swigCPtr, this, Progress.getCPtr(progress), progress);
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
@@ -68,6 +78,11 @@ public class CurlUtil {
 
   public CurlUtil setParam(ParamMap key_value) {
     long cPtr = CurlUtilsJNI.CurlUtil_setParam(swigCPtr, this, ParamMap.getCPtr(key_value), key_value);
+    return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
+  }
+
+  public CurlUtil setParamData(String data) {
+    long cPtr = CurlUtilsJNI.CurlUtil_setParamData(swigCPtr, this, data);
     return (cPtr == 0) ? null : new CurlUtil(cPtr, false);
   }
 

@@ -28,11 +28,12 @@ static size_t writeData(void *ptr, size_t size, size_t nmemb, void *stream) {
 
     return sizes;
 }
-static size_t write_file(void *ptr, size_t size, size_t nmemb, void *stream)
-{
-    size_t written = fwrite(ptr, size, nmemb, (FILE *)stream);
+
+static size_t write_file(void *ptr, size_t size, size_t nmemb, void *stream) {
+    size_t written = fwrite(ptr, size, nmemb, (FILE *) stream);
     return written;
 }
+
 // Callback function used by libcurl for collect header data
 static size_t writeHeaderData(void *ptr, size_t size, size_t nmemb, void *stream) {
     std::vector<char> *recvBuffer = (std::vector<char> *) stream;
@@ -360,11 +361,16 @@ static int processPostFileTask(CAHttpClient *client, HttpRequest *request, write
 
     curl_httppost *pFormPost = NULL;
     curl_httppost *pLastElem = NULL;
+    typedef std::map<std::string,std::string> MyMap;
+    auto maps = request->getFileNameToPost();
 
-    curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, "filepath", CURLFORM_FILE,
-                 request->getFileNameToPost(), CURLFORM_CONTENTTYPE, "application/octet-stream",
-                 CURLFORM_END);
-
+    if (maps.size() != 0) {
+        for (MyMap::iterator ite = maps.begin(); ite != maps.end(); ++ite) {
+                curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, ite->first.c_str(), CURLFORM_FILE,
+                             ite->second.c_str(), CURLFORM_CONTENTTYPE, "application/octet-stream",
+                             CURLFORM_END);
+        }
+    }
     ssize_t requestDataSize = request->getRequestDataSize();
     if (requestDataSize > 0) {
         std::string strReq = request->getRequestData();
@@ -383,7 +389,7 @@ static int processPostFileTask(CAHttpClient *client, HttpRequest *request, write
 
     ok = curl.setOption(CURLOPT_HTTPPOST, pFormPost)
          && curl.perform(responseCode);
-
+    LOGD("ok===%d===%ld", ok, *responseCode);
     if (pFormPost) {
         curl_formfree(pFormPost);
         pFormPost = NULL;
@@ -595,21 +601,22 @@ void CAHttpClient::processResponse(HttpResponse *response, char *responseMessage
                                            writeHeaderData,
                                            &responseHeader,
                                            responseMessage);
+            LOGD("aaaaa");
             break;
         case HttpRequest::Type::GetFile:
-                retValue = processGetTask(this, request,
-                                          write_file,
-                                          request->getFileToGet(),
-                                          &responseCode,
-                                          writeHeaderData,
-                                          &responseHeader,
-                                          responseMessage);
+            retValue = processGetTask(this, request,
+                                      write_file,
+                                      request->getFileToGet(),
+                                      &responseCode,
+                                      writeHeaderData,
+                                      &responseHeader,
+                                      responseMessage);
             break;
         default:
             break;
     }
 
-    if (request->getRequestType()==HttpRequest::Type::GetFile) {
+    if (request->getRequestType() == HttpRequest::Type::GetFile) {
         return;
     }
     ssize_t c_responseDataLength = responseData.size();
