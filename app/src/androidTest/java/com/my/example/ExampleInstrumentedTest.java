@@ -1,4 +1,4 @@
-package com.my.jcurl;
+package com.my.example;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

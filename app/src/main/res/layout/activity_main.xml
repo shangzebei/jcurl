@@ -4,7 +4,7 @@
     android:id="@+id/bk"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="s.docker.com.jcurl.MainActivity"
+    tools:context=".MainActivity"
     >
 
     <LinearLayout

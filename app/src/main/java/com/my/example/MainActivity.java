@@ -10,7 +10,6 @@ import android.widget.GridView;
 import com.my.jcurl.CurlUtil;
 import com.my.jcurl.ParamMap;
 import com.my.jcurl.Progress;
-import com.my.jcurl.R;
 import com.my.jcurl.Response;
 
 public class MainActivity extends AppCompatActivity {

@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import com.my.jcurl.ByteResponse;
 import com.my.jcurl.CurlUtil;
 import com.my.jcurl.Progress;
-import com.my.jcurl.R;
+
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
