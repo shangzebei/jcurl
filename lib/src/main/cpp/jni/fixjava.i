@@ -61,8 +61,8 @@ if (!$1) {
 %include <various.i>
 
 namespace std {
-  %template(ParamMap) map<std::string,std::string>;
-  %template(ParamMap) map<std::string,char **>;
+  %template(ParamArray) vector<std::string>;
+  %template(ParamMap) map<std::string,FormDataParam>;
 };
 
 %apply unsigned char *NIOBUFFER { unsigned char *buf };

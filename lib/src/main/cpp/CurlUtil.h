@@ -11,7 +11,18 @@
 #include <map>
 #include "HttpClient.h"
 #include "HttpRequest.h"
+#pragma FormDataParam
+class FormDataParam{
+public:
+    enum class Type {
+        TEXT = 0,
+        FILE
 
+    };
+    std::string name;
+    std::vector<std::string> files;
+    Type type;
+};
 
 #pragma once
 
@@ -22,6 +33,7 @@ public:
 
     }
 };
+
 
 #pragma once
 

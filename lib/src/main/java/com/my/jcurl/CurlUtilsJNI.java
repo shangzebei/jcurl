@@ -19,6 +19,15 @@ public class CurlUtilsJNI {
   public final static native void ParamMap_del(long jarg1, ParamMap jarg1_, String jarg2);
   public final static native boolean ParamMap_has_key(long jarg1, ParamMap jarg1_, String jarg2);
   public final static native void delete_ParamMap(long jarg1);
+  public final static native int FormDataParam_Type_TEXT_get();
+  public final static native void FormDataParam_name_set(long jarg1, FormDataParam jarg1_, String jarg2);
+  public final static native String FormDataParam_name_get(long jarg1, FormDataParam jarg1_);
+  public final static native void FormDataParam_value_set(long jarg1, FormDataParam jarg1_, String jarg2);
+  public final static native String FormDataParam_value_get(long jarg1, FormDataParam jarg1_);
+  public final static native void FormDataParam_type_set(long jarg1, FormDataParam jarg1_, int jarg2);
+  public final static native int FormDataParam_type_get(long jarg1, FormDataParam jarg1_);
+  public final static native long new_FormDataParam();
+  public final static native void delete_FormDataParam(long jarg1);
   public final static native void Response_callback(long jarg1, Response jarg1_, int jarg2, String jarg3);
   public final static native void Response_callbackSwigExplicitResponse(long jarg1, Response jarg1_, int jarg2, String jarg3);
   public final static native long new_Response();

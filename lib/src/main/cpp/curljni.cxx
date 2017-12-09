@@ -1308,6 +1308,201 @@ SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_delete_1ParamMap(JNIEnv *
 }
 
 
+SWIGEXPORT jint JNICALL Java_com_my_jcurl_CurlUtilsJNI_FormDataParam_1Type_1TEXT_1get(JNIEnv *jenv, jclass jcls) {
+  jint jresult = 0 ;
+  FormDataParam::Type result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (FormDataParam::Type)FormDataParam::Type::TEXT;
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_FormDataParam_1name_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+  FormDataParam *arg1 = (FormDataParam *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(FormDataParam **)&jarg1; 
+  if(!jarg2) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
+    return ;
+  }
+  const char *arg2_pstr = (const char *)jenv->GetStringUTFChars(jarg2, 0); 
+  if (!arg2_pstr) return ;
+  std::string arg2_str(arg2_pstr);
+  arg2 = &arg2_str;
+  jenv->ReleaseStringUTFChars(jarg2, arg2_pstr); 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
+  if (arg1) (arg1)->name = *arg2;
+}
+
+
+SWIGEXPORT jstring JNICALL Java_com_my_jcurl_CurlUtilsJNI_FormDataParam_1name_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jstring jresult = 0 ;
+  FormDataParam *arg1 = (FormDataParam *) 0 ;
+  std::string *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(FormDataParam **)&jarg1; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return 0;
+  }
+  
+  result = (std::string *) & ((arg1)->name);
+  jresult = jenv->NewStringUTF(result->c_str()); 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_FormDataParam_1value_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+  FormDataParam *arg1 = (FormDataParam *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(FormDataParam **)&jarg1; 
+  if(!jarg2) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null string");
+    return ;
+  }
+  const char *arg2_pstr = (const char *)jenv->GetStringUTFChars(jarg2, 0); 
+  if (!arg2_pstr) return ;
+  std::string arg2_str(arg2_pstr);
+  arg2 = &arg2_str;
+  jenv->ReleaseStringUTFChars(jarg2, arg2_pstr); 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
+  if (arg1) (arg1)->value = *arg2;
+}
+
+
+SWIGEXPORT jstring JNICALL Java_com_my_jcurl_CurlUtilsJNI_FormDataParam_1value_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jstring jresult = 0 ;
+  FormDataParam *arg1 = (FormDataParam *) 0 ;
+  std::string *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(FormDataParam **)&jarg1; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return 0;
+  }
+  
+  result = (std::string *) & ((arg1)->value);
+  jresult = jenv->NewStringUTF(result->c_str()); 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_FormDataParam_1type_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+  FormDataParam *arg1 = (FormDataParam *) 0 ;
+  FormDataParam::Type arg2 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(FormDataParam **)&jarg1; 
+  arg2 = (FormDataParam::Type)jarg2; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
+  if (arg1) (arg1)->type = arg2;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_my_jcurl_CurlUtilsJNI_FormDataParam_1type_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jint jresult = 0 ;
+  FormDataParam *arg1 = (FormDataParam *) 0 ;
+  FormDataParam::Type result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(FormDataParam **)&jarg1; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return 0;
+  }
+  
+  result = (FormDataParam::Type) ((arg1)->type);
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_my_jcurl_CurlUtilsJNI_new_1FormDataParam(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  FormDataParam *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  
+  try {
+    result = (FormDataParam *)new FormDataParam();
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
+  *(FormDataParam **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_delete_1FormDataParam(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  FormDataParam *arg1 = (FormDataParam *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(FormDataParam **)&jarg1; 
+  
+  if (!arg1) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException,
+      "invalid native object; delete() likely already called");
+    return ;
+  }
+  
+  
+  try {
+    delete arg1;
+  } catch (std::exception& e) {
+    SWIG_JavaException(jenv,SWIG_RuntimeError,e.what());
+  }
+  
+}
+
+
 SWIGEXPORT void JNICALL Java_com_my_jcurl_CurlUtilsJNI_Response_1callback(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jstring jarg3) {
   Response *arg1 = (Response *) 0 ;
   int arg2 ;
