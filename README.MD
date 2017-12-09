@@ -111,7 +111,7 @@ CurlUtil.getBytes(aa[position], new ByteResponse() {
   }).execute();
 ```
 
-### 带参多文件上传
+### 带参多文件上传 （不同的key）
 ```java
 ParamMap paramMap = new ParamMap();
 paramMap.set("file","data/data/com.my.jcurl/lib/libjcurl.so");
@@ -125,7 +125,7 @@ CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
             }
         }).execute();
 ```
-### 带参文件上传加进度条需要不同的key
+### 带参文件上传加进度条需要（不同的key）
 ```java
 ParamMap paramMap = new ParamMap();
 paramMap.set("files", "data/data/com.my.jcurl/lib/libjcurl.so");
