@@ -35,9 +35,7 @@ android {
             path "CMakeLists.txt"
         }
     }
-    dexOptions {
-        javaMaxHeapSize "4g"
-    }
+
 }
 
 dependencies {
