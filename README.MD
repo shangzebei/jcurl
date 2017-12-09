@@ -111,11 +111,11 @@ CurlUtil.getBytes(aa[position], new ByteResponse() {
   }).execute();
 ```
 
-### 多文件上传
+### 带参多文件上传
 ```java
 ParamMap paramMap = new ParamMap();
 paramMap.set("file","data/data/com.my.jcurl/lib/libjcurl.so");
-paramMap.set("file","data/data/com.my.jcurl/lib/kkk.so");
+paramMap.set("files","data/data/com.my.jcurl/lib/kkk.so");
 CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
         paramMap,new Response(){
             @Override
@@ -124,4 +124,22 @@ CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
 
             }
         }).execute();
+```
+### 带参多文件上传加进度条
+```java
+ParamMap paramMap = new ParamMap();
+paramMap.set("files", "data/data/com.my.jcurl/lib/libjcurl.so");
+CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
+        paramMap, new Response() {
+            @Override
+            public void callback(int result, String s) {
+                Log.i("szb", "callback: " + s);
+
+            }
+        }).setProgress(new Progress() {
+    @Override
+    public void progress(long unow, long utotal, long dnow, long dtotal) {
+        Log.i("szb", "progress: " + unow + ":::" + utotal);
+    }
+}).execute();
 ```
