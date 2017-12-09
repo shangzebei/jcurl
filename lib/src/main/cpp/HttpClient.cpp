@@ -606,7 +606,6 @@ void CAHttpClient::processResponse(HttpResponse *response, char *responseMessage
                                           responseMessage);
             break;
         default:
-//            CCASSERT(true, "CCCAHttpClient: unknown request type, only GET and POSt are supported");
             break;
     }
 
