@@ -141,15 +141,19 @@ CurlUtil *CurlUtil::setParam(std::map<std::string, std::string> key_value) {
     auto value = dealParam(key_value);
     switch (_httpRequest->getRequestType()) {
         case HttpRequest::Type::Put:
+        case HttpRequest::Type::Delete:
         case HttpRequest::Type::Get: {
             getHttpRequest()->setUrl(getHttpRequest()->getUrl() + ("?" + value));
         }
             break;
+        case HttpRequest::Type::PostFile:
         case HttpRequest::Type::Post: {
             LOGD("%s", value.c_str());
             getHttpRequest()->setRequestData(value.c_str(), value.length());
         }
             break;
+        default:
+            throw std::runtime_error("not support HttpRequest Type");
     }
     return this;
 }
