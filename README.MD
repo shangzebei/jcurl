@@ -58,7 +58,7 @@ CurlUtil.get("http://192.168.0.88:15000/v1/get_all_user", new Response() {
   .setHeader("Accept: application/json")
   .execute();
 ```
-####添加进度条
+#### 添加进度条
 ```
 public CurlUtil setProgress(Progress progress);//任何方法都可以添加就可以实现进度条
 ```
