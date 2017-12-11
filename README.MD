@@ -144,7 +144,7 @@ CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
     }
 }).execute();
 ```
-### 带参批量上传
+### 带参批量上传文件
 ```java
 ParamFormMap paramFormMap = new ParamFormMap();
 ParamFormData pp = new ParamFormData();
