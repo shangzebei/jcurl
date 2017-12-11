@@ -1,6 +1,6 @@
 ## JCURL的使用支持http和https
 
-项目编译需要swig的支持，需要配置环境变量。
+项目编译需要cmake,swig,ndk的支持，需要配置环境变量。
 
 ### 简单请求,支持GET,POST,PUT,DELETE等方法
 ```java
@@ -129,6 +129,7 @@ CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
 ```java
 ParamMap paramMap = new ParamMap();
 paramMap.set("files", "data/data/com.my.jcurl/lib/libjcurl.so");
+paramMap.set("file","data/data/com.my.jcurl/lib/kkk.so");
 CurlUtil.uploadMultiFile("http://192.168.0.164:8080/file",
         paramMap, new Response() {
             @Override
